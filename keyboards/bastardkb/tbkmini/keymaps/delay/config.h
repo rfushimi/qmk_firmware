@@ -5,6 +5,17 @@
  */
 #define FORCE_NKRO
 
+/**
+ * Flash each side with `-bl dfu-split-{left,right}` to set handedness in memory
+ * eg. `qmk flash -bl dfu-split-left -kb bastardkb/tbkmini -km delay`.
+ */
+#define EE_HANDS
+
+/**
+ * Left is primary.
+ */
+#define MASTER_LEFT
+
 /* RGB configuration. */
 
 /**
@@ -13,7 +24,8 @@
 #define RGBLIGHT_SPLIT { 21, 21 }
 
 /**
- * Limit maximum brightness to keep power consumption reasonable, and avoid disconnects.
+ * Limit maximum brightness to keep power consumption reasonable, and avoid
+ * disconnects.
  */
 #undef RGBLIGHT_LIMIT_VAL
 #define RGBLIGHT_LIMIT_VAL 32
@@ -21,7 +33,7 @@
 /**
  * Default RGB mode to use: relaxing mode.
  */
-// Unload all animations but the rainbow swirl, reduces memory footprint.
+// Unloads all animations but the rainbow swirl, reduces memory footprint.
 #undef RGBLIGHT_ANIMATIONS
 #define RGBLIGHT_EFFECT_RAINBOW_SWIRL
 
@@ -49,14 +61,12 @@
  * If you have a lot of accidental mod activations, crank up the tapping term.
  * https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold#tapping-term
  */
-#define TAPPING_TERM 175
+#define TAPPING_TERM 150
 
-#if 0
 /**
  * Customize the TAPPING_TERM for specific keys.
  */
 #define TAPPING_TERM_PER_KEY
-#endif
 
 #if 0
 /**
@@ -67,7 +77,7 @@
 #endif
 
 /**
- * Disable auto-repeat when pressing key twice.
+ * Disable auto-repeat when pressing key twice, except for one-shot shift.
  * https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold#tapping-force-hold
  */
 #define TAPPING_FORCE_HOLD_PER_KEY

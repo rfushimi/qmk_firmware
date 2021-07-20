@@ -139,6 +139,15 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 }
 
+/**
+ * Called when a one-shot layer "lock" status changes.
+ *
+ * This is called automatically by the QMK framework when a one-shot layer is
+ * activated and deactivated.
+ * The only one-shot layer in this layout is the one-shot shift layer.  Turns
+ * the RGBs solid blue when this layer is activated, and back to default when
+ * deactivated.
+ */
 void oneshot_locked_mods_changed_user(uint8_t mods) {
   if (mods & MOD_MASK_SHIFT) {
     rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
@@ -148,20 +157,26 @@ void oneshot_locked_mods_changed_user(uint8_t mods) {
   }
 }
 
-#if 0
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case BSP_DEV:
+    // Pinky and ring fingers.
+    case C_GUI_A:
+    case C_ALT_O:
+    case C_ALT_N:
+    case C_GUI_S:
+      return TAPPING_TERM + 125;
+    // Index fingers.
+    case C_SFT_U:
+    case C_SFT_H:
+      return TAPPING_TERM + 25;
+    // Thumbs.
     case TAB_NAV:
-    case ESC_MED:
     case SPC_NUM:
-    case ENT_SYM:
-      return 175;
+      return TAPPING_TERM + 75;
     default:
       return TAPPING_TERM;
   }
 }
-#endif
 
 bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
   return keycode != C_OSSFT;
