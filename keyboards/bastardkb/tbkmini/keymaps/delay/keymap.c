@@ -1,5 +1,6 @@
 #include "keymap.h"
 #include QMK_KEYBOARD_H
+#include "quantum/rgblight.h"
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
