@@ -14,6 +14,7 @@
 /**
  * Left is primary.
  */
+#undef MASTER_RIGHT
 #define MASTER_LEFT
 
 /* RGB configuration. */
@@ -60,6 +61,8 @@
 /**
  * If you have a lot of accidental mod activations, crank up the tapping term.
  * https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold#tapping-term
+ *
+ * See https://precondition.github.io/home-row-mods#tapping-term.
  */
 #define TAPPING_TERM 150
 
@@ -68,37 +71,40 @@
  */
 #define TAPPING_TERM_PER_KEY
 
-#if 0
-/**
- * Send the tap anyway, even after TAPPING_TERM, if there was no other key
- * interruption between press and release.  Only enable for specific keys.
- */
-#define RETRO_TAPPING_PER_KEY
-#endif
-
 /**
  * Disable auto-repeat when pressing key twice, except for one-shot shift.
  * https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold#tapping-force-hold
+ *
+ * See https://precondition.github.io/home-row-mods#tapping-force-hold.
  */
 #define TAPPING_FORCE_HOLD_PER_KEY
 
 /*
  * Note that the following two flags, PERMISSIVE_HOLD and
  * IGNORE_MOD_TAP_INTERRUPT, behave differently when both enabled.
+ *
+ * See https://redirect.is/3mv2fhj for a visual explanation of PERMISSIVE_HOLD
+ * and IGNORE_MOD_TAP_INTERRUPT behavior.
  */
 
 /**
- * More permissive tap dances with Mod Tap keys.
- *   Mod🠗 K🠗 K🠕 Mod🠕 (within TAPPING_TERM) ➞ Mod+K
- * https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold#permissive-hold
- */
-#if 0
-#define PERMISSIVE_HOLD
-#endif
-
-/**
- * More permissive tap dances with Mod Tap keys.
- *   Mod🠗 K🠗 Mod🠕 K🠕 (within TAPPING_TERM) ➞ Mod+K
+ * Must-have for home row mod.
+ *   Mod(a)🠗 e🠗 Mod(a)🠕 e🠕 (within TAPPING_TERM) ➞ ae
  * https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold#ignore-mod-tap-interrupt
+ *
+ * Ignores key presses that interrupt a mod-tap.
+ * See https://precondition.github.io/home-row-mods#ignore-mod-tap-interrupt.
  */
 #define IGNORE_MOD_TAP_INTERRUPT
+
+/**
+ * Faster mod-tap hold trigger.
+ *   Mod🠗 K🠗 K🠕 Mod🠕 (within TAPPING_TERM) ➞ Mod+K
+ * https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold#permissive-hold
+ *
+ * See https://precondition.github.io/home-row-mods#permissive-hold.
+ *
+ * TODO(delay): in case of excessive triggers on the home-row, consider using
+ * PERMISIVE_HOLD_PER_KEY to target only the thumb cluster's keys.
+ */
+#define PERMISSIVE_HOLD
