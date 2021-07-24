@@ -73,4 +73,4 @@
 
 ## Keymap Layout (generated with keyboard-layout-editor.com)
 
-![Keymap Layout (generated with keyboard-layout-editor.com)](./keymap.png)
+![Keymap Layout (generated with keyboard-layout-editor.com)](./assets/keymap.png)
