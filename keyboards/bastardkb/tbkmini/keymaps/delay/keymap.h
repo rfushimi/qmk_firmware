@@ -15,6 +15,7 @@ enum custom_keycodes {
   C_BSLSH = SAFE_RANGE,
   C_COMMA,
   C_DOT,
+  C_ESC,
   C_GRAVE,
   C_LBRC,
   C_RBRC,

@@ -11,7 +11,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // |--------+--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------+--------|
        XXXXXXX,  C_SCLN,    KC_Q,    KC_J,    KC_K,    KC_X,      KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, XXXXXXX,
   // ╰─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────╯
-                                  BSP_DEV, TAB_NAV,  KC_ESC,   C_OSSFT, SPC_NUM, ENT_SYM
+                                  BSP_DEV, TAB_NAV,   C_ESC,   C_OSSFT, SPC_NUM, ENT_SYM
   //                            ╰──────────────────────────╯ ╰──────────────────────────╯
   ),
 
@@ -68,8 +68,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define NO_SHIFT_CODE(keycode) \
 { \
   if (record->event.pressed) { \
-    if (get_mods() & MOD_MASK_SHIFT) { \
-      const uint8_t mods = get_mods() & MOD_MASK_SHIFT; \
+    const uint8_t mods = get_mods() & MOD_MASK_SHIFT; \
+    if (mods) { \
       del_mods(mods); \
       register_code(keycode); \
       add_mods(mods); \
@@ -95,6 +95,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       NO_SHIFT_CODE(KC_LBRC);
     case C_RBRC:
       NO_SHIFT_CODE(KC_RBRC);
+    case C_ESC: {
+      if (record->event.pressed) {
+        const uint8_t locked_mods = get_oneshot_locked_mods() & MOD_MASK_SHIFT;
+        if (locked_mods) {
+          // Clear any locked one-shot mod, if enabled.  The only one-shot layer
+          // in this layout is the one-shot shift layer, so it is safe to clear
+          // all locked mods.
+          del_mods(locked_mods);
+          clear_oneshot_locked_mods();
+        }
+        register_code(KC_ESC);
+      }
+      break;
+    }
     case C_RESET: {
       rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
       rgblight_sethsv_noeeprom(0, 255, RGBLIGHT_LIMIT_VAL);
@@ -126,6 +140,8 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
       UNREGISTER_CODE_IF_PRESSED(KC_COMMA);
     case C_DOT:
       UNREGISTER_CODE_IF_PRESSED(KC_DOT);
+    case C_ESC:
+      UNREGISTER_CODE_IF_PRESSED(KC_ESC);
     case C_GRAVE:
       UNREGISTER_CODE_IF_PRESSED(KC_GRAVE);
     case C_LBRC:
