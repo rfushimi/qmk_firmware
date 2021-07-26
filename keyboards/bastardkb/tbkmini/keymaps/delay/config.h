@@ -22,7 +22,8 @@
 /**
  * The TBK Mini with per-key RGB has 21 LED on each split.
  */
-#define RGBLIGHT_SPLIT { 21, 21 }
+#define RGBLIGHT_SPLIT \
+  { 21, 21 }
 
 /**
  * Limit maximum brightness to keep power consumption reasonable, and avoid

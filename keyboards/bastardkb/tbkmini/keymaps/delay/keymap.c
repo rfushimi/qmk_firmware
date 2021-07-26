@@ -2,6 +2,7 @@
 #include QMK_KEYBOARD_H
 #include "quantum/rgblight.h"
 
+// clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [BASE] = LAYOUT_split_3x6_3(
@@ -64,23 +65,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                            ╰──────────────────────────╯ ╰──────────────────────────╯
   ),
 };
+// clang-format on
 
 #ifndef NO_SHIFT_CODE
-#define NO_SHIFT_CODE(keycode) \
-{ \
-  if (record->event.pressed) { \
-    const uint8_t mods = get_mods() & MOD_MASK_SHIFT; \
-    if (mods) { \
-      del_mods(mods); \
-      register_code(keycode); \
-      add_mods(mods); \
-    } else { \
-      register_code(keycode); \
-    } \
-  } \
-  break; \
-}
-#endif // NO_SHIFT_CODE
+#define NO_SHIFT_CODE(keycode)                          \
+  {                                                     \
+    if (record->event.pressed) {                        \
+      const uint8_t mods = get_mods() & MOD_MASK_SHIFT; \
+      if (mods) {                                       \
+        del_mods(mods);                                 \
+        register_code(keycode);                         \
+        add_mods(mods);                                 \
+      } else {                                          \
+        register_code(keycode);                         \
+      }                                                 \
+    }                                                   \
+    break;                                              \
+  }
+#endif  // NO_SHIFT_CODE
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
@@ -125,13 +127,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 };
 
 #ifndef UNREGISTER_CODE_IF_PRESSED
-#define UNREGISTER_CODE_IF_PRESSED(keycode) { \
-  if (!record->event.pressed) { \
-    unregister_code(keycode); \
-  } \
-  break; \
-}
-#endif // UNREGISTER_CODE_IF_PRESSED
+#define UNREGISTER_CODE_IF_PRESSED(keycode) \
+  {                                         \
+    if (!record->event.pressed) {           \
+      unregister_code(keycode);             \
+    }                                       \
+    break;                                  \
+  }
+#endif  // UNREGISTER_CODE_IF_PRESSED
 
 void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
@@ -170,7 +173,7 @@ void oneshot_locked_mods_changed_user(uint8_t mods) {
     rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
     rgblight_sethsv_noeeprom(155, 80, RGBLIGHT_LIMIT_VAL);
   } else if (!mods) {
-    rgblight_reload_from_eeprom(); // Load default mode.
+    rgblight_reload_from_eeprom();  // Load default mode.
   }
 }
 

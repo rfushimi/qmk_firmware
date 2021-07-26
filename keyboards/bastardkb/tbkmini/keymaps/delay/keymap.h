@@ -3,11 +3,11 @@
 #include QMK_KEYBOARD_H
 
 enum layer_names {
-    BASE,
-    DEVR,
-    NAVR,
-    NUMR,
-    SYMR,
+  BASE,
+  DEVR,
+  NAVR,
+  NUMR,
+  SYMR,
 };
 
 enum custom_keycodes {
@@ -45,8 +45,8 @@ enum custom_keycodes {
 #define C_OSSFT OSM(MOD_LSFT)
 
 // Custom NAV keycodes, for Apple macOS.
-#define U_CUT   LCMD(KC_X)
-#define U_COPY  LCMD(KC_C)
+#define U_CUT LCMD(KC_X)
+#define U_COPY LCMD(KC_C)
 #define U_PASTE LCMD(KC_V)
 
 // Spaces navigation.
