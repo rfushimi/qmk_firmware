@@ -12,37 +12,38 @@ enum layer_names {
 
 enum custom_keycodes {
   // Custom version of these keycode that don't produce shifted symbols.
-  C_BSLSH = SAFE_RANGE,
-  C_COMMA,
-  C_DOT,
+  NS_BSLS = SAFE_RANGE,
+  NS_COMM,
+  NS_DOT,
   C_ESC,
-  C_GRAVE,
-  C_LBRC,
-  C_RBRC,
+  NS_GRV,
+  NS_LBRC,
+  NS_RBRC,
   C_RESET,
-  C_SCLN,
-  C_SLASH,
+  NS_SCLN,
+  NS_SLSH,
 };
 
 // Home row mods.
-#define C_GUI_A LGUI_T(KC_A)
-#define C_ALT_O LALT_T(KC_O)
-#define C_CTL_E LCTL_T(KC_E)
-#define C_SFT_U LSFT_T(KC_U)
+#define HOME_A LGUI_T(KC_A)
+#define HOME_O LALT_T(KC_O)
+#define HOME_E LCTL_T(KC_E)
+#define HOME_U LSFT_T(KC_U)
 
-#define C_SFT_H RSFT_T(KC_H)
-#define C_CTL_T RCTL_T(KC_T)
-#define C_ALT_N LALT_T(KC_N)
-#define C_GUI_S RGUI_T(KC_S)
+#define HOME_H RSFT_T(KC_H)
+#define HOME_T RCTL_T(KC_T)
+#define HOME_N LALT_T(KC_N)
+#define HOME_S RGUI_T(KC_S)
 
 // Layers.
-#define TAB_NAV LT(NAVR, KC_TAB)
+#define SPC_NAV LT(NAVR, KC_SPC)
 #define BSP_DEV LT(DEVR, KC_BSPC)
-#define SPC_NUM LT(NUMR, KC_SPC)
-#define ENT_SYM LT(SYMR, KC_ENT)
+#define ENT_NUM LT(NUMR, KC_ENT)
+#define ESC_DEV LT(DEVR, KC_ESC)
+#define TAB_SYM LT(SYMR, KC_TAB)
 
 // Tap dances.
-#define C_OSSFT OSM(MOD_LSFT)
+#define OSM_SFT OSM(MOD_LSFT)
 
 // Custom NAV keycodes, for Apple macOS.
 #define U_CUT LCMD(KC_X)
