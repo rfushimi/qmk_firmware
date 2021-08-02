@@ -13,29 +13,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // |--------+--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------+--------|
        XXXXXXX, NS_SCLN,    KC_Q,    KC_J,    KC_K,    KC_X,      KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, XXXXXXX,
   // ╰─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────╯
-                                  BSP_DEV, SPC_NAV, ESC_DEV,   OSM_SFT, ENT_NUM, TAB_SYM
+                                  BSP_DEV, SPC_NAV,  FX_ESC,   OSM_SFT, ENT_NUM, TAB_SYM
   //                            ╰──────────────────────────╯ ╰──────────────────────────╯
   ),
 
   [DEVR] = LAYOUT_split_3x6_3(
   // ╭─────────────────────────────────────────────────────╮ ╭─────────────────────────────────────────────────────╮
-       XXXXXXX, C_RESET, EEP_RST, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, KC_LCBR, KC_AMPR, KC_RCBR, KC_PIPE, XXXXXXX,
+       XXXXXXX,  FX_RST, EEP_RST, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, KC_LCBR, KC_AMPR, KC_RCBR, KC_PIPE, XXXXXXX,
   // |--------+--------+--------+--------+--------|--------| |--------+--------+--------+--------+--------+--------|
        XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,   KC_CIRC, KC_LPRN, KC_ASTR, KC_RPRN,  KC_DLR, XXXXXXX,
   // |--------+--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------+--------|
        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   NS_BSLS,  NS_DOT, NS_SLSH, KC_TILD, KC_QUES, XXXXXXX,
   // ╰─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────╯
-                                  BSP_DEV, XXXXXXX, ESC_DEV,   XXXXXXX,  KC_ENT,  KC_TAB
+                                  BSP_DEV, XXXXXXX, XXXXXXX,   XXXXXXX,  KC_ENT,  KC_TAB
   //                            ╰──────────────────────────╯ ╰──────────────────────────╯
   ),
 
   [NAVR] = LAYOUT_split_3x6_3(
   // ╭─────────────────────────────────────────────────────╮ ╭─────────────────────────────────────────────────────╮
-       XXXXXXX, XXXXXXX, U_PASTE,  U_COPY,   U_CUT, XXXXXXX,   KC_PGUP, KC_HOME,   KC_UP,  KC_END, XXXXXXX, XXXXXXX,
+       XXXXXXX, XXXXXXX, FX_PSTE, FX_COPY,  FX_CUT, XXXXXXX,   KC_PGUP, KC_HOME,   KC_UP,  KC_END, XXXXXXX, XXXXXXX,
   // |--------+--------+--------+--------+--------|--------| |--------+--------+--------+--------+--------+--------|
        XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,   KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX,
   // |--------+--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------+--------|
-       XXXXXXX, XXXXXXX, XXXXXXX, C_SCR_L, C_SCR_R, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+       XXXXXXX, XXXXXXX, XXXXXXX, FX_SCRL, FX_SCRR, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ╰─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────╯
                                   XXXXXXX, SPC_NAV, XXXXXXX,   XXXXXXX,  KC_ENT,  KC_TAB
   //                            ╰──────────────────────────╯ ╰──────────────────────────╯
@@ -43,19 +43,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [NUMR] = LAYOUT_split_3x6_3(
   // ╭─────────────────────────────────────────────────────╮ ╭─────────────────────────────────────────────────────╮
-       XXXXXXX, KC_PEQL,    KC_7,    KC_8,    KC_9, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+       XXXXXXX, KC_PEQL,    NS_7,    NS_8,    NS_9, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // |--------+--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------+--------|
-       XXXXXXX, KC_PMNS,    KC_4,    KC_5,    KC_6, KC_PPLS,   XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX,
+       XXXXXXX, KC_PMNS,    NS_4,    NS_5,    NS_6, KC_PPLS,   XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX,
   // |--------+--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------+--------|
-       XXXXXXX, KC_PSLS,    KC_1,    KC_2,    KC_3, KC_PAST,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+       XXXXXXX, KC_PSLS,    NS_1,    NS_2,    NS_3, KC_PAST,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ╰─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────╯
-                                  KC_BSPC,    KC_0, KC_PDOT,   XXXXXXX, ENT_NUM, XXXXXXX
+                                  KC_BSPC,    NS_0, KC_PDOT,   XXXXXXX, ENT_NUM, XXXXXXX
   //                            ╰──────────────────────────╯ ╰──────────────────────────╯
   ),
 
   [SYMR] = LAYOUT_split_3x6_3(
   // ╭─────────────────────────────────────────────────────╮ ╭─────────────────────────────────────────────────────╮
-       XXXXXXX,  NS_GRV,   KC_LT, NS_SLSH,   KC_GT, KC_PERC,   XXXXXXX, XXXXXXX, XXXXXXX, EEP_RST, C_RESET, XXXXXXX,
+       XXXXXXX,  NS_GRV,   KC_LT, NS_SLSH,   KC_GT, KC_PERC,   XXXXXXX, XXXXXXX, XXXXXXX, EEP_RST,  FX_RST, XXXXXXX,
   // |--------+--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------+--------|
        XXXXXXX, KC_COLN, NS_LBRC, KC_UNDS, NS_RBRC, XXXXXXX,   XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX,
   // |--------+--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------+--------|
@@ -86,20 +86,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case NS_BSLS:
-      NO_SHIFT_CODE(KC_BSLASH);
-    case NS_COMM:
-      NO_SHIFT_CODE(KC_COMMA);
-    case NS_DOT:
-      NO_SHIFT_CODE(KC_DOT);
-    case NS_GRV:
-      NO_SHIFT_CODE(KC_GRAVE);
-    case NS_LBRC:
-      NO_SHIFT_CODE(KC_LBRC);
-    case NS_RBRC:
-      NO_SHIFT_CODE(KC_RBRC);
     // TODO(delay): Reconcile this code with the new ESC_DEV layer key.
-    case C_ESC: {
+    case FX_ESC: {
       if (record->event.pressed) {
         const uint8_t locked_mods = get_oneshot_locked_mods() & MOD_MASK_SHIFT;
         if (locked_mods) {
@@ -113,12 +101,44 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       break;
     }
-    case C_RESET: {
+    case FX_RST: {
       rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
       rgblight_sethsv_noeeprom(0, 255, RGBLIGHT_LIMIT_VAL);
       reset_keyboard();
       break;
     }
+    case NS_0:
+      NO_SHIFT_CODE(KC_0);
+    case NS_1:
+      NO_SHIFT_CODE(KC_1);
+    case NS_2:
+      NO_SHIFT_CODE(KC_2);
+    case NS_3:
+      NO_SHIFT_CODE(KC_3);
+    case NS_4:
+      NO_SHIFT_CODE(KC_4);
+    case NS_5:
+      NO_SHIFT_CODE(KC_5);
+    case NS_6:
+      NO_SHIFT_CODE(KC_6);
+    case NS_7:
+      NO_SHIFT_CODE(KC_7);
+    case NS_8:
+      NO_SHIFT_CODE(KC_8);
+    case NS_9:
+      NO_SHIFT_CODE(KC_9);
+    case NS_BSLS:
+      NO_SHIFT_CODE(KC_BSLASH);
+    case NS_COMM:
+      NO_SHIFT_CODE(KC_COMMA);
+    case NS_DOT:
+      NO_SHIFT_CODE(KC_DOT);
+    case NS_GRV:
+      NO_SHIFT_CODE(KC_GRAVE);
+    case NS_LBRC:
+      NO_SHIFT_CODE(KC_LBRC);
+    case NS_RBRC:
+      NO_SHIFT_CODE(KC_RBRC);
     case NS_SCLN:
       NO_SHIFT_CODE(KC_SCOLON);
     case NS_SLSH:
@@ -139,14 +159,34 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
+    case FX_ESC:
+      UNREGISTER_CODE_IF_PRESSED(KC_ESC);
+    case NS_0:
+      UNREGISTER_CODE_IF_PRESSED(KC_0);
+    case NS_1:
+      UNREGISTER_CODE_IF_PRESSED(KC_1);
+    case NS_2:
+      UNREGISTER_CODE_IF_PRESSED(KC_2);
+    case NS_3:
+      UNREGISTER_CODE_IF_PRESSED(KC_3);
+    case NS_4:
+      UNREGISTER_CODE_IF_PRESSED(KC_4);
+    case NS_5:
+      UNREGISTER_CODE_IF_PRESSED(KC_5);
+    case NS_6:
+      UNREGISTER_CODE_IF_PRESSED(KC_6);
+    case NS_7:
+      UNREGISTER_CODE_IF_PRESSED(KC_7);
+    case NS_8:
+      UNREGISTER_CODE_IF_PRESSED(KC_8);
+    case NS_9:
+      UNREGISTER_CODE_IF_PRESSED(KC_9);
     case NS_BSLS:
       UNREGISTER_CODE_IF_PRESSED(KC_BSLASH);
     case NS_COMM:
       UNREGISTER_CODE_IF_PRESSED(KC_COMMA);
     case NS_DOT:
       UNREGISTER_CODE_IF_PRESSED(KC_DOT);
-    case C_ESC:
-      UNREGISTER_CODE_IF_PRESSED(KC_ESC);
     case NS_GRV:
       UNREGISTER_CODE_IF_PRESSED(KC_GRAVE);
     case NS_LBRC:

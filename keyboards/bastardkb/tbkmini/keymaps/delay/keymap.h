@@ -12,14 +12,24 @@ enum layer_names {
 
 enum custom_keycodes {
   // Custom version of these keycode that don't produce shifted symbols.
-  NS_BSLS = SAFE_RANGE,
+  FX_ESC = SAFE_RANGE,
+  FX_RST,
+  NS_0,
+  NS_1,
+  NS_2,
+  NS_3,
+  NS_4,
+  NS_5,
+  NS_6,
+  NS_7,
+  NS_8,
+  NS_9,
+  NS_BSLS,
   NS_COMM,
   NS_DOT,
-  C_ESC,
   NS_GRV,
   NS_LBRC,
   NS_RBRC,
-  C_RESET,
   NS_SCLN,
   NS_SLSH,
 };
@@ -39,17 +49,16 @@ enum custom_keycodes {
 #define SPC_NAV LT(NAVR, KC_SPC)
 #define BSP_DEV LT(DEVR, KC_BSPC)
 #define ENT_NUM LT(NUMR, KC_ENT)
-#define ESC_DEV LT(DEVR, KC_ESC)
 #define TAB_SYM LT(SYMR, KC_TAB)
 
 // Tap dances.
 #define OSM_SFT OSM(MOD_LSFT)
 
 // Custom NAV keycodes, for Apple macOS.
-#define U_CUT LCMD(KC_X)
-#define U_COPY LCMD(KC_C)
-#define U_PASTE LCMD(KC_V)
+#define FX_CUT LCMD(KC_X)
+#define FX_COPY LCMD(KC_C)
+#define FX_PSTE LCMD(KC_V)
 
 // Spaces navigation.
-#define C_SCR_L LGUI(KC_LEFT)
-#define C_SCR_R LGUI(KC_RIGHT)
+#define FX_SCRL LGUI(KC_LEFT)
+#define FX_SCRR LGUI(KC_RIGHT)
