@@ -1,6 +1,6 @@
 #include "keymap.h"
 #include QMK_KEYBOARD_H
-#include "quantum/rgblight.h"
+#include "quantum/rgb_matrix.h"
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -102,8 +102,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     }
     case FX_RST: {
-      rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
-      rgblight_sethsv_noeeprom(0, 255, RGBLIGHT_LIMIT_VAL);
+      rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+      rgb_matrix_sethsv_noeeprom(0, 255, RGB_MATRIX_MAXIMUM_BRIGHTNESS);
       reset_keyboard();
       break;
     }
@@ -201,6 +201,18 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 /**
+ * Apply default/startup RGB matrix values.
+ *
+ * This is to replace the missing `rgb_matrix_reload_from_eeprom()`.
+ */
+static void _rgb_matrix_apply_default(void) {
+  rgb_matrix_mode_noeeprom(RGB_MATRIX_STARTUP_MODE);
+  rgb_matrix_sethsv_noeeprom(RGB_MATRIX_STARTUP_HUE, RGB_MATRIX_STARTUP_SAT,
+                             RGB_MATRIX_STARTUP_VAL);
+  rgb_matrix_set_speed_noeeprom(RGB_MATRIX_STARTUP_SPD);
+}
+
+/**
  * Called when a one-shot layer "lock" status changes.
  *
  * This is called automatically by the QMK framework when a one-shot layer is
@@ -211,10 +223,10 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
  */
 void oneshot_locked_mods_changed_user(uint8_t mods) {
   if (mods & MOD_MASK_SHIFT) {
-    rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
-    rgblight_sethsv_noeeprom(155, 80, RGBLIGHT_LIMIT_VAL);
+    rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+    rgb_matrix_sethsv_noeeprom(155, 80, RGB_MATRIX_MAXIMUM_BRIGHTNESS);
   } else if (!mods) {
-    rgblight_reload_from_eeprom();  // Load default mode.
+    _rgb_matrix_apply_default();  // Load default values.
   }
 }
 
@@ -249,6 +261,8 @@ void keyboard_post_init_user(void) {
 #endif
 
 void eeconfig_init_user(void) {
-  rgblight_mode(RGBLIGHT_DEFAULT_MODE);
-  rgblight_set_speed(RGBLIGHT_DEFAULT_SPD);
+  rgb_matrix_mode(RGB_MATRIX_STARTUP_MODE);
+  rgb_matrix_sethsv(RGB_MATRIX_STARTUP_HUE, RGB_MATRIX_STARTUP_SAT,
+                    RGB_MATRIX_STARTUP_VAL);
+  rgb_matrix_set_speed(RGB_MATRIX_STARTUP_SPD);
 }
