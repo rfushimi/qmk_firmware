@@ -1,6 +1,67 @@
-#include "keymap.h"
 #include QMK_KEYBOARD_H
 #include "quantum/rgb_matrix.h"
+
+enum layer_names {
+  BASE,  // Default, alpha, layer.
+  DEVR,  // Characters heavily used when programming.
+  NAVR,  // Navigation layer.
+  NUMR,  // Number pad.
+  SYMR,  // Other special characters commonly found in regular text.
+};
+
+enum custom_keycodes {
+  // Custom version of these keycodes to add special effects.
+  FX_ESC = SAFE_RANGE,  // Auto-unlock OSM Shift.
+  FX_RST,               // Changes LEDs color before entering reset mode.
+  // Custom version of these keycodes that can't be shifted.
+  NS_0,
+  NS_1,
+  NS_2,
+  NS_3,
+  NS_4,
+  NS_5,
+  NS_6,
+  NS_7,
+  NS_8,
+  NS_9,
+  NS_BSLS,
+  NS_COMM,
+  NS_DOT,
+  NS_GRV,
+  NS_LBRC,
+  NS_RBRC,
+  NS_SCLN,
+  NS_SLSH,
+};
+
+// Custom NAV keycodes, for Apple macOS.
+#define FX_CUT LCMD(KC_X)
+#define FX_COPY LCMD(KC_C)
+#define FX_PSTE LCMD(KC_V)
+
+// Spaces navigation.
+#define FX_SCRL LGUI(KC_LEFT)
+#define FX_SCRR LGUI(KC_RIGHT)
+
+// Home row mods.
+#define HOME_A LGUI_T(KC_A)
+#define HOME_O LALT_T(KC_O)
+#define HOME_E LCTL_T(KC_E)
+#define HOME_U LSFT_T(KC_U)
+
+#define HOME_H RSFT_T(KC_H)
+#define HOME_T RCTL_T(KC_T)
+#define HOME_N LALT_T(KC_N)
+#define HOME_S RGUI_T(KC_S)
+
+// Layers.
+#define SPC_NAV LT(NAVR, KC_SPC)
+#define BSP_DEV LT(DEVR, KC_BSPC)
+#define ENT_NUM LT(NUMR, KC_ENT)
+#define TAB_SYM LT(SYMR, KC_TAB)
+
+// Tap dances.
+#define OSM_SFT OSM(MOD_LSFT)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -8,9 +69,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_split_3x6_3(
   // ╭─────────────────────────────────────────────────────╮ ╭─────────────────────────────────────────────────────╮
        XXXXXXX, KC_QUOT, NS_COMM,  NS_DOT,    KC_P,    KC_Y,      KC_F,    KC_G,    KC_C,    KC_R,    KC_L, XXXXXXX,
-  // |--------+--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------+--------|
+  // ├─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────┤
        XXXXXXX,  HOME_A,  HOME_O,  HOME_E,  HOME_U,    KC_I,      KC_D,  HOME_H,  HOME_T,  HOME_N,  HOME_S, XXXXXXX,
-  // |--------+--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------+--------|
+  // ├─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────┤
        XXXXXXX, NS_SCLN,    KC_Q,    KC_J,    KC_K,    KC_X,      KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, XXXXXXX,
   // ╰─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────╯
                                   BSP_DEV, SPC_NAV,  FX_ESC,   OSM_SFT, ENT_NUM, TAB_SYM
@@ -20,9 +81,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [DEVR] = LAYOUT_split_3x6_3(
   // ╭─────────────────────────────────────────────────────╮ ╭─────────────────────────────────────────────────────╮
        XXXXXXX,  FX_RST, EEP_RST, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, KC_LCBR, KC_AMPR, KC_RCBR, KC_PIPE, XXXXXXX,
-  // |--------+--------+--------+--------+--------|--------| |--------+--------+--------+--------+--------+--------|
+  // ├─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────┤
        XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,   KC_CIRC, KC_LPRN, KC_ASTR, KC_RPRN,  KC_DLR, XXXXXXX,
-  // |--------+--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------+--------|
+  // ├─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────┤
        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   NS_BSLS,  NS_DOT, NS_SLSH, KC_TILD, KC_QUES, XXXXXXX,
   // ╰─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────╯
                                   BSP_DEV, XXXXXXX, XXXXXXX,   XXXXXXX,  KC_ENT,  KC_TAB
@@ -32,9 +93,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [NAVR] = LAYOUT_split_3x6_3(
   // ╭─────────────────────────────────────────────────────╮ ╭─────────────────────────────────────────────────────╮
        XXXXXXX, XXXXXXX, FX_PSTE, FX_COPY,  FX_CUT, XXXXXXX,   KC_PGUP, KC_HOME,   KC_UP,  KC_END, XXXXXXX, XXXXXXX,
-  // |--------+--------+--------+--------+--------|--------| |--------+--------+--------+--------+--------+--------|
+  // ├─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────┤
        XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,   KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX,
-  // |--------+--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------+--------|
+  // ├─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────┤
        XXXXXXX, XXXXXXX, XXXXXXX, FX_SCRL, FX_SCRR, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ╰─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────╯
                                   XXXXXXX, SPC_NAV, XXXXXXX,   XXXXXXX,  KC_ENT,  KC_TAB
@@ -44,9 +105,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [NUMR] = LAYOUT_split_3x6_3(
   // ╭─────────────────────────────────────────────────────╮ ╭─────────────────────────────────────────────────────╮
        XXXXXXX, KC_PEQL,    NS_7,    NS_8,    NS_9, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  // |--------+--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------+--------|
+  // ├─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────┤
        XXXXXXX, KC_PMNS,    NS_4,    NS_5,    NS_6, KC_PPLS,   XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX,
-  // |--------+--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------+--------|
+  // ├─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────┤
        XXXXXXX, KC_PSLS,    NS_1,    NS_2,    NS_3, KC_PAST,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ╰─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────╯
                                   KC_BSPC,    NS_0, KC_PDOT,   XXXXXXX, ENT_NUM, XXXXXXX
@@ -56,9 +117,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [SYMR] = LAYOUT_split_3x6_3(
   // ╭─────────────────────────────────────────────────────╮ ╭─────────────────────────────────────────────────────╮
        XXXXXXX,  NS_GRV,   KC_LT, NS_SLSH,   KC_GT, KC_PERC,   XXXXXXX, XXXXXXX, XXXXXXX, EEP_RST,  FX_RST, XXXXXXX,
-  // |--------+--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------+--------|
+  // ├─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────┤
        XXXXXXX, KC_COLN, NS_LBRC, KC_UNDS, NS_RBRC, XXXXXXX,   XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX,
-  // |--------+--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------+--------|
+  // ├─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────┤
        XXXXXXX, XXXXXXX, KC_EXLM,   KC_AT, KC_HASH, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ╰─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────╯
                                   KC_BSPC, KC_MINS,  KC_TAB,   XXXXXXX, XXXXXXX, TAB_SYM
