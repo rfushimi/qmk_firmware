@@ -242,10 +242,6 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     case HOME_U:
     case HOME_H:
       return TAPPING_TERM + 25;
-    // Thumbs.
-    case SPC_NAV:
-    case ENT_NUM:
-      return TAPPING_TERM + 50;
     default:
       return TAPPING_TERM;
   }
