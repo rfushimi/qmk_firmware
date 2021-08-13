@@ -43,6 +43,11 @@ enum custom_keycodes {
 #define FX_SCRL LGUI(KC_LEFT)
 #define FX_SCRR LGUI(KC_RIGHT)
 
+// Mouse keys.
+#define FX_MBT1 KC_MS_BTN1
+#define FX_MBT2 KC_MS_BTN2
+#define FX_MBT3 KC_MS_BTN3
+
 // Home row mods.
 #define HOME_A LGUI_T(KC_A)
 #define HOME_O LALT_T(KC_O)
@@ -56,9 +61,9 @@ enum custom_keycodes {
 
 // Layers.
 #define SPC_NAV LT(NAVR, KC_SPC)
-#define BSP_DEV LT(DEVR, KC_BSPC)
+#define TAB_DEV LT(DEVR, KC_TAB)
+#define ESC_SYM LT(SYMR, KC_ESC)
 #define ENT_NUM LT(NUMR, KC_ENT)
-#define TAB_SYM LT(SYMR, KC_TAB)
 
 // Tap dances.
 #define OSM_SFT OSM(MOD_LSFT)
@@ -74,43 +79,43 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────┤
        XXXXXXX, NS_SCLN,    KC_Q,    KC_J,    KC_K,    KC_X,      KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, XXXXXXX,
   // ╰─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────╯
-                                  BSP_DEV, SPC_NAV,  FX_ESC,   OSM_SFT, ENT_NUM, TAB_SYM
+                                  TAB_DEV, SPC_NAV, OSM_SFT,   ESC_SYM, ENT_NUM, XXXXXXX
   //                            ╰──────────────────────────╯ ╰──────────────────────────╯
   ),
 
   [DEVR] = LAYOUT_split_3x6_3(
   // ╭─────────────────────────────────────────────────────╮ ╭─────────────────────────────────────────────────────╮
-       XXXXXXX,  FX_RST, EEP_RST, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, KC_LCBR, KC_AMPR, KC_RCBR, KC_PIPE, XXXXXXX,
+       XXXXXXX,  FX_RST, EEP_RST, XXXXXXX, XXXXXXX, XXXXXXX,   NS_BSLS, KC_LCBR, KC_AMPR, KC_RCBR, KC_PIPE, XXXXXXX,
   // ├─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────┤
        XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,   KC_CIRC, KC_LPRN, KC_ASTR, KC_RPRN,  KC_DLR, XXXXXXX,
   // ├─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────┤
-       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   NS_BSLS,  NS_DOT, NS_SLSH, KC_TILD, KC_QUES, XXXXXXX,
+       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, KC_QUES, NS_SLSH, KC_TILD, XXXXXXX, XXXXXXX,
   // ╰─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────╯
-                                  BSP_DEV, XXXXXXX, XXXXXXX,   XXXXXXX,  KC_ENT,  KC_TAB
+                                  TAB_DEV, XXXXXXX, XXXXXXX,    FX_ESC,  KC_ENT, XXXXXXX
   //                            ╰──────────────────────────╯ ╰──────────────────────────╯
   ),
 
   [NAVR] = LAYOUT_split_3x6_3(
   // ╭─────────────────────────────────────────────────────╮ ╭─────────────────────────────────────────────────────╮
-       XXXXXXX, XXXXXXX, FX_PSTE, FX_COPY,  FX_CUT, XXXXXXX,   KC_PGUP, KC_HOME,   KC_UP,  KC_END, XXXXXXX, XXXXXXX,
+       XXXXXXX, FX_SCRL, FX_MBT3, FX_MBT1, FX_MBT2, FX_SCRR,   KC_PGUP, KC_HOME,   KC_UP,  KC_END, XXXXXXX, XXXXXXX,
   // ├─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────┤
        XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,   KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX,
   // ├─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────┤
-       XXXXXXX, XXXXXXX, XXXXXXX, FX_SCRL, FX_SCRR, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+       XXXXXXX, XXXXXXX, FX_PSTE, FX_COPY,  FX_CUT, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ╰─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────╯
-                                  XXXXXXX, SPC_NAV, XXXXXXX,   XXXXXXX,  KC_ENT,  KC_TAB
+                                  XXXXXXX, SPC_NAV, XXXXXXX,    FX_ESC,  KC_ENT, XXXXXXX
   //                            ╰──────────────────────────╯ ╰──────────────────────────╯
   ),
 
   [NUMR] = LAYOUT_split_3x6_3(
   // ╭─────────────────────────────────────────────────────╮ ╭─────────────────────────────────────────────────────╮
-       XXXXXXX, KC_PEQL,    NS_7,    NS_8,    NS_9, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+       XXXXXXX, KC_PEQL,    NS_7,    NS_8,    NS_9, KC_PDOT,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ├─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────┤
-       XXXXXXX, KC_PMNS,    NS_4,    NS_5,    NS_6, KC_PPLS,   XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX,
+       XXXXXXX, KC_COLN,    NS_4,    NS_5,    NS_6, KC_PPLS,   XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX,
   // ├─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────┤
        XXXXXXX, KC_PSLS,    NS_1,    NS_2,    NS_3, KC_PAST,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ╰─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────╯
-                                  KC_BSPC,    NS_0, KC_PDOT,   XXXXXXX, ENT_NUM, XXXXXXX
+                                  KC_BSPC,    NS_0, KC_MINS,   XXXXXXX, ENT_NUM, XXXXXXX
   //                            ╰──────────────────────────╯ ╰──────────────────────────╯
   ),
 
@@ -118,11 +123,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ╭─────────────────────────────────────────────────────╮ ╭─────────────────────────────────────────────────────╮
        XXXXXXX,  NS_GRV,   KC_LT, NS_SLSH,   KC_GT, KC_PERC,   XXXXXXX, XXXXXXX, XXXXXXX, EEP_RST,  FX_RST, XXXXXXX,
   // ├─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────┤
-       XXXXXXX, KC_COLN, NS_LBRC, KC_UNDS, NS_RBRC, XXXXXXX,   XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX,
+       XXXXXXX, XXXXXXX, NS_LBRC, KC_UNDS, NS_RBRC, XXXXXXX,   XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX,
   // ├─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────┤
        XXXXXXX, XXXXXXX, KC_EXLM,   KC_AT, KC_HASH, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ╰─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────╯
-                                  KC_BSPC, KC_MINS,  KC_TAB,   XXXXXXX, XXXXXXX, TAB_SYM
+                                   KC_TAB,  KC_SPC, XXXXXXX,   ESC_SYM, XXXXXXX, XXXXXXX
   //                            ╰──────────────────────────╯ ╰──────────────────────────╯
   ),
 };
@@ -147,7 +152,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    // TODO(delay): Reconcile this code with the new ESC_DEV layer key.
     case FX_ESC: {
       if (record->event.pressed) {
         const uint8_t locked_mods = get_oneshot_locked_mods() & MOD_MASK_SHIFT;
@@ -266,7 +270,7 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
  *
  * This is to replace the missing `rgb_matrix_reload_from_eeprom()`.
  */
-static void _rgb_matrix_apply_default(void) {
+static void _rgb_matrix_apply_default_noeeprom(void) {
   rgb_matrix_mode_noeeprom(RGB_MATRIX_STARTUP_MODE);
   rgb_matrix_sethsv_noeeprom(RGB_MATRIX_STARTUP_HUE, RGB_MATRIX_STARTUP_SAT,
                              RGB_MATRIX_STARTUP_VAL);
@@ -287,7 +291,7 @@ void oneshot_locked_mods_changed_user(uint8_t mods) {
     rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
     rgb_matrix_sethsv_noeeprom(155, 80, RGB_MATRIX_MAXIMUM_BRIGHTNESS);
   } else if (!mods) {
-    _rgb_matrix_apply_default();  // Load default values.
+    _rgb_matrix_apply_default_noeeprom();  // Load default values.
   }
 }
 

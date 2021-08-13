@@ -11,9 +11,7 @@
  */
 #define EE_HANDS
 
-/**
- * Left is primary.
- */
+// Left is primary.
 #undef MASTER_RIGHT
 #define MASTER_LEFT
 
@@ -113,7 +111,8 @@
 #define TAPPING_TERM_PER_KEY
 
 /**
- * Disable auto-repeat when pressing key twice, except for one-shot shift.
+ * Enable rapid switch from tap to hold.  Disable auto-repeat when pressing key
+ * twice, except for one-shot shift.
  * https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold#tapping-force-hold
  *
  * See https://precondition.github.io/home-row-mods#tapping-force-hold.
@@ -129,6 +128,7 @@
  */
 
 /**
+ * Prevent normal rollover on alphas from accidentally triggering mods.
  * Must-have for home row mod.
  *   Mod(a)🠗 e🠗 Mod(a)🠕 e🠕 (within TAPPING_TERM) ➞ ae
  * https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold#ignore-mod-tap-interrupt
@@ -145,7 +145,7 @@
  *
  * See https://precondition.github.io/home-row-mods#permissive-hold.
  *
- * TODO(delay): in case of excessive triggers on the home-row, consider using
+ * NOTE: in case of excessive triggers on the home-row, consider using
  * PERMISIVE_HOLD_PER_KEY to target only the thumb cluster's keys.
  */
 #define PERMISSIVE_HOLD
