@@ -133,6 +133,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
+static void _maybe_clear_oneshot_locked_mods(void) {
+  const uint8_t locked_mods = get_oneshot_locked_mods() & MOD_MASK_SHIFT;
+  if (locked_mods) {
+    // Clear any locked one-shot mod, if enabled.  The only one-shot layer in
+    // this layout is the one-shot shift layer, so it is safe to clear all
+    // locked mods.
+    del_mods(locked_mods);
+    clear_oneshot_locked_mods();
+  }
+}
+
 #ifndef NO_SHIFT_CODE
 #define NO_SHIFT_CODE(keycode)                          \
   {                                                     \
@@ -145,6 +156,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       } else {                                          \
         register_code(keycode);                         \
       }                                                 \
+    } else {                                            \
+      unregister_code(keycode);                         \
     }                                                   \
     break;                                              \
   }
@@ -152,17 +165,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
+    case ESC_SYM: {
+      if (record->tap.count > 0) {
+        if (record->event.pressed) {
+          _maybe_clear_oneshot_locked_mods();
+          register_code(KC_ESC);
+        } else {
+          unregister_code(KC_ESC);
+        }
+        // Do not continue with the default tap action if the LT was pressed or
+        // released, but not held.
+        return false;
+      }
+      break;
+    }
     case FX_ESC: {
       if (record->event.pressed) {
-        const uint8_t locked_mods = get_oneshot_locked_mods() & MOD_MASK_SHIFT;
-        if (locked_mods) {
-          // Clear any locked one-shot mod, if enabled.  The only one-shot layer
-          // in this layout is the one-shot shift layer, so it is safe to clear
-          // all locked mods.
-          del_mods(locked_mods);
-          clear_oneshot_locked_mods();
-        }
+        _maybe_clear_oneshot_locked_mods();
         register_code(KC_ESC);
+      } else {
+        unregister_code(KC_ESC);
       }
       break;
     }
@@ -211,59 +233,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
   return true;
 };
-
-#ifndef UNREGISTER_CODE_IF_PRESSED
-#define UNREGISTER_CODE_IF_PRESSED(keycode) \
-  {                                         \
-    if (!record->event.pressed) {           \
-      unregister_code(keycode);             \
-    }                                       \
-    break;                                  \
-  }
-#endif  // UNREGISTER_CODE_IF_PRESSED
-
-void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case FX_ESC:
-      UNREGISTER_CODE_IF_PRESSED(KC_ESC);
-    case NS_0:
-      UNREGISTER_CODE_IF_PRESSED(KC_0);
-    case NS_1:
-      UNREGISTER_CODE_IF_PRESSED(KC_1);
-    case NS_2:
-      UNREGISTER_CODE_IF_PRESSED(KC_2);
-    case NS_3:
-      UNREGISTER_CODE_IF_PRESSED(KC_3);
-    case NS_4:
-      UNREGISTER_CODE_IF_PRESSED(KC_4);
-    case NS_5:
-      UNREGISTER_CODE_IF_PRESSED(KC_5);
-    case NS_6:
-      UNREGISTER_CODE_IF_PRESSED(KC_6);
-    case NS_7:
-      UNREGISTER_CODE_IF_PRESSED(KC_7);
-    case NS_8:
-      UNREGISTER_CODE_IF_PRESSED(KC_8);
-    case NS_9:
-      UNREGISTER_CODE_IF_PRESSED(KC_9);
-    case NS_BSLS:
-      UNREGISTER_CODE_IF_PRESSED(KC_BSLASH);
-    case NS_COMM:
-      UNREGISTER_CODE_IF_PRESSED(KC_COMMA);
-    case NS_DOT:
-      UNREGISTER_CODE_IF_PRESSED(KC_DOT);
-    case NS_GRV:
-      UNREGISTER_CODE_IF_PRESSED(KC_GRAVE);
-    case NS_LBRC:
-      UNREGISTER_CODE_IF_PRESSED(KC_LBRC);
-    case NS_RBRC:
-      UNREGISTER_CODE_IF_PRESSED(KC_RBRC);
-    case NS_SCLN:
-      UNREGISTER_CODE_IF_PRESSED(KC_SCOLON);
-    case NS_SLSH:
-      UNREGISTER_CODE_IF_PRESSED(KC_SLASH);
-  }
-}
 
 /**
  * Apply default/startup RGB matrix values.
