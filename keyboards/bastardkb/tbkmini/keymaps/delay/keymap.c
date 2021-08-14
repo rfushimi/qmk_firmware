@@ -121,13 +121,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [SYMR] = LAYOUT_split_3x6_3(
   // ╭─────────────────────────────────────────────────────╮ ╭─────────────────────────────────────────────────────╮
-       XXXXXXX,  NS_GRV,   KC_LT, NS_SLSH,   KC_GT, KC_PERC,   XXXXXXX, XXXXXXX, XXXXXXX, EEP_RST,  FX_RST, XXXXXXX,
+       XXXXXXX, XXXXXXX,   KC_LT,  NS_GRV,   KC_GT, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, EEP_RST,  FX_RST, XXXXXXX,
   // ├─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────┤
-       XXXXXXX, XXXXXXX, NS_LBRC, KC_UNDS, NS_RBRC, XXXXXXX,   XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX,
+       XXXXXXX, XXXXXXX, NS_LBRC, KC_PERC, NS_RBRC, XXXXXXX,   XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX,
   // ├─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────┤
        XXXXXXX, XXXXXXX, KC_EXLM,   KC_AT, KC_HASH, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ╰─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────╯
-                                   KC_TAB,  KC_SPC, XXXXXXX,   ESC_SYM, XXXXXXX, XXXXXXX
+                                   KC_TAB,  KC_SPC, KC_UNDS,   ESC_SYM, XXXXXXX, XXXXXXX
   //                            ╰──────────────────────────╯ ╰──────────────────────────╯
   ),
 };
