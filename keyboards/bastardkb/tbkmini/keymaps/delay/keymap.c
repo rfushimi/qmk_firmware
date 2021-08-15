@@ -1,12 +1,13 @@
 #include QMK_KEYBOARD_H
 #include "quantum/rgb_matrix.h"
+#include "quantum/rgblight_list.h"
 
 enum layer_names {
   BASE,  // Default, alpha, layer.
-  DEVR,  // Characters heavily used when programming.
-  NAVR,  // Navigation layer.
-  NUMR,  // Number pad.
-  SYMR,  // Other special characters commonly found in regular text.
+  _DEV,  // Characters heavily used when programming.
+  _NAV,  // Navigation layer.
+  _NUM,  // Number pad.
+  _SYM,  // Other special characters commonly found in regular text.
 };
 
 enum custom_keycodes {
@@ -60,10 +61,10 @@ enum custom_keycodes {
 #define HOME_S RGUI_T(KC_S)
 
 // Layers.
-#define SPC_NAV LT(NAVR, KC_SPC)
-#define TAB_DEV LT(DEVR, KC_TAB)
-#define ESC_SYM LT(SYMR, KC_ESC)
-#define ENT_NUM LT(NUMR, KC_ENT)
+#define SPC_NAV LT(_NAV, KC_SPC)
+#define TAB_DEV LT(_DEV, KC_TAB)
+#define ESC_SYM LT(_SYM, KC_ESC)
+#define ENT_NUM LT(_NUM, KC_ENT)
 
 // Tap dances.
 #define OSM_SFT OSM(MOD_LSFT)
@@ -83,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                            ╰──────────────────────────╯ ╰──────────────────────────╯
   ),
 
-  [DEVR] = LAYOUT_split_3x6_3(
+  [_DEV] = LAYOUT_split_3x6_3(
   // ╭─────────────────────────────────────────────────────╮ ╭─────────────────────────────────────────────────────╮
        XXXXXXX,  FX_RST, EEP_RST, XXXXXXX, XXXXXXX, XXXXXXX,   NS_BSLS, KC_LCBR, KC_AMPR, KC_RCBR, KC_PIPE, XXXXXXX,
   // ├─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────┤
@@ -95,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                            ╰──────────────────────────╯ ╰──────────────────────────╯
   ),
 
-  [NAVR] = LAYOUT_split_3x6_3(
+  [_NAV] = LAYOUT_split_3x6_3(
   // ╭─────────────────────────────────────────────────────╮ ╭─────────────────────────────────────────────────────╮
        XXXXXXX, FX_SCRL, FX_MBT3, FX_MBT1, FX_MBT2, FX_SCRR,   KC_PGUP, KC_HOME,   KC_UP,  KC_END, XXXXXXX, XXXXXXX,
   // ├─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────┤
@@ -107,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                            ╰──────────────────────────╯ ╰──────────────────────────╯
   ),
 
-  [NUMR] = LAYOUT_split_3x6_3(
+  [_NUM] = LAYOUT_split_3x6_3(
   // ╭─────────────────────────────────────────────────────╮ ╭─────────────────────────────────────────────────────╮
        XXXXXXX, KC_PEQL,    NS_7,    NS_8,    NS_9, KC_PDOT,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ├─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────┤
@@ -119,7 +120,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                            ╰──────────────────────────╯ ╰──────────────────────────╯
   ),
 
-  [SYMR] = LAYOUT_split_3x6_3(
+  [_SYM] = LAYOUT_split_3x6_3(
   // ╭─────────────────────────────────────────────────────╮ ╭─────────────────────────────────────────────────────╮
        XXXXXXX, XXXXXXX,   KC_LT,  NS_GRV,   KC_GT, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, EEP_RST,  FX_RST, XXXXXXX,
   // ├─────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────┤
@@ -190,7 +191,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     case FX_RST: {
       rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
-      rgb_matrix_sethsv_noeeprom(0, 255, RGB_MATRIX_MAXIMUM_BRIGHTNESS);
+      rgb_matrix_set_color_all(RGB_RED);
       reset_keyboard();
       break;
     }
@@ -244,6 +245,25 @@ static void _rgb_matrix_apply_default_noeeprom(void) {
   rgb_matrix_sethsv_noeeprom(RGB_MATRIX_STARTUP_HUE, RGB_MATRIX_STARTUP_SAT,
                              RGB_MATRIX_STARTUP_VAL);
   rgb_matrix_set_speed_noeeprom(RGB_MATRIX_STARTUP_SPD);
+}
+
+/**
+ * Called on layer change.
+ *
+ * This is called automatically by the QMK framework when the active layer
+ * changes.
+ */
+layer_state_t layer_state_set_user(layer_state_t state) {
+  switch (get_highest_layer(state)) {
+    case _NAV:
+      rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+      rgb_matrix_sethsv_noeeprom(40, 80, RGB_MATRIX_MAXIMUM_BRIGHTNESS);
+      break;
+    default:
+      _rgb_matrix_apply_default_noeeprom();
+      break;
+  }
+  return state;
 }
 
 /**
