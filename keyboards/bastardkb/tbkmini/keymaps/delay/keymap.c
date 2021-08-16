@@ -190,9 +190,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     }
     case FX_RST: {
-      rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
-      rgb_matrix_set_color_all(RGB_RED);
-      reset_keyboard();
+      if (record->event.pressed) {
+        rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
+        rgb_matrix_sethsv_noeeprom(HSV_RED);
+      } else {
+        reset_keyboard();
+      }
       break;
     }
     case NS_0:
@@ -240,30 +243,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
  *
  * This is to replace the missing `rgb_matrix_reload_from_eeprom()`.
  */
-static void _rgb_matrix_apply_default_noeeprom(void) {
+static void _rgb_matrix_reset_noeeprom(void) {
   rgb_matrix_mode_noeeprom(RGB_MATRIX_STARTUP_MODE);
-  rgb_matrix_sethsv_noeeprom(RGB_MATRIX_STARTUP_HUE, RGB_MATRIX_STARTUP_SAT,
-                             RGB_MATRIX_STARTUP_VAL);
+  rgb_matrix_sethsv_noeeprom(RGB_MATRIX_STARTUP_HSV);
   rgb_matrix_set_speed_noeeprom(RGB_MATRIX_STARTUP_SPD);
-}
-
-/**
- * Called on layer change.
- *
- * This is called automatically by the QMK framework when the active layer
- * changes.
- */
-layer_state_t layer_state_set_user(layer_state_t state) {
-  switch (get_highest_layer(state)) {
-    case _NAV:
-      rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
-      rgb_matrix_sethsv_noeeprom(40, 80, RGB_MATRIX_MAXIMUM_BRIGHTNESS);
-      break;
-    default:
-      _rgb_matrix_apply_default_noeeprom();
-      break;
-  }
-  return state;
 }
 
 /**
@@ -278,9 +261,9 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 void oneshot_locked_mods_changed_user(uint8_t mods) {
   if (mods & MOD_MASK_SHIFT) {
     rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
-    rgb_matrix_sethsv_noeeprom(155, 80, RGB_MATRIX_MAXIMUM_BRIGHTNESS);
+    rgb_matrix_sethsv_noeeprom(HSV_BLUE);
   } else if (!mods) {
-    _rgb_matrix_apply_default_noeeprom();  // Load default values.
+    _rgb_matrix_reset_noeeprom();  // Load default values.
   }
 }
 
@@ -312,7 +295,6 @@ void keyboard_post_init_user(void) {
 
 void eeconfig_init_user(void) {
   rgb_matrix_mode(RGB_MATRIX_STARTUP_MODE);
-  rgb_matrix_sethsv(RGB_MATRIX_STARTUP_HUE, RGB_MATRIX_STARTUP_SAT,
-                    RGB_MATRIX_STARTUP_VAL);
+  rgb_matrix_sethsv(RGB_MATRIX_STARTUP_HSV);
   rgb_matrix_set_speed(RGB_MATRIX_STARTUP_SPD);
 }

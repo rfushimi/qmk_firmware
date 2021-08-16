@@ -20,7 +20,7 @@
 /**
  * Default RGB mode to use: relaxing mode.
  */
-// Unloads all animations but the rainbow swirl, reduces memory footprint.
+// Unloads all animations but the one used for idle, reduces memory footprint.
 #define DISABLE_RGB_MATRIX_ALPHAS_MODS
 #define DISABLE_RGB_MATRIX_GRADIENT_UP_DOWN
 #define DISABLE_RGB_MATRIX_GRADIENT_LEFT_RIGHT
@@ -32,11 +32,11 @@
 #define DISABLE_RGB_MATRIX_BAND_SPIRAL_SAT
 #define DISABLE_RGB_MATRIX_BAND_SPIRAL_VAL
 #define DISABLE_RGB_MATRIX_CYCLE_ALL
-// #define DISABLE_RGB_MATRIX_CYCLE_LEFT_RIGHT
+#define DISABLE_RGB_MATRIX_CYCLE_LEFT_RIGHT
 #define DISABLE_RGB_MATRIX_CYCLE_UP_DOWN
 #define DISABLE_RGB_MATRIX_RAINBOW_MOVING_CHEVRON
 #define DISABLE_RGB_MATRIX_CYCLE_OUT_IN
-#define DISABLE_RGB_MATRIX_CYCLE_OUT_IN_DUAL
+// #define DISABLE_RGB_MATRIX_CYCLE_OUT_IN_DUAL
 #define DISABLE_RGB_MATRIX_CYCLE_PINWHEEL
 #define DISABLE_RGB_MATRIX_CYCLE_SPIRAL
 #define DISABLE_RGB_MATRIX_DUAL_BEACON
@@ -66,20 +66,23 @@
 // control the feature).
 #define RGB_MATRIX_DISABLE_KEYCODES
 
-// Rainbow swirl as startup mode.
-#define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_CYCLE_LEFT_RIGHT
-
-// Slow swirl at startup.
-#define RGB_MATRIX_STARTUP_SPD 0
-
-// Startup values.
-#define RGB_MATRIX_STARTUP_HUE 0
-#define RGB_MATRIX_STARTUP_SAT 255
-
 // Limit maximum brightness to keep power consumption reasonable, and avoid
 // disconnects.
 #undef RGB_MATRIX_MAXIMUM_BRIGHTNESS
 #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 32
+
+// Rainbow swirl as startup mode.
+#define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_CYCLE_OUT_IN_DUAL
+
+// Slow swirl at startup.
+#define RGB_MATRIX_STARTUP_SPD 10
+
+// Startup values.
+#define RGB_MATRIX_STARTUP_HUE 0
+#define RGB_MATRIX_STARTUP_SAT 255
+#define RGB_MATRIX_STARTUP_VAL RGB_MATRIX_MAXIMUM_BRIGHTNESS
+#define RGB_MATRIX_STARTUP_HSV \
+  RGB_MATRIX_STARTUP_HUE, RGB_MATRIX_STARTUP_SAT, RGB_MATRIX_STARTUP_VAL
 
 /* One-Shot keys. */
 
