@@ -1,12 +1,12 @@
 # Tap-Hold Configuration Options
 
-While Tap-Hold options are fantastic, they are not without their issues.  We have tried to configure them with reasonable defaults, but that may still cause issues for some people.
+While Tap-Hold options are fantastic, they are not without their issues. We have tried to configure them with reasonable defaults, but that may still cause issues for some people.
 
 These options let you modify the behavior of the Tap-Hold keys.
 
 ## Tapping Term
 
-The crux of all of the following features is the tapping term setting.  This determines what is a tap and what is a hold.  And the exact timing for this to feel natural can vary from keyboard to keyboard, from switch to switch, and from key to key.
+The crux of all of the following features is the tapping term setting. This determines what is a tap and what is a hold. And the exact timing for this to feel natural can vary from keyboard to keyboard, from switch to switch, and from key to key.
 
 You can set the global time for this by adding the following setting to your `config.h`:
 
@@ -14,9 +14,10 @@ You can set the global time for this by adding the following setting to your `co
 #define TAPPING_TERM 200
 ```
 
-This setting is defined in milliseconds, and does default to 200ms.  This is a good average for a majority of people.
+This setting is defined in milliseconds, and does default to 200ms. This is a good average for a majority of people.
 
 For more granular control of this feature, you can add the following to your `config.h`:
+
 ```c
 #define TAPPING_TERM_PER_KEY
 ```
@@ -40,13 +41,13 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 
 The code which decides between the tap and hold actions of dual-role keys supports three different modes, in increasing order of preference for the hold action:
 
-1. The default mode selects the hold action only if the dual-role key is held down longer than the tapping term.  In this mode pressing other keys while the dual-role key is held down does not influence the tap-or-hold decision.
+1. The default mode selects the hold action only if the dual-role key is held down longer than the tapping term. In this mode pressing other keys while the dual-role key is held down does not influence the tap-or-hold decision.
 
-2. The “permissive hold” mode, in addition to the default behavior, immediately selects the hold action when another key is tapped (pressed and then released) while the dual-role key is held down, even if this happens earlier than the tapping term.  If another key is just pressed, but then the dual-role key is released before that other key (and earlier than the tapping term), this mode will still select the tap action.
+2. The “permissive hold” mode, in addition to the default behavior, immediately selects the hold action when another key is tapped (pressed and then released) while the dual-role key is held down, even if this happens earlier than the tapping term. If another key is just pressed, but then the dual-role key is released before that other key (and earlier than the tapping term), this mode will still select the tap action.
 
 3. The “hold on other key press” mode, in addition to the default behavior, immediately selects the hold action when another key is pressed while the dual-role key is held down, even if this happens earlier than the tapping term.
 
-Note that until the tap-or-hold decision completes (which happens when either the dual-role key is released, or the tapping term has expired, or the extra condition for the selected decision mode is satisfied), key events are delayed and not transmitted to the host immediately.  The default mode gives the most delay (if the dual-role key is held down, this mode always waits for the whole tapping term), and the other modes may give less delay when other keys are pressed, because the hold action may be selected earlier.
+Note that until the tap-or-hold decision completes (which happens when either the dual-role key is released, or the tapping term has expired, or the extra condition for the selected decision mode is satisfied), key events are delayed and not transmitted to the host immediately. The default mode gives the most delay (if the dual-role key is held down, this mode always waits for the whole tapping term), and the other modes may give less delay when other keys are pressed, because the hold action may be selected earlier.
 
 ### Permissive Hold
 
@@ -58,27 +59,27 @@ The “permissive hold” mode can be enabled for all dual-role keys by adding t
 
 This makes tap and hold keys (like Layer Tap) work better for fast typists, or for high `TAPPING_TERM` settings.
 
-If you press a dual-role key, tap another key (press and release) and then release the dual-role key, all within the tapping term, by default the dual-role key will perform its tap action.  If the `PERMISSIVE_HOLD` option is enabled, the dual-role key will perform its hold action instead.
+If you press a dual-role key, tap another key (press and release) and then release the dual-role key, all within the tapping term, by default the dual-role key will perform its tap action. If the `PERMISSIVE_HOLD` option is enabled, the dual-role key will perform its hold action instead.
 
 An example of a sequence which is affected by the “permissive hold” mode:
 
-- `LT(2, KC_A)` Down
-- `KC_L` Down (the `L` key is also mapped to `KC_RGHT` on layer 2)
-- `KC_L` Up
-- `LT(2, KC_A)` Up
+-   `LT(2, KC_A)` Down
+-   `KC_L` Down (the `L` key is also mapped to `KC_RGHT` on layer 2)
+-   `KC_L` Up
+-   `LT(2, KC_A)` Up
 
-Normally, if you do all this within the `TAPPING_TERM` (default: 200ms), this will be registered as `al` by the firmware and host system.  With the `PERMISSIVE_HOLD` option enabled, the Layer Tap key is considered as a layer switch if another key is tapped, and the above sequence would be registered as `KC_RGHT` (the mapping of `L` on layer 2).
+Normally, if you do all this within the `TAPPING_TERM` (default: 200ms), this will be registered as `al` by the firmware and host system. With the `PERMISSIVE_HOLD` option enabled, the Layer Tap key is considered as a layer switch if another key is tapped, and the above sequence would be registered as `KC_RGHT` (the mapping of `L` on layer 2).
 
 However, this slightly different sequence will not be affected by the “permissive hold” mode:
 
-- `LT(2, KC_A)` Down
-- `KC_L` Down (the `L` key is also mapped to `KC_RGHT` on layer 2)
-- `LT(2, KC_A)` Up
-- `KC_L` Up
+-   `LT(2, KC_A)` Down
+-   `KC_L` Down (the `L` key is also mapped to `KC_RGHT` on layer 2)
+-   `LT(2, KC_A)` Up
+-   `KC_L` Up
 
 In the sequence above the dual-role key is released before the other key is released, and if that happens within the tapping term, the “permissive hold” mode will still choose the tap action for the dual-role key, and the sequence will be registered as `al` by the host.
 
-?> The `PERMISSIVE_HOLD` option also affects Mod Tap keys, but this may not be noticeable if you do not also enable the `IGNORE_MOD_TAP_INTERRUPT` option for those keys, because the default handler for Mod Tap keys also considers both the “nested press” and “rolling press” sequences like shown above as a modifier hold, not the tap action.  If you do not enable `IGNORE_MOD_TAP_INTERRUPT`, the effect of `PERMISSIVE_HOLD` on Mod Tap keys would be limited to reducing the delay before the key events are made visible to the host.
+?> The `PERMISSIVE_HOLD` option also affects Mod Tap keys, but this may not be noticeable if you do not also enable the `IGNORE_MOD_TAP_INTERRUPT` option for those keys, because the default handler for Mod Tap keys also considers both the “nested press” and “rolling press” sequences like shown above as a modifier hold, not the tap action. If you do not enable `IGNORE_MOD_TAP_INTERRUPT`, the effect of `PERMISSIVE_HOLD` on Mod Tap keys would be limited to reducing the delay before the key events are made visible to the host.
 
 For more granular control of this feature, you can add the following to your `config.h`:
 
@@ -109,20 +110,20 @@ The “hold on other key press” mode can be enabled for all dual-role keys by 
 #define HOLD_ON_OTHER_KEY_PRESS
 ```
 
-This mode makes tap and hold keys (like Layer Tap) work better for fast typists, or for high `TAPPING_TERM` settings.  Compared to the “permissive hold” mode, this mode selects the hold action in more cases.
+This mode makes tap and hold keys (like Layer Tap) work better for fast typists, or for high `TAPPING_TERM` settings. Compared to the “permissive hold” mode, this mode selects the hold action in more cases.
 
-If you press a dual-role key, press another key, and then release the dual-role key, all within the tapping term, by default the dual-role key will perform its tap action.  If the `HOLD_ON_OTHER_KEY_PRESS` option is enabled, the dual-role key will perform its hold action instead.
+If you press a dual-role key, press another key, and then release the dual-role key, all within the tapping term, by default the dual-role key will perform its tap action. If the `HOLD_ON_OTHER_KEY_PRESS` option is enabled, the dual-role key will perform its hold action instead.
 
 An example of a sequence which is affected by the “hold on other key press” mode, but not by the “permissive hold” mode:
 
-- `LT(2, KC_A)` Down
-- `KC_L` Down (the `L` key is also mapped to `KC_RGHT` on layer 2)
-- `LT(2, KC_A)` Up
-- `KC_L` Up
+-   `LT(2, KC_A)` Down
+-   `KC_L` Down (the `L` key is also mapped to `KC_RGHT` on layer 2)
+-   `LT(2, KC_A)` Up
+-   `KC_L` Up
 
-Normally, if you do all this within the `TAPPING_TERM` (default: 200ms), this will be registered as `al` by the firmware and host system.  With the `HOLD_ON_OTHER_KEY_PRESS` option enabled, the Layer Tap key is considered as a layer switch if another key is pressed, and the above sequence would be registered as `KC_RGHT` (the mapping of `L` on layer 2).
+Normally, if you do all this within the `TAPPING_TERM` (default: 200ms), this will be registered as `al` by the firmware and host system. With the `HOLD_ON_OTHER_KEY_PRESS` option enabled, the Layer Tap key is considered as a layer switch if another key is pressed, and the above sequence would be registered as `KC_RGHT` (the mapping of `L` on layer 2).
 
-?> The `HOLD_ON_OTHER_KEY_PRESS` option also affects Mod Tap keys, but this may not be noticeable if you do not also enable the `IGNORE_MOD_TAP_INTERRUPT` option for those keys, because the default handler for Mod Tap keys also considers the “rolling press” sequence like shown above as a modifier hold, not the tap action.  If you do not enable `IGNORE_MOD_TAP_INTERRUPT`, the effect of `HOLD_ON_OTHER_KEY_PRESS` on Mod Tap keys would be limited to reducing the delay before the key events are made visible to the host.
+?> The `HOLD_ON_OTHER_KEY_PRESS` option also affects Mod Tap keys, but this may not be noticeable if you do not also enable the `IGNORE_MOD_TAP_INTERRUPT` option for those keys, because the default handler for Mod Tap keys also considers the “rolling press” sequence like shown above as a modifier hold, not the tap action. If you do not enable `IGNORE_MOD_TAP_INTERRUPT`, the effect of `HOLD_ON_OTHER_KEY_PRESS` on Mod Tap keys would be limited to reducing the delay before the key events are made visible to the host.
 
 For more granular control of this feature, you can add the following to your `config.h`:
 
@@ -145,7 +146,6 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 }
 ```
 
-
 ## Ignore Mod Tap Interrupt
 
 To enable this setting, add this to your `config.h`:
@@ -156,20 +156,20 @@ To enable this setting, add this to your `config.h`:
 
 ?> This option affects only the Mod Tap keys; it does not affect other dual-role keys such as Layer Tap.
 
-By default the tap-or-hold decision for Mod Tap keys strongly prefers the hold action.  If you press a Mod Tap key, then press another key while still holding the Mod Tap key down, the Mod Tap press will be handled as a modifier hold even if the Mod Tap key is then released within the tapping term, and irrespective of the order in which those keys are released.  Using options such as `PERMISSIVE_HOLD` or `HOLD_ON_OTHER_KEY_PRESS` will not affect the functionality of Mod Tap keys in a major way (these options would still affect the delay until the common code for dual-role keys finishes its tap-or-hold decision, but then the special code for Mod Tap keys will override the result of that decision and choose the hold action if another key was pressed).  In fact, by default the tap-or-hold decision for Mod Tap keys is done in the same way as if the `HOLD_ON_OTHER_KEY_PRESS` option was enabled, but without the decreased delay provided by `HOLD_ON_OTHER_KEY_PRESS`.
+By default the tap-or-hold decision for Mod Tap keys strongly prefers the hold action. If you press a Mod Tap key, then press another key while still holding the Mod Tap key down, the Mod Tap press will be handled as a modifier hold even if the Mod Tap key is then released within the tapping term, and irrespective of the order in which those keys are released. Using options such as `PERMISSIVE_HOLD` or `HOLD_ON_OTHER_KEY_PRESS` will not affect the functionality of Mod Tap keys in a major way (these options would still affect the delay until the common code for dual-role keys finishes its tap-or-hold decision, but then the special code for Mod Tap keys will override the result of that decision and choose the hold action if another key was pressed). In fact, by default the tap-or-hold decision for Mod Tap keys is done in the same way as if the `HOLD_ON_OTHER_KEY_PRESS` option was enabled, but without the decreased delay provided by `HOLD_ON_OTHER_KEY_PRESS`.
 
-If the `IGNORE_MOD_TAP_INTERRUPT` option is enabled, Mod Tap keys are no longer treated as a special case, and their behavior will match the behavior of other dual-role keys such as Layer Tap.  Then the behavior of Mod Tap keys can be further tuned using other options such as `PERMISSIVE_HOLD` or `HOLD_ON_OTHER_KEY_PRESS`.
+If the `IGNORE_MOD_TAP_INTERRUPT` option is enabled, Mod Tap keys are no longer treated as a special case, and their behavior will match the behavior of other dual-role keys such as Layer Tap. Then the behavior of Mod Tap keys can be further tuned using other options such as `PERMISSIVE_HOLD` or `HOLD_ON_OTHER_KEY_PRESS`.
 
 An example of a sequence which will be affected by the `IGNORE_MOD_TAP_INTERRUPT` option (assuming that options like `PERMISSIVE_HOLD` or `HOLD_ON_OTHER_KEY_PRESS` are not enabled):
 
-- `SFT_T(KC_A)` Down
-- `KC_X` Down
-- `SFT_T(KC_A)` Up
-- `KC_X` Up
+-   `SFT_T(KC_A)` Down
+-   `KC_X` Down
+-   `SFT_T(KC_A)` Up
+-   `KC_X` Up
 
-Normally, this would send a capital `X` (`SHIFT`+`x`), even if the sequence is performed faster than the `TAPPING_TERM`.  However, if the `IGNORE_MOD_TAP_INTERRUPT` option is enabled, the `SFT_T(KC_A)` key must be held longer than the `TAPPING_TERM` to register the hold action.  A quick tap will output `ax` in this case, while a hold will still output a capital `X` (`SHIFT`+`x`).
+Normally, this would send a capital `X` (`SHIFT`+`x`), even if the sequence is performed faster than the `TAPPING_TERM`. However, if the `IGNORE_MOD_TAP_INTERRUPT` option is enabled, the `SFT_T(KC_A)` key must be held longer than the `TAPPING_TERM` to register the hold action. A quick tap will output `ax` in this case, while a hold will still output a capital `X` (`SHIFT`+`x`).
 
-However, if the `HOLD_ON_OTHER_KEY_PRESS` option is enabled in addition to `IGNORE_MOD_TAP_INTERRUPT`, the above sequence will again send a capital `X` (`SHIFT`+`x`) even if performed faster that the `TAPPING_TERM`.  The difference from the default configuration is that by default the host will receive the key events only after the `SFT_T(KC_A)` key is released, but with the `HOLD_ON_OTHER_KEY_PRESS` option the host will start receiving key events when the `KC_X` key is pressed.
+However, if the `HOLD_ON_OTHER_KEY_PRESS` option is enabled in addition to `IGNORE_MOD_TAP_INTERRUPT`, the above sequence will again send a capital `X` (`SHIFT`+`x`) even if performed faster that the `TAPPING_TERM`. The difference from the default configuration is that by default the host will receive the key events only after the `SFT_T(KC_A)` key is released, but with the `HOLD_ON_OTHER_KEY_PRESS` option the host will start receiving key events when the `KC_X` key is pressed.
 
 For more granular control of this feature, you can add the following to your `config.h`:
 
@@ -206,11 +206,11 @@ When the user holds a key after tapping it, the tapping function is repeated by 
 
 Example:
 
-- `SFT_T(KC_A)` Down
-- `SFT_T(KC_A)` Up
-- `SFT_T(KC_A)` Down
-- wait until the tapping term expires...
-- `SFT_T(KC_A)` Up
+-   `SFT_T(KC_A)` Down
+-   `SFT_T(KC_A)` Up
+-   `SFT_T(KC_A)` Down
+-   wait until the tapping term expires...
+-   `SFT_T(KC_A)` Up
 
 With default settings, `a` will be sent on the first release, then `a` will be sent on the second press allowing the computer to trigger its auto repeat function.
 
@@ -268,11 +268,35 @@ bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
 }
 ```
 
+## Bilateral Combinations
+
+The last mod-tap hold will be converted to the corresponding mod-tap tap if another key on the same hand is tapped during the hold, unless a key on the other hand is tapped first.
+
+This option can be used to prevent accidental modifier combinations with mod-tap, in particular those caused by rollover on home row mods. As only the last mod-tap hold is affected, it should be enabled after adjusting settings and typing style so that accidental mods happen only occasionally, e.g. with a long enough tapping term, ignore mod tap interrupt, and deliberately brief keypresses.
+
+To enable bilateral combinations, add the following to your `config.h`:
+
+```c
+#define BILATERAL_COMBINATIONS
+```
+
+If `BILATERAL_COMBINATIONS` is defined to a value, hold times greater than that value will permit same hand combinations. For example:
+
+```c
+#define BILATERAL_COMBINATIONS 500
+```
+
+To monitor activations in the background, enable debugging, enable the console, enable terminal bell, add `#define DEBUG_ACTION` to `config.h`, and use something like the following shell command line:
+
+```sh
+hid_listen | sed -u 's/BILATERAL_COMBINATIONS: change/&\a/g'
+```
+
 ## Why do we include the key record for the per key functions?
 
 One thing that you may notice is that we include the key record for all of the "per key" functions, and may be wondering why we do that.
 
-Well, it's simple really: customization.  But specifically, it depends on how your keyboard is wired up.  For instance, if each row is actually using a row in the keyboard's matrix, then it may be simpler to use `if (record->event.row == 3)` instead of checking a whole bunch of keycodes.  Which is especially good for those people using the Tap Hold type keys on the home row. So you could fine tune those to not interfere with your normal typing.
+Well, it's simple really: customization. But specifically, it depends on how your keyboard is wired up. For instance, if each row is actually using a row in the keyboard's matrix, then it may be simpler to use `if (record->event.row == 3)` instead of checking a whole bunch of keycodes. Which is especially good for those people using the Tap Hold type keys on the home row. So you could fine tune those to not interfere with your normal typing.
 
 ## Why is there no `*_kb` or `*_user` functions?!
 
