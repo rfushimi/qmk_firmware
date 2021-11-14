@@ -251,9 +251,13 @@ __attribute__((weak)) void process_mouse_report(report_mouse_t* mouse_report) {
   }
 }
 
+__attribute__((weak)) void process_mouse_report_user(
+    report_mouse_t* mouse_report) {}
+
 void pointing_device_task(void) {
   report_mouse_t mouse_report = pointing_device_get_report();
   process_mouse_report(&mouse_report);
+  process_mouse_report_user(&mouse_report);
 
   pointing_device_set_report(mouse_report);
   pointing_device_send();

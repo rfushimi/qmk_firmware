@@ -46,6 +46,29 @@ layer:
 #define CHARYBDIS_AUTO_SNIPING_ON_LAYER LAYER_POINTER
 ```
 
+### Auto pointer layer
+
+The pointer layer can be automatically enabled when moving the trackball. To
+enable or disable this behavior, add or remove the following define:
+
+```c
+#define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER
+```
+
+By default, the layer is turned off 1 second after the last registered trackball
+movement:
+
+```c
+#define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS 1000
+```
+
+The trigger sensibility can also be tuned. The lower the value, the more
+sensible the trigger:
+
+```c
+#define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD 8
+```
+
 ## Layout
 
 ![Keymap layout (generated with keyboard-layout-editor.com)](https://i.imgur.com/qI7phR7.png)

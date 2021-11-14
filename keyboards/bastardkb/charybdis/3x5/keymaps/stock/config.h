@@ -101,6 +101,11 @@
 // displacement, while maintaining 1x speed for slow movements.
 #define CHARYBDIS_ENABLE_POINTER_ACCELERATION
 
+// Automatically enable the pointer layer when moving the trackball.  See also:
+// - `CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS`
+// - `CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD`
+#define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER
+
 /** RGB Matrix. */
 
 #ifdef RGB_MATRIX_ENABLE

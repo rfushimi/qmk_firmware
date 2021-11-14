@@ -91,8 +91,20 @@ void charybdis_set_pointer_dragscroll_enabled(bool enable);
 
 /**
  * Process raw mouse report from sensor, ie. `pointing_device_get_report()`.
+ *
+ * While a default implementation is provided, this function is defined weakly
+ * to allow overriding it, and effectively *replace* the default behavior.
  */
 void process_mouse_report(report_mouse_t* mouse_report);
+
+/**
+ * Further process mouse report from sensor.
+ *
+ * This is called *after* `process_mouse_report(report_mouse_t*)`.  Use this to
+ * *augment* the default behavior, (as opposed to overriding it, which can be
+ * done by redefining `process_mouse_report(report_mouse_t*)` instead).
+ */
+void process_mouse_report_user(report_mouse_t* mouse_report);
 
 /**
  * Process PMW report, and update mouse report accordingly.
