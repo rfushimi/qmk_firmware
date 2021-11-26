@@ -71,14 +71,3 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
   return true;
 }
 #endif  // ENCODER_ENABLE
-
-#ifdef RGBLIGHT_ENABLE
-layer_state_t layer_state_set_user(layer_state_t state) {
-  switch (get_highest_layer(state)) {
-    default:  // For any other layers, or the default layer
-      rgblight_reload_from_eeprom();
-      break;
-  }
-  return state;
-}
-#endif  // RGBLIGHT_ENABLE
