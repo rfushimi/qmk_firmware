@@ -1,8 +1,8 @@
-name: Build firmwares for Charybdis keyboards with Elite-C (ATMEGA32u4)
+name: Build firmwares for delay's keymaps
 on:
   push:
     branches:
-      - charybdis-upstream
+      - users-delay
     paths-ignore:
       - "**.md"
 
@@ -13,11 +13,14 @@ jobs:
       fail-fast: false
       matrix:
         keyboard:
-          - bastardkb/charybdis/3x5
-          - bastardkb/charybdis/4x6
+          - bastardkb/charybdis/3x5/f411
+          - bastardkb/skeletyl
+          - bastardkb/tbkmini
+          - pikatea/macropad1x5
+          - ploopyco/trackball_nano/rev1_001
+          - reviung5
         keymap:
-          - default
-          - via
+          - delay
 
     steps:
       - uses: actions/checkout@v2
