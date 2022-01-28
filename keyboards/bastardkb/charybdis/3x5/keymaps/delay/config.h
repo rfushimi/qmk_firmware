@@ -16,6 +16,10 @@
  */
 #pragma once
 
+// Trackball angle adjustment.
+#undef ROTATIONAL_TRANSFORM_ANGLE
+#define ROTATIONAL_TRANSFORM_ANGLE -80
+
 // Enable pointer acceleration.
 #define CHARYBDIS_POINTER_ACCELERATION_ENABLE
 
