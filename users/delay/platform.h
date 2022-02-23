@@ -28,6 +28,8 @@ void process_record_copy(const keyrecord_t *record);
 void process_record_paste(const keyrecord_t *record);
 void process_record_paste_no_format(const keyrecord_t *record);
 
+void process_record_launcher(const keyrecord_t *record);
+
 void process_record_close(const keyrecord_t *record);
 void process_record_new_tab(const keyrecord_t *record);
 void process_record_new_window(const keyrecord_t *record);

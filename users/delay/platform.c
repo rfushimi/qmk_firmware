@@ -50,6 +50,15 @@ void process_record_paste_no_format(const keyrecord_t *record) {
   _process_record_simple_shortcut(record, S(KC_V));
 }
 
+void process_record_launcher(const keyrecord_t *record) {
+  const uint16_t keycode16 = LGUI(is_macos() ? KC_SPACE : KC_P);
+  if (record->event.pressed) {
+    register_code16(keycode16);
+  } else {
+    unregister_code16(keycode16);
+  }
+}
+
 void process_record_close(const keyrecord_t *record) {
   _process_record_simple_shortcut(record, KC_W);
 }

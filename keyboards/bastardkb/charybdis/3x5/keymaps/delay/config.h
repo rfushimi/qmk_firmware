@@ -24,7 +24,7 @@
 #define CHARYBDIS_POINTER_ACCELERATION_ENABLE
 
 // macOS "Natural" scroll direction.
-#define CHARYBDIS_DRAGSCROLL_REVERSE_Y
+// #define CHARYBDIS_DRAGSCROLL_REVERSE_Y
 
 // Disable unused keycodes.
 #define NO_CHARYBDIS_KEYCODES

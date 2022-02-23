@@ -37,6 +37,7 @@ enum keycodes_user {
   SC_PASTE,            // ^V or Cmd+V based on the platform.
   SC_PASTE_NO_FORMAT,  // Shifted ^V or Cmd+V based on the platform.
   // Other platform-specific shortcuts.
+  SC_LAUNCHER,    // Platform launcher.
   SC_CLOSE,       // ^W or Cmd+W based on the platform.
   SC_NEW_TAB,     // ^T or Cmd+T based on the platform.
   SC_NEW_WINDOW,  // ^N or Cmd+N based on the platform.
@@ -112,6 +113,7 @@ enum keycodes_user {
 #define SC_NTAB SC_NEW_TAB
 #define SC_NWIN SC_NEW_WINDOW
 #define SC_SELA SC_SELECT_ALL
+#define LAUNCHR SC_LAUNCHER
 #define WS_1 WS_GOTO_1
 #define WS_2 WS_GOTO_2
 #define WS_3 WS_GOTO_3

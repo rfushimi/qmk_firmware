@@ -44,6 +44,8 @@ bool is_oneshot_mod_ignore_key(uint16_t keycode) {
     case CLEAR:
     case LMOD:
     case RMOD:
+    case MOD_ESC:
+    case MOD_TAB:
     case OS_LALT:
     case OS_LCTL:
     case OS_LGUI:
@@ -55,6 +57,17 @@ bool is_oneshot_mod_ignore_key(uint16_t keycode) {
   }
 }
 #endif  // ONESHOT_MOD_ENABLE
+
+#ifdef RGB_MATRIX_ENABLE
+void platform_inform_current(void) {
+  rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
+  if (is_macos()) {
+    rgb_matrix_sethsv_noeeprom(HSV_CYAN);
+  } else {
+    rgb_matrix_sethsv_noeeprom(HSV_GREEN);
+  }
+}
+#endif  // RGB_MATRIX_ENABLE
 
 bool process_record_user_keymap(uint16_t keycode, keyrecord_t *record) {
   if (!process_record_keymap(keycode, record)) {
@@ -73,16 +86,16 @@ bool process_record_user_keymap(uint16_t keycode, keyrecord_t *record) {
       clear_oneshot_locked_mods();
       del_mods(MOD_MASK_SHIFT);
       break;
+#if defined(RGB_MATRIX_ENABLE) && defined(DEFERRED_EXEC_ENABLE)
+    // Also gate on DEFERRED_EXEC_ENABLE being true since this is the mechanism
+    // used to reset the RGB Matrix mode.
+    // TODO(delay): find a better way to handle that.
     case MACOS:
       if (record->event.pressed) {
-        rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
-        if (is_macos()) {
-          rgb_matrix_sethsv_noeeprom(HSV_CYAN);
-        } else {
-          rgb_matrix_sethsv_noeeprom(HSV_GREEN);
-        }
+        platform_inform_current();
       }
       return false;
+#endif  // RGB_MATRIX_ENABLE && DEFERRED_EXEC_ENABLE
   }
   return true;
 };
@@ -107,23 +120,27 @@ uint32_t reset_rgb_matrix_callback(uint32_t trigger_time, void *cb_arg) {
   rgb_matrix_reload_from_eeprom();
   return 0;
 }
+
+void schedule_rgb_matrix_reset(uint16_t delay_ms) {
+  // Defer reseting the RGB matrix to its default value.
+  //
+  // TODO(delay): add a dedicated define for this feature, and make the
+  // timeout configurable.
+  static deferred_token reset_rgb_matrix_token = 0;
+  if (reset_rgb_matrix_token != 0) {
+    cancel_deferred_exec(reset_rgb_matrix_token);
+  }
+  reset_rgb_matrix_token = defer_exec(delay_ms, reset_rgb_matrix_callback,
+                                      /* cb_arg= */ NULL);
+}
 #endif  // RGB_MATRIX_ENABLE && DEFERRED_EXEC_ENABLE
 
 /** Called on layer change. */
 layer_state_t layer_state_set_user_keymap(layer_state_t state) {
 #if defined(RGB_MATRIX_ENABLE) && defined(DEFERRED_EXEC_ENABLE)
   if (get_highest_layer(state) == _BASE) {
-    // Defer reseting the RGB matrix to its default value.
-    //
-    // TODO(delay): add a dedicated define for this feature, and make the
-    // timeout configurable.
-    static deferred_token reset_rgb_matrix_token = 0;
-    if (reset_rgb_matrix_token != 0) {
-      cancel_deferred_exec(reset_rgb_matrix_token);
-    }
-    reset_rgb_matrix_token =
-        defer_exec(/* delay_ms= */ 1000, reset_rgb_matrix_callback,
-                   /* cb_arg= */ NULL);
+    // Reset the RGB matrix to its default value.
+    schedule_rgb_matrix_reset(/* delay_ms= */ 1000);
   }
 #endif  // RGB_MATRIX_ENABLE && DEFERRED_EXEC_ENABLE
   return layer_state_set_keymap(state);
@@ -134,7 +151,13 @@ __attribute__((weak)) layer_state_t layer_state_set_keymap(
   return state;
 }
 
-void keyboard_post_init_user_keymap(void) { keyboard_post_init_keymap(); }
+void keyboard_post_init_user_keymap(void) {
+#ifdef RGB_MATRIX_ENABLE
+  platform_inform_current();
+  schedule_rgb_matrix_reset(/* delay_ms= */ 2000);
+#endif  // RGB_MATRIX_ENABLE
+  keyboard_post_init_keymap();
+}
 
 __attribute__((weak)) void keyboard_post_init_keymap(void) {}
 

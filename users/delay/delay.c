@@ -207,6 +207,9 @@ static bool process_record_user_internal(uint16_t keycode,
     case SC_PASTE_NO_FORMAT:
       process_record_paste_no_format(record);
       break;
+    case SC_LAUNCHER:
+      process_record_launcher(record);
+      break;
     case SC_CLOSE:
       process_record_close(record);
       break;
