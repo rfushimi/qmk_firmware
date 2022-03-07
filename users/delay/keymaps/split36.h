@@ -21,6 +21,10 @@
 #include "delay.h"
 #include "quantum.h"
 
+#ifdef TAP_DANCE_ENABLE
+#include "tap_dance.h"
+#endif  // TAP_DANCE_ENABLE
+
 /**
  * \brief Similar to `_kb`, `_user`, `_user_keymap`, and other variants, but for
  * keymaps.
@@ -69,6 +73,15 @@ enum keycodes_keymap {
 // Tap dances.
 #define TD_SFT OSM(MOD_LSFT)
 
+#if defined(TAP_DANCE_ENABLE) && defined(POINTING_DEVICE_ENABLE) && \
+    defined(TD_ONESHOT_DRAGSCROLL_ENABLE) &&                        \
+    defined(KEYBOARD_bastardkb_charybdis)
+#define TD_DRG TD(TD_ONESHOT_DRAGSCROLL)
+#else
+#define TD_DRG KC_NO
+#endif  // TAP_DANCE_ENABLE && POINTING_DEVICE_ENABLE &&
+        // TD_ONESHOT_DRAGSCROLL_ENABLE && KEYBOARD_bastardkb_charybdis
+
 // Ctrl-Tab.
 #define CTL_TAB C(KC_TAB)
 #define RCS_TAB RCS(KC_TAB)
@@ -101,7 +114,7 @@ enum keycodes_keymap {
  */
 // clang-format off
 #define LMOD_split_3x5_3                                                                      \
-    SPECIAL,     FUN, ___x___, ___x___, ___x___, KC_AMPR, KC_LCBR,  KC_EQL, KC_RCBR, KC_PERC, \
+    SPECIAL,     FUN,  TD_DRG, ___x___, ___x___, KC_AMPR, KC_LCBR,  KC_EQL, KC_RCBR, KC_PERC, \
     OS_LALT, OS_LSFT, OS_LCTL, OS_LGUI, ___x___, KC_CIRC, KC_LPRN, KC_QUES, KC_RPRN,  KC_DLR, \
     ___x___, KC_BTN2, KC_BTN1, KC_BTN3, ___x___, KC_PIPE, KC_LBRC,   KC_AT, KC_RBRC, KC_SCLN, \
                       _______, ___x___, _______, ___x___,   CLEAR, ___x___
@@ -112,7 +125,7 @@ enum keycodes_keymap {
  */
 // clang-format off
 #define RMOD_split_3x5_3                                                                      \
-    KC_DQUO, KC_LABK,  KC_EQL, KC_RABK,  KC_GRV, ___x___, ___x___, ___x___,     FUN, SPECIAL, \
+    KC_DQUO, KC_LABK,  KC_EQL, KC_RABK,  KC_GRV, ___x___, ___x___,  TD_DRG,     FUN, SPECIAL, \
     KC_HASH, KC_PLUS, KC_MINS, KC_COLN, KC_EXLM, ___x___, OS_LGUI, OS_LCTL, OS_LSFT, OS_LALT, \
     KC_TILD, KC_BSLS, KC_ASTR, KC_SLSH, KC_UNDS, ___x___, KC_BTN3, KC_BTN1, KC_BTN2, ___x___, \
                       ___x___, ___x___, ___x___, _______,   CLEAR, _______

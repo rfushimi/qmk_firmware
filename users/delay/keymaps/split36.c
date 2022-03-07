@@ -27,6 +27,10 @@
 #include "oneshot_mod.h"
 #endif  // ONESHOT_MOD_ENABLE
 
+#ifdef TAP_DANCE_ENABLE
+#include "tap_dance.h"
+#endif  // TAP_DANCE_ENABLE
+
 #ifdef ONESHOT_MOD_ENABLE
 bool is_oneshot_mod_cancel_key(uint16_t keycode) {
   switch (keycode) {
@@ -57,6 +61,37 @@ bool is_oneshot_mod_ignore_key(uint16_t keycode) {
   }
 }
 #endif  // ONESHOT_MOD_ENABLE
+
+#if defined(TAP_DANCE_ENABLE) && defined(POINTING_DEVICE_ENABLE) && \
+    defined(TD_ONESHOT_DRAGSCROLL_ENABLE) &&                        \
+    defined(KEYBOARD_bastardkb_charybdis)
+/**
+ * \brief The state for the oneshot-shift tap-dance.
+ *
+ * This state is not meant to be accessed directly.  Instead, use the
+ * `user_data` value that is passed to each callback.
+ */
+static oneshot_dragscroll_td_state_t g_oneshot_dragscroll_td_state = {
+    .td_state = TD_NONE,
+};
+
+/**
+ * \brief Define global tap-dance actions.
+ */
+qk_tap_dance_action_t tap_dance_actions[] = {
+    [TD_ONESHOT_DRAGSCROLL] =
+        {
+            .fn = {
+                /* user_fn_on_each_tap= */ NULL,
+                oneshot_dragscroll_td_on_dance_finished,
+                oneshot_dragscroll_td_on_dance_reset,
+            },
+            .user_data = &g_oneshot_dragscroll_td_state,
+            .custom_tapping_term = DELAY_TD_TAPPING_TERM,
+        },
+};
+#endif  // TAP_DANCE_ENABLE && POINTING_DEVICE_ENABLE &&
+        // TD_ONESHOT_DRAGSCROLL_ENABLE && KEYBOARD_bastardkb_charybdis
 
 #ifdef RGB_MATRIX_ENABLE
 void platform_inform_current(void) {

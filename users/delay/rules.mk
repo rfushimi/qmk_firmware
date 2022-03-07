@@ -31,6 +31,14 @@ ifeq ($(strip $(TD_ONESHOT_SHIFT_ENABLE)), yes)
 	OPT_DEFS += -DTD_ONESHOT_SHIFT_ENABLE
 endif
 
+# Include tap-dances source and flags if enabled.
+# This feature only works for the charybdis.
+ifeq ($(strip $(TD_ONESHOT_DRAGSCROLL_ENABLE)), yes)
+	TAP_DANCE_ENABLE = yes
+	SRC += tap_dance.c
+	OPT_DEFS += -DTD_ONESHOT_DRAGSCROLL_ENABLE
+endif
+
 # Include oneshot mods.
 ifeq ($(strip $(ONESHOT_MOD_ENABLE)), yes)
 	SRC += oneshot_mod.c
