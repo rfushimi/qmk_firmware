@@ -32,16 +32,7 @@
 #endif  // TAP_DANCE_ENABLE
 
 #ifdef ONESHOT_MOD_ENABLE
-bool is_oneshot_mod_cancel_key(uint16_t keycode) {
-  switch (keycode) {
-    case CLEAR:
-    case LMOD:
-    case RMOD:
-      return true;
-    default:
-      return false;
-  }
-}
+bool is_oneshot_mod_cancel_key(uint16_t keycode) { return keycode == CLEAR; }
 
 bool is_oneshot_mod_ignore_key(uint16_t keycode) {
   switch (keycode) {
