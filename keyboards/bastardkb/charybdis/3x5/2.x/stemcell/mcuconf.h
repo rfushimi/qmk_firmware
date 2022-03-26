@@ -1,5 +1,6 @@
 /*
- * Copyright 2021 Quentin LEBASTARD <qlebastard@gmail.com>
+ * Copyright 2020 Nick Brassel (tzarc)
+ * Copyright 2021 Stefan Kerkmann (@KarlK90)
  * Copyright 2021 Charly Delay <charly@codesink.dev> (@0xcharly)
  *
  * This program is free software: you can redistribute it and/or modify
@@ -18,18 +19,12 @@
 
 #pragma once
 
-#include "config_common.h"
+#include_next "mcuconf.h"
 
-/* Pointing device configuration. */
+#if 0
+#undef STM32_PWM_USE_TIM3
+#define STM32_PWM_USE_TIM3 TRUE
+#endif
 
-// Enable use of pointing device on slave split.
-#define SPLIT_POINTING_ENABLE
-
-// Pointing device is on the right split.
-#define POINTING_DEVICE_LEFT
-
-// Limits the frequency that the sensor is polled for motion.
-#define POINTING_DEVICE_TASK_THROTTLE_MS 1
-
-/** \brief Invert X axis on mouse reports. */
-#define POINTING_DEVICE_INVERT_X
+#undef STM32_SPI_USE_SPI1
+#define STM32_SPI_USE_SPI1 TRUE

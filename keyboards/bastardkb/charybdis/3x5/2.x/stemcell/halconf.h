@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Quentin LEBASTARD <qlebastard@gmail.com>
+ * Copyright 2020 Nick Brassel (tzarc)
  * Copyright 2021 Charly Delay <charly@codesink.dev> (@0xcharly)
  *
  * This program is free software: you can redistribute it and/or modify
@@ -18,18 +18,12 @@
 
 #pragma once
 
-#include "config_common.h"
+#if 0
+#define HAL_USE_PWM TRUE
+#endif
+#define HAL_USE_SERIAL TRUE
+#define HAL_USE_SPI TRUE
+#define SPI_USE_WAIT TRUE
+#define SPI_SELECT_MODE SPI_SELECT_MODE_PAD
 
-/* Pointing device configuration. */
-
-// Enable use of pointing device on slave split.
-#define SPLIT_POINTING_ENABLE
-
-// Pointing device is on the right split.
-#define POINTING_DEVICE_LEFT
-
-// Limits the frequency that the sensor is polled for motion.
-#define POINTING_DEVICE_TASK_THROTTLE_MS 1
-
-/** \brief Invert X axis on mouse reports. */
-#define POINTING_DEVICE_INVERT_X
+#include_next <halconf.h>

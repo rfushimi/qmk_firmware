@@ -37,6 +37,29 @@
 
 /* RGB settings. */
 #define RGB_DI_PIN D3
+#if 0
+#define WS2812_PWM_DRIVER PWMD3
+#define WS2812_PWM_CHANNEL 4
+#define WS2812_PWM_PAL_MODE 1
+#define WS2812_EXTERNAL_PULLUP
+#define FASTLED_SCALE8_FIXED 1
+#define WS2812_DMA_STREAM STM32_DMA1_STREAM7
+#define WS2812_DMA_CHANNEL 3
+#define WS2812_TRST_US 34
+#define WS2812_PWM_TARGET_PERIOD 800000
+#endif
+
+/* SPI config for pmw3360 sensor. */
+#define SPI_DRIVER SPID1
+#define SPI_SCK_PIN B1
+#define SPI_SCK_PAL_MODE 5
+#define SPI_MOSI_PIN B2
+#define SPI_MOSI_PAL_MODE 5
+#define SPI_MISO_PIN B3
+#define SPI_MISO_PAL_MODE 5
 
 /* PMW3360 settings. */
-#define PMW3360_CS_PIN F0
+#define A1 PAL_LINE(GPIOA, 1)
+#define PMW3360_CS_PIN A1
+#define PMW3360_CS_MODE 3
+#define PMW3360_CS_DIVISOR 64
