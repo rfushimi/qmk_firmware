@@ -23,14 +23,14 @@
 
 /* Key matrix configuration. */
 #define MATRIX_ROW_PINS \
-  { F7, C6, D4, B5 }
+    { F7, C6, D4, B5 }
 #define MATRIX_COL_PINS \
-  { F5, B6, D7, E6, B4 }
+    { F5, B6, D7, E6, B4 }
 
 /* Handedness. */
 #define A0 PAL_LINE(GPIOA, 0)
 #define SPLIT_HAND_PIN A0
-#define SPLIT_HAND_PIN_LOW_IS_LEFT  // High -> right, Low -> left.
+#define SPLIT_HAND_PIN_LOW_IS_LEFT // High -> right, Low -> left.
 
 /* serial.c configuration (for split keyboard). */
 #define SOFT_SERIAL_PIN D2
@@ -38,15 +38,15 @@
 /* RGB settings. */
 #define RGB_DI_PIN D3
 #if 0
-#define WS2812_PWM_DRIVER PWMD3
-#define WS2812_PWM_CHANNEL 4
-#define WS2812_PWM_PAL_MODE 1
-#define WS2812_EXTERNAL_PULLUP
-#define FASTLED_SCALE8_FIXED 1
-#define WS2812_DMA_STREAM STM32_DMA1_STREAM7
-#define WS2812_DMA_CHANNEL 3
-#define WS2812_TRST_US 34
-#define WS2812_PWM_TARGET_PERIOD 800000
+#    define WS2812_PWM_DRIVER PWMD3
+#    define WS2812_PWM_CHANNEL 4
+#    define WS2812_PWM_PAL_MODE 1
+#    define WS2812_EXTERNAL_PULLUP
+#    define FASTLED_SCALE8_FIXED 1
+#    define WS2812_DMA_STREAM STM32_DMA1_STREAM7
+#    define WS2812_DMA_CHANNEL 3
+#    define WS2812_TRST_US 34
+#    define WS2812_PWM_TARGET_PERIOD 800000
 #endif
 
 /* SPI config for pmw3360 sensor. */

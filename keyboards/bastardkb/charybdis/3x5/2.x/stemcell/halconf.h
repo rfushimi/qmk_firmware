@@ -19,7 +19,7 @@
 #pragma once
 
 #if 0
-#define HAL_USE_PWM TRUE
+#    define HAL_USE_PWM TRUE
 #endif
 #define HAL_USE_SERIAL TRUE
 #define HAL_USE_SPI TRUE
