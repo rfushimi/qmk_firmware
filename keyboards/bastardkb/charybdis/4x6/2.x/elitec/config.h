@@ -23,9 +23,9 @@
 
 /* Key matrix configuration. */
 #define MATRIX_ROW_PINS \
-  { F4, F7, C6, D4, B5 }
+    { F4, F7, C6, D4, B5 }
 #define MATRIX_COL_PINS \
-  { F6, F5, B6, D7, E6, B4 }
+    { F6, F5, B6, D7, E6, B4 }
 
 /* Handedness. */
 #define MASTER_RIGHT

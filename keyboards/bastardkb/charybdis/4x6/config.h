@@ -25,14 +25,14 @@
 #define DEVICE_VER 0x0001
 
 /* Key matrix configuration. */
-#define MATRIX_ROWS 10  // Rows are doubled-up.
+#define MATRIX_ROWS 10 // Rows are doubled-up.
 #define MATRIX_COLS 6
 
 #define DIODE_DIRECTION ROW2COL
 
 /* Disable action features. */
-#define NO_ACTION_MACRO     // Disable old-style macro handling.
-#define NO_ACTION_FUNCTION  // Disable old-style function handling.
+#define NO_ACTION_MACRO    // Disable old-style macro handling.
+#define NO_ACTION_FUNCTION // Disable old-style function handling.
 
 /* Set 0 if debouncing isn't needed. */
 #define DEBOUNCE 5
@@ -43,15 +43,15 @@
 /* RGB settings. */
 #define RGBLED_NUM 56
 #define RGBLED_SPLIT \
-  { 29, 27 }
+    { 29, 27 }
 
 /* RGB matrix support. */
 #ifdef RGB_MATRIX_ENABLE
-#define SPLIT_TRANSPORT_MIRROR
-#define DRIVER_LED_TOTAL RGBLED_NUM
-#define RGB_MATRIX_SPLIT RGBLED_SPLIT
-#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 50
-#define RGB_MATRIX_STARTUP_VAL RGB_MATRIX_MAXIMUM_BRIGHTNESS
-#define RGB_DISABLE_WHEN_USB_SUSPENDED
-#define RGB_MATRIX_KEYPRESSES
+#    define SPLIT_TRANSPORT_MIRROR
+#    define DRIVER_LED_TOTAL RGBLED_NUM
+#    define RGB_MATRIX_SPLIT RGBLED_SPLIT
+#    define RGB_MATRIX_MAXIMUM_BRIGHTNESS 50
+#    define RGB_MATRIX_STARTUP_VAL RGB_MATRIX_MAXIMUM_BRIGHTNESS
+#    define RGB_DISABLE_WHEN_USB_SUSPENDED
+#    define RGB_MATRIX_KEYPRESSES
 #endif

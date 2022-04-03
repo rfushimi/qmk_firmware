@@ -26,10 +26,13 @@
 #define SPLIT_POINTING_ENABLE
 
 // Pointing device is on the right split.
-#define POINTING_DEVICE_LEFT
+#define POINTING_DEVICE_RIGHT
 
 // Limits the frequency that the sensor is polled for motion.
 #define POINTING_DEVICE_TASK_THROTTLE_MS 1
 
 /** \brief Invert X axis on mouse reports. */
 #define POINTING_DEVICE_INVERT_X
+
+/** Improve trackball firmware upload speed at boot. */
+#define PMW3360_FIRMWARE_UPLOAD_FAST

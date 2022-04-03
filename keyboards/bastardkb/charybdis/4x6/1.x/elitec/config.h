@@ -24,14 +24,14 @@
 
 /* Key matrix configuration. */
 #define MATRIX_ROW_PINS \
-  { F1, B7, C6, D4, B5 }
+    { F1, B7, C6, D4, B5 }
 #define MATRIX_COL_PINS \
-  { D5, C7, F0, D7, E6, B4 }
+    { D5, C7, F0, D7, E6, B4 }
 
 #define MATRIX_ROW_PINS_RIGHT \
-  { D5, F0, C6, D4, B5 }
+    { D5, F0, C6, D4, B5 }
 #define MATRIX_COL_PINS_RIGHT \
-  { F1, C7, B7, D7, E6, B4 }
+    { F1, C7, B7, D7, E6, B4 }
 
 /* Handedness. */
 #define MASTER_RIGHT
