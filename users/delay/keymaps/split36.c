@@ -84,17 +84,6 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #endif  // TAP_DANCE_ENABLE && POINTING_DEVICE_ENABLE &&
         // TD_ONESHOT_DRAGSCROLL_ENABLE && KEYBOARD_bastardkb_charybdis
 
-#ifdef RGB_MATRIX_ENABLE
-void platform_inform_current(void) {
-  rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
-  if (is_macos()) {
-    rgb_matrix_sethsv_noeeprom(HSV_CYAN);
-  } else {
-    rgb_matrix_sethsv_noeeprom(HSV_GREEN);
-  }
-}
-#endif  // RGB_MATRIX_ENABLE
-
 bool process_record_user_keymap(uint16_t keycode, keyrecord_t *record) {
   if (!process_record_keymap(keycode, record)) {
     return false;
@@ -112,16 +101,6 @@ bool process_record_user_keymap(uint16_t keycode, keyrecord_t *record) {
       clear_oneshot_locked_mods();
       del_mods(MOD_MASK_SHIFT);
       break;
-#if defined(RGB_MATRIX_ENABLE) && defined(DEFERRED_EXEC_ENABLE)
-    // Also gate on DEFERRED_EXEC_ENABLE being true since this is the mechanism
-    // used to reset the RGB Matrix mode.
-    // TODO(delay): find a better way to handle that.
-    case MACOS:
-      if (record->event.pressed) {
-        platform_inform_current();
-      }
-      return false;
-#endif  // RGB_MATRIX_ENABLE && DEFERRED_EXEC_ENABLE
   }
   return true;
 };
@@ -177,13 +156,7 @@ __attribute__((weak)) layer_state_t layer_state_set_keymap(
   return state;
 }
 
-void keyboard_post_init_user_keymap(void) {
-#ifdef RGB_MATRIX_ENABLE
-  platform_inform_current();
-  schedule_rgb_matrix_reset(/* delay_ms= */ 2000);
-#endif  // RGB_MATRIX_ENABLE
-  keyboard_post_init_keymap();
-}
+void keyboard_post_init_user_keymap(void) { keyboard_post_init_keymap(); }
 
 __attribute__((weak)) void keyboard_post_init_keymap(void) {}
 
