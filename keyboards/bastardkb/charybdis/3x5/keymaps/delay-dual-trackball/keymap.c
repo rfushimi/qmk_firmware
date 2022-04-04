@@ -19,7 +19,7 @@
 #include "keymaps/split36.h"
 
 #define LAYOUT_charybdis_3x5_delay(...) LAYOUT_split_3x5_3(__VA_ARGS__)
-#define DRAGSCROLL_BUFFER_SIZE 6
+#define DRAGSCROLL_PADDING 6
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -45,9 +45,21 @@ void keyboard_post_init_keymap(void) {
 
 report_mouse_t pointing_device_task_combined_user(report_mouse_t left_report,
                                                   report_mouse_t right_report) {
-  left_report.h = left_report.x;
-  left_report.v = left_report.y;
+  static int16_t scroll_buffer_x = 0;
+  static int16_t scroll_buffer_y = 0;
+  scroll_buffer_x += left_report.x;
+  scroll_buffer_y += left_report.y;
   left_report.x = 0;
   left_report.y = 0;
+  left_report.h = 0;
+  left_report.v = 0;
+  if (abs(scroll_buffer_x) > DRAGSCROLL_PADDING) {
+    left_report.h = scroll_buffer_x > 0 ? 1 : -1;
+    scroll_buffer_x = 0;
+  }
+  if (abs(scroll_buffer_y) > DRAGSCROLL_PADDING) {
+    left_report.v = scroll_buffer_y > 0 ? 1 : -1;
+    scroll_buffer_y = 0;
+  }
   return pointing_device_combine_reports(left_report, right_report);
 }

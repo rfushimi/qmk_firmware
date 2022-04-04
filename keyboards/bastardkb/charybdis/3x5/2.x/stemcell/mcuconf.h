@@ -21,10 +21,14 @@
 
 #include_next "mcuconf.h"
 
-#if 0
-#    undef STM32_PWM_USE_TIM3
-#    define STM32_PWM_USE_TIM3 TRUE
-#endif
-
 #undef STM32_SPI_USE_SPI1
 #define STM32_SPI_USE_SPI1 TRUE
+
+#undef STM32_SERIAL_USE_USART1
+#define STM32_SERIAL_USE_USART1 FALSE
+
+#undef STM32_PWM_USE_TIM2
+#define STM32_PWM_USE_TIM2 TRUE
+
+#undef STM32_ST_USE_TIMER
+#define STM32_ST_USE_TIMER 3
