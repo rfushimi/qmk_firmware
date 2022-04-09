@@ -26,3 +26,9 @@
 
 // Disable unused keycodes.
 #define NO_CHARYBDIS_KEYCODES
+
+// Double trackball build.
+#undef POINTING_DEVICE_RIGHT
+#define POINTING_DEVICE_COMBINED
+
+#define POINTING_DEVICE_INVERT_X_RIGHT
