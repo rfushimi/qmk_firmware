@@ -59,18 +59,7 @@ enum keycodes_user {
   OS_LCTL,
   OS_LGUI,
   OS_LSFT,
-  OS_RALT,
   // Workspace navigation.
-  WS_GOTO_1,
-  WS_GOTO_2,
-  WS_GOTO_3,
-  WS_GOTO_4,
-  WS_GOTO_5,
-  WS_GOTO_6,
-  WS_GOTO_7,
-  WS_GOTO_8,
-  WS_GOTO_9,
-  WS_GOTO_0,
   WS_CYCLE_MODE,
   WS_FOCUS_PREVIOUS,
   WS_FOCUS_NEXT,
@@ -109,16 +98,6 @@ enum keycodes_user {
 #define SC_NWIN SC_NEW_WINDOW
 #define SC_SELA SC_SELECT_ALL
 #define LAUNCHR SC_LAUNCHER
-#define WS_1 WS_GOTO_1
-#define WS_2 WS_GOTO_2
-#define WS_3 WS_GOTO_3
-#define WS_4 WS_GOTO_4
-#define WS_5 WS_GOTO_5
-#define WS_6 WS_GOTO_6
-#define WS_7 WS_GOTO_7
-#define WS_8 WS_GOTO_8
-#define WS_9 WS_GOTO_9
-#define WS_0 WS_GOTO_0
 #define WS_MOD WS_CYCLE_MODE
 #define WS_FPRV WS_FOCUS_PREVIOUS
 #define WS_FNXT WS_FOCUS_NEXT

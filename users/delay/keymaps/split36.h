@@ -40,56 +40,25 @@ void shutdown_keymap(void);
 
 enum layers_keymap {
   _BASE = 0,
-  _LMOD,  // Left mods, right symbols.
-  _RMOD,  // Right mods, left symbols.
   _NAV,   // Navigation.
+  _SYM,   // Symbols.
   _WNAV,  // Workspace navigation.
   _NUM,   // Number pad.
-  _FUN,   // Function keys.
   _SPEC,  // Specials.
 };
 
-enum keycodes_keymap {
-  CLEAR = SAFE_RANGE_KEYMAP,  // Clear all WORD, one-shots, and reset to BASE.
-  // Shell shorthands.
-  // Smart caps lock and num layer that turn off on certain keys.
-  CAPWORD,
-  // Use as starting range to extend the keycode list further.
-  SAFE_RANGE_WITH_DEFAULT_KEYMAP,
-};
-
 // Layers.
-#define NAV OSL(_NAV)
-#define WNAV MO(_WNAV)
-#define FUN OSL(_FUN)
-#define LMOD OSL(_LMOD)
-#define RMOD OSL(_RMOD)
+#define NAV MO(_NAV)
+#define SYM MO(_SYM)
+#define WNAV TG(_WNAV)
 #define SPECIAL OSL(_SPEC)
-#define NUM_ENT LT(_NUM, KC_ENT)
-#define NAV_SPC LT(_NAV, KC_SPC)
-#define MOD_TAB LT(_LMOD, KC_TAB)
-#define MOD_ESC LT(_RMOD, KC_ESC)
 
 // Tap dances.
 #define TD_SFT OSM(MOD_LSFT)
 
-#if defined(TAP_DANCE_ENABLE) && defined(POINTING_DEVICE_ENABLE) && \
-    defined(TD_ONESHOT_DRAGSCROLL_ENABLE) &&                        \
-    defined(KEYBOARD_bastardkb_charybdis)
-#define TD_DRG TD(TD_ONESHOT_DRAGSCROLL)
-#else
-#define TD_DRG KC_NO
-#endif  // TAP_DANCE_ENABLE && POINTING_DEVICE_ENABLE &&
-        // TD_ONESHOT_DRAGSCROLL_ENABLE && KEYBOARD_bastardkb_charybdis
-
 // Ctrl-Tab.
 #define CTL_TAB C(KC_TAB)
 #define RCS_TAB RCS(KC_TAB)
-
-// Mod-taps.
-#define CTL_DWN LCTL_T(KC_DOWN)
-#define GUI_RGH LGUI_T(KC_RIGHT)
-#define SFT_LFT LSFT_T(KC_LEFT)
 
 // Shorthands for readability.
 #define ___x___ KC_NO
@@ -97,61 +66,15 @@ enum keycodes_keymap {
 /**
  * \brief Alternative Dvorak layout.
  *
- * Slightly modified versions of the original layout to surface high-frequency
- * keys on the base layer (namely, underscore `_`).  Also prevent quote `'`,
- * comma `,` and dot `.` from shifting (plays well with oneshot shift).
+ * Slightly modified versions of the original layout that also prevents quote
+ * `'`, comma `,` and dot `.` from shifting (plays well with oneshot shift).
  */
 // clang-format off
-#define DVORAK_ALT_3x5_3                                                                      \
+#define DVORAK_split34_3x5_2                                                                  \
     NS_QUOT, NS_COMM,  NS_DOT,    KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L, \
        KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S, \
-     TD_SFT,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
-                         LMOD, NAV_SPC,    LMOD,    RMOD, NUM_ENT,    RMOD
-// clang-format on
-
-/**
- * \brief Left-hand mods, right-hand symbols.
- */
-// clang-format off
-#define LMOD_split_3x5_3                                                                      \
-    SPECIAL,     FUN,  TD_DRG, ___x___, ___x___, KC_AMPR, KC_LCBR,  KC_EQL, KC_RCBR, KC_PERC, \
-    OS_LALT, OS_LSFT, OS_LCTL, OS_LGUI, ___x___, KC_CIRC, KC_LPRN, KC_QUES, KC_RPRN,  KC_DLR, \
-    ___x___, KC_BTN2, KC_BTN1, KC_BTN3,  KC_ESC, KC_PIPE, KC_LBRC,   KC_AT, KC_RBRC, KC_SCLN, \
-                      _______, ___x___, _______, ___x___,   CLEAR, ___x___
-// clang-format on
-
-/**
- * \brief Right-hand mods, left-hand symbols.
- */
-// clang-format off
-#define RMOD_split_3x5_3                                                                      \
-    KC_DQUO, KC_LABK,  KC_EQL, KC_RABK,  KC_GRV, ___x___, ___x___,  TD_DRG,     FUN, SPECIAL, \
-    KC_HASH, KC_PLUS, KC_MINS, KC_COLN, KC_EXLM, ___x___, OS_LGUI, OS_LCTL, OS_LSFT, OS_LALT, \
-    KC_TILD, KC_BSLS, KC_ASTR, NS_SLSH, KC_UNDS,  KC_ESC, KC_BTN3, KC_BTN1, KC_BTN2, ___x___, \
-                      ___x___,  KC_ENT,  KC_TAB, _______,   CLEAR, _______
-
-// clang-format on
-
-/**
- * \brief Numpad.
- */
-// clang-format off
-#define NUM_split_3x5_3                                                                       \
-     NS_DOT,    NS_7,    NS_8,    NS_9, NS_COMM, ___x___, ___x___, ___x___, ___x___, ___x___, \
-     KC_EQL,    NS_4,    NS_5,    NS_6, KC_PLUS, ___x___, OS_LGUI, OS_LCTL, OS_LSFT, OS_LALT, \
-    KC_SLSH,    NS_1,    NS_2,    NS_3, KC_ASTR, ___x___, ___x___, ___x___, ___x___, ___x___, \
-                      ___x___,    NS_0, KC_BSPC, ___x___, _______, ___x___
-// clang-format on
-
-/**
- * \brief Function keys.
- */
-// clang-format off
-#define FUN_split_3x5_3                                                                       \
-     KC_F12,   KC_F7,   KC_F8,   KC_F9, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
-     KC_F11,   KC_F4,   KC_F5,   KC_F6, ___x___, ___x___, OS_LGUI, OS_LCTL, OS_LSFT, OS_LALT, \
-     KC_F10,   KC_F1,   KC_F2,   KC_F3, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
-                      ___x___, ___x___, ___x___, ___x___, ___x___, ___x___
+    KC_UNDS,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
+                                   NAV,  TD_SFT,   KC_SPC,    SYM
 // clang-format on
 
 /**
@@ -162,11 +85,33 @@ enum keycodes_keymap {
  * home row mods.
  */
 // clang-format off
-#define NAV_split_3x5_3                                                                       \
-    WS_PREV, RCS_TAB, LAUNCHR, CTL_TAB, WS_NEXT, ___x___, KC_HOME,   NS_UP,  KC_END, ___x___, \
-    ___x___, OS_LSFT, OS_LCTL, OS_LGUI, ___x___, ___x___, NS_LEFT, NS_DOWN, NS_RGHT, ___x___, \
-    ___x___,  SC_CUT, SC_COPY, SC_PSTE, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
-                      ___x___, _______, ___x___, ___x___,    WNAV, ___x___
+#define NAV_split34_3x5_2                                                                     \
+    WS_PREV, WS_NEXT, RCS_TAB, CTL_TAB,    WNAV,    WNAV, KC_HOME,   NS_UP,  KC_END, KC_BSPC, \
+    OS_LALT, OS_LSFT, OS_LCTL, OS_LGUI, ___x___, ___x___, NS_LEFT, NS_DOWN, NS_RGHT,  KC_ENT, \
+    SPECIAL,  SC_CUT, SC_COPY, SC_PSTE, ___x___, ___x___, KC_BTN3, KC_BTN1, KC_BTN2,  KC_TAB, \
+                               _______, _______, _______, _______
+// clang-format on
+
+/**
+ * \brief Symbols.
+ */
+// clang-format off
+#define SYM_split34_3x5_2                                                                     \
+     KC_ESC, KC_PERC, KC_QUES, KC_COLN,   KC_AT, KC_CIRC, KC_LPRN, KC_RPRN, NS_SCLN,  NS_GRV, \
+    KC_EXLM, KC_PLUS, KC_MINS,  KC_EQL, KC_HASH, ___x___, OS_LGUI, OS_LCTL, OS_LSFT, OS_LALT, \
+    KC_TILD,  KC_DLR, KC_ASTR, KC_SLSH, KC_AMPR, KC_PIPE, KC_LCBR, KC_RCBR, NS_BSLS, SPECIAL, \
+                               _______, _______, _______, _______
+// clang-format on
+
+/**
+ * \brief Numrow.
+ */
+// clang-format off
+#define NUM_split34_3x5_2                                                                     \
+       NS_7,    NS_5,    NS_3,    NS_1,    NS_9,    NS_8,    NS_0,    NS_2,    NS_4,    NS_6, \
+    OS_LALT, OS_LSFT, OS_LCTL, OS_LGUI, ___x___, ___x___, OS_LGUI, OS_LCTL, OS_LSFT, OS_LALT, \
+    ___x___, ___x___, NS_COMM,  NS_DOT, ___x___, ___x___, NS_LBRC, NS_RBRC, ___x___, ___x___, \
+                               _______, _______, _______, _______
 // clang-format on
 
 /**
@@ -176,20 +121,47 @@ enum keycodes_keymap {
  * and interacting with tiling window managers.
  */
 // clang-format off
-#define WNAV_split_3x5_3                                                                      \
-    ___x___,    WS_7,    WS_8,    WS_9, ___x___, ___x___, WS_MPCI, WS_MPPR, WS_MPCD, ___x___, \
-    ___x___,    WS_4,    WS_5,    WS_6, ___x___, ___x___, WS_MPSH, ___x___, WS_MPEX, ___x___, \
-    ___x___,    WS_1,    WS_2,    WS_3, ___x___, ___x___, WS_FPRV,  WS_MOD, WS_FNXT, ___x___, \
-                      ___x___, ___x___, KC_LSFT, ___x___, _______, ___x___
+#define WNAV_split34_3x5_2                                                                    \
+    ___x___,  WS_MOD, WS_MPCD, WS_MPCI,    WNAV,    WNAV, WS_MPCI, WS_MPCD,  WS_MOD, ___x___, \
+    ___x___, WS_MPPR, WS_MPEX, WS_MPSH, ___x___, ___x___, WS_MPSH, WS_MPEX, WS_MPPR, ___x___, \
+    ___x___, ___x___, WS_FNXT, WS_FPRV, ___x___, ___x___, WS_FPRV, WS_FNXT, ___x___, ___x___, \
+                               _______, KC_LSFT, KC_LSFT, _______
 // clang-format on
 
 /**
  * \brief Special keycodes/functions.
  */
 // clang-format off
-#define SPEC_split_3x5_3                                                                      \
-     KC_ESC, ___x___, ___x___, ___x___, RGB_TOG, RGB_TOG, ___x___, ___x___, ___x___,  KC_ESC, \
-    ___x___, SC_NWIN, SC_NTAB, ___x___, ___x___, ___x___, ___x___, SC_NTAB, SC_NWIN, ___x___, \
-    QK_BOOT, EEP_RST, SC_CLSE, ___x___, ___x___, ___x___, ___x___, SC_CLSE, EEP_RST, QK_BOOT, \
-                      ___x___, ___x___, ___x___, ___x___, ___x___, ___x___
+#define SPEC_split34_3x5_2                                                                    \
+    ___x___, ___x___, ___x___, ___x___, RGB_TOG, RGB_TOG, ___x___, ___x___, ___x___, ___x___, \
+    ___x___, SC_NWIN, SC_NTAB, ___x___, EEP_RST, EEP_RST, ___x___, SC_NTAB, SC_NWIN, ___x___, \
+    ___x___, ___x___, SC_CLSE, ___x___, QK_BOOT, QK_BOOT, ___x___, SC_CLSE, ___x___, ___x___, \
+                               LAUNCHR, ___x___, ___x___, LAUNCHR
+// clang-format on
+
+// clang-format off
+/**
+ * \brief Converts a 3x5_2 layout into the more common 3x5_3 layout.
+ *
+ * In other words, converts a split-34 keymap into a split-36 one.
+ */
+#define _LAYOUT_split_3x5_2_to_split_3x5_3(                  \
+           k00, k01, k02, k03, k04, k05, k06, k07, k08, k09, \
+           k10, k11, k12, k13, k14, k15, k16, k17, k18, k19, \
+           k20, k21, k22, k23, k24, k25, k26, k27, k28, k29, \
+                          k33, k34, k35, k36)                \
+           k00, k01, k02, k03, k04, k05, k06, k07, k08, k09, \
+           k10, k11, k12, k13, k14, k15, k16, k17, k18, k19, \
+           k20, k21, k22, k23, k24, k25, k26, k27, k28, k29, \
+                   k33, k34, KC_NO, KC_NO, k35, k36
+
+#define LAYOUT_split_3x5_2_to_split_3x5_3(...) _LAYOUT_split_3x5_2_to_split_3x5_3(__VA_ARGS__)
+
+/* Converts the 3x5_2 layouts into 3x5_3 layouts. */
+#define DVORAK_ALT_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(DVORAK_split34_3x5_2)
+#define NAV_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(NAV_split34_3x5_2)
+#define SYM_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(SYM_split34_3x5_2)
+#define NUM_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(NUM_split34_3x5_2)
+#define WNAV_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(WNAV_split34_3x5_2)
+#define SPEC_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(SPEC_split34_3x5_2)
 // clang-format on

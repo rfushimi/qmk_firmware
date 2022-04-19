@@ -36,7 +36,6 @@ typedef struct {
   oneshot_mod_state_t lctl;
   oneshot_mod_state_t lgui;
   oneshot_mod_state_t lsft;
-  oneshot_mod_state_t ralt;
 } osm_state_t;
 #endif  // ONESHOT_MOD_ENABLE
 
@@ -190,9 +189,6 @@ static bool process_record_user_internal(uint16_t keycode,
       NO_ONESHOT_SHIFT_LOCKED_CODE(KC_LEFT);
     case NS_RIGHT:
       NO_ONESHOT_SHIFT_LOCKED_CODE(KC_RIGHT);
-    case WS_GOTO_1 ... WS_GOTO_0:
-      process_record_space_goto_index(record, keycode - WS_GOTO_1);
-      break;
     case WS_CYCLE_MODE:
       process_record_space_cycle_mode(record);
       break;
@@ -234,13 +230,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       .lctl = ONESHOT_UP_UNQUEUED,
       .lgui = ONESHOT_UP_UNQUEUED,
       .lsft = ONESHOT_UP_UNQUEUED,
-      .ralt = ONESHOT_UP_UNQUEUED,
   };
   oneshot_mod_pre(&osm_state.lalt, KC_LALT, OS_LALT, keycode, record);
   oneshot_mod_pre(&osm_state.lctl, KC_LCTL, OS_LCTL, keycode, record);
   oneshot_mod_pre(&osm_state.lgui, KC_LGUI, OS_LGUI, keycode, record);
   oneshot_mod_pre(&osm_state.lsft, KC_LSFT, OS_LSFT, keycode, record);
-  oneshot_mod_pre(&osm_state.ralt, KC_RALT, OS_RALT, keycode, record);
 #endif  // ONESHOT_MOD_ENABLE
   const bool result = process_record_user_internal(keycode, record);
 #ifdef ONESHOT_MOD_ENABLE
@@ -248,7 +242,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   oneshot_mod_post(&osm_state.lctl, KC_LCTL, OS_LCTL, keycode, record);
   oneshot_mod_post(&osm_state.lgui, KC_LGUI, OS_LGUI, keycode, record);
   oneshot_mod_post(&osm_state.lsft, KC_LSFT, OS_LSFT, keycode, record);
-  oneshot_mod_post(&osm_state.ralt, KC_RALT, OS_RALT, keycode, record);
 #endif  // ONESHOT_MOD_ENABLE
   return result;
 }
@@ -287,6 +280,7 @@ __attribute__((weak)) layer_state_t layer_state_set_user_keymap(
 }
 
 void keyboard_post_init_user(void) {
+  oneshot_disable();
 #ifdef COMPOSE_ENABLE
   keyboard_post_init_compose(&g_compose_state);
 #endif  // COMPOSE_ENABLE
