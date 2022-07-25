@@ -19,7 +19,25 @@
 #ifdef VIA_ENABLE
 /* VIA configuration. */
 #    define DYNAMIC_KEYMAP_LAYER_COUNT 7
-#endif // VIA_ENABLE
+#    ifdef VIAL_ENABLE
+/** Vial-specific configuration. */
+
+#        define VIAL_KEYBOARD_UID \
+            { 0x09, 0x80, 0xDF, 0x80, 0xFB, 0x72, 0xB8, 0x4A }
+#        define VIAL_UNLOCK_COMBO_ROWS \
+            { 0, 4 }
+#        define VIAL_UNLOCK_COMBO_COLS \
+            { 0, 0 }
+
+#        ifndef __arm__
+/** Disable unused vial features. */
+
+// In addition to RGB Matrix effects, VialRGB also provides direct LED control
+// with a script running on your computer.  Remove to reenable.
+#            define VIALRGB_NO_DIRECT
+#        endif // __arm__
+#    endif     // VIAL_ENABLE
+#endif         // VIA_ENABLE
 
 /* Disable unused features. */
 #define NO_ACTION_ONESHOT
