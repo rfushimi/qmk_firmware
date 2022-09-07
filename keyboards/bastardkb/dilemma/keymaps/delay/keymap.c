@@ -27,13 +27,12 @@
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_BASE] = LAYOUT_dilemma(DVORAK_split_3x5_2),
-  [_NAVL] = LAYOUT_dilemma(NAVL_split_3x5_2),
-  [_NAVR] = LAYOUT_dilemma(NAVR_split_3x5_2),
-  [_SYML] = LAYOUT_dilemma(SYML_split_3x5_2),
-  [_SYMR] = LAYOUT_dilemma(SYMR_split_3x5_2),
-  [_NUM] = LAYOUT_dilemma(NUM_split_3x5_2),
-  [_SPEC] = LAYOUT_dilemma(SPEC_split_3x5_2),
+  [_DVORAK] = LAYOUT_dilemma(DVORAK_split_3x5_2),
+  [_MOTION] = LAYOUT_dilemma(MOTION_split_3x5_2),
+  [_NUMBER] = LAYOUT_dilemma(NUMBER_split_3x5_2),
+  [_SYMBOL] = LAYOUT_dilemma(SYMBOL_split_3x5_2),
+  [_EXTEND] = LAYOUT_dilemma(EXTEND_split_3x5_2),
+  [_SYSTEM] = LAYOUT_dilemma(SYSTEM_split_3x5_2),
 };
 // clang-format on
 
@@ -182,10 +181,11 @@ static void render_logo(void) {
 #    define OLED_KAKI_SPEED 40 // above this wpm value typing animation to triggere
 
 #    define OLED_RTOGI_FRAMES 2
-//#define OLED_LTOGI_FRAMES 2
+// #define OLED_LTOGI_FRAMES 2
 
-//#define ANIM_FRAME_DURATION 500 // how long each frame lasts in ms
-// #define SLEEP_TIMER 60000 // should sleep after this period of 0 wpm, needs fixing
+// #define ANIM_FRAME_DURATION 500 // how long each frame lasts in ms
+//  #define SLEEP_TIMER 60000 // should sleep after this period of 0 wpm, needs
+//  fixing
 #    define OLED_ANIM_SIZE 36
 #    define OLED_ANIM_ROWS 4
 #    define OLED_ANIM_MAX_FRAMES 3
@@ -330,7 +330,8 @@ static void render_wpm_graph(uint8_t max_lines_graph, uint8_t vertical_offset) {
     uint8_t         currwpm = get_current_wpm();
     float           max_wpm = OLED_WPM_GRAPH_MAX_WPM;
 
-    if (timer_elapsed(timer) > OLED_WPM_GRAPH_REFRESH_INTERVAL) {                  // check if it's been long enough before refreshing graph
+    if (timer_elapsed(timer) > OLED_WPM_GRAPH_REFRESH_INTERVAL) {                  // check if it's been long enough
+                                                                                   // before refreshing graph
         x = (max_lines_graph - 1) - ((currwpm / max_wpm) * (max_lines_graph - 1)); // main calculation to plot graph line
         for (uint8_t i = 0; i <= OLED_WPM_GRAPH_GRAPH_LINE_THICKNESS - 1; i++) {   // first draw actual value line
             oled_write_pixel(3, x + i + vertical_offset, true);
@@ -361,8 +362,9 @@ static void render_wpm_graph(uint8_t max_lines_graph, uint8_t vertical_offset) {
 #        include <math.h>
         uint8_t y_start  = ceil(vertical_offset / 8);
         uint8_t y_length = y_start + ceil(max_lines_graph / 8);
-        oled_pan_section(false, y_start, y_length, 3, 125); // then move the entire graph one pixel to the right
-        timer = timer_read();                               // refresh the timer for the next iteration
+        oled_pan_section(false, y_start, y_length, 3,
+                         125); // then move the entire graph one pixel to the right
+        timer = timer_read();  // refresh the timer for the next iteration
     }
 #    endif
 }
@@ -406,22 +408,25 @@ bool oled_task_user(void) {
     } else {
         // Layer status.
         layer_state_t current_layer = get_highest_layer(layer_state);
-        oled_write_P(PSTR("BASE"), /* inverted = */ current_layer == _BASE);
+        oled_write_P(PSTR("NAV"), /* inverted = */ current_layer == _MOTION);
         oled_write_P(PSTR(" "), /* inverted = */ false);
-        oled_write_P(PSTR("NAV"), /* inverted = */ current_layer == _NAVL || current_layer == _NAVR);
+        oled_write_P(PSTR("SYM"), /* inverted = */ current_layer == _SYMBOL);
         oled_write_P(PSTR(" "), /* inverted = */ false);
-        oled_write_P(PSTR("SYM"), /* inverted = */ current_layer == _SYML || current_layer == _SYMR);
+        oled_write_P(PSTR("NUM"), /* inverted = */ current_layer == _NUMBER);
         oled_write_P(PSTR(" "), /* inverted = */ false);
-        oled_write_P(PSTR("NUM"), /* inverted = */ current_layer == _NUM);
+        oled_write_P(PSTR("EXT"), /* inverted = */ current_layer == _EXTEND);
         oled_write_P(PSTR(" "), /* inverted = */ false);
-        oled_write_P(PSTR("SPEC"), /* inverted = */ current_layer == _SPEC);
+        oled_write_P(PSTR("SYS"), /* inverted = */ current_layer == _SYSTEM);
+        oled_write_P("\n", false);
 
-        oled_write_P(PSTR("Shift: "), /* inverted = */ false);
-        oled_write_P(PSTR("OSM"), /* inverted = */ get_oneshot_mods() & MOD_MASK_SHIFT);
+        oled_write_P(PSTR("Caps:   "), /* inverted = */ false);
+        oled_write_P(PSTR("OSM"),
+                     /* inverted = */ get_oneshot_mods() & MOD_MASK_SHIFT);
         oled_write_P(PSTR(" "), /* inverted = */ false);
         oled_write_P(PSTR("WRD"), /* inverted = */ is_caps_word_on());
         oled_write_P(PSTR(" "), /* inverted = */ false);
-        oled_write_P(PSTR("LCK"), /* inverted = */ get_oneshot_locked_mods() & MOD_MASK_SHIFT);
+        oled_write_P(PSTR("LCK"),
+                     /* inverted = */ get_oneshot_locked_mods() & MOD_MASK_SHIFT);
 
         oled_write_P("\n\n", false);
         oled_write_P("\n  DPI: ", false);

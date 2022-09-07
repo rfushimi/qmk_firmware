@@ -82,10 +82,12 @@
 #    define QUICK_TAP_TERM 75
 #endif // QUICK_TAP_TERM
 
+#if 0
 /**
  * \brief Customize the TAPPING_TERM for specific keys.
  */
-// #define TAPPING_TERM_PER_KEY
+#    define TAPPING_TERM_PER_KEY
+#endif
 
 /**
  * \brief Enable rapid switch from tap to hold.
