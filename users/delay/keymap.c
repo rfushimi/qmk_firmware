@@ -149,12 +149,6 @@ __attribute__((weak)) uint16_t get_tapping_term_keymap(uint16_t keycode, keyreco
  * \brief Define key-specific `TAPPING_TERM`.
  */
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
-    if (keycode == QK_OSS) {
-        return TAPPING_TERM + 300;
-    }
-    if (keycode == QK_OSS) {
-        return TAPPING_TERM + 300;
-    }
     return get_tapping_term_keymap(keycode, record);
 }
 #endif // TAPPING_TERM_PER_KEY

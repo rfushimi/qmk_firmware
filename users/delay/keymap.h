@@ -130,9 +130,6 @@ enum layers_keymap {
 #define EXTEND MO(_EXTEND)
 #define SYSTEM OSL(_SYSTEM)
 
-// Tap-dances.
-#define QK_OSS OSM(MOD_LSFT)
-
 // Ctrl-Tab.
 #define CTL_TAB C(KC_TAB)
 #define RCS_TAB RCS(KC_TAB)
@@ -160,7 +157,7 @@ enum layers_keymap {
  */
 // clang-format off
 #define MOTION_split_3x5_2                                                                    \
-     KC_ESC, RCS_TAB,  KC_TAB, CTL_TAB,  SYSTEM, ___x___, KC_HOME,   KC_UP,  KC_END, KC_BSPC, \
+    ___x___, RCS_TAB,  KC_TAB, CTL_TAB,  SYSTEM, ___x___, KC_HOME,   KC_UP,  KC_END, KC_BSPC, \
     OSM_ALT, OSM_SFT, OSM_CTL, OSM_GUI, ___x___, ___x___, KC_LEFT, KC_DOWN, KC_RGHT,  KC_ENT, \
     ___x___, WS_PREV, ___x___, WS_NEXT, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
                                _______, ___x___, ___x___, _______
@@ -175,7 +172,7 @@ enum layers_keymap {
     ___x___, VIM_S_L, ___x___, VIM_S_R, ___x___, ___x___, VIM_S_L,   VIM_U, VIM_S_R, VIMTESC, \
     OSM_ALT, OSM_SFT, OSM_CTL, OSM_GUI, ___x___, ___x___,   VIM_L,   VIM_D,   VIM_R, VIMTERM, \
     _______,  SC_CUT, SC_COPY, SC_PSTE, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
-                               LAUNCHR,  QK_OSS, ___x___, _______
+                               LAUNCHR, ___x___, ___x___, _______
 // clang-format on
 
 /**
@@ -183,10 +180,10 @@ enum layers_keymap {
  */
 // clang-format off
 #define NUMBER_split_3x5_2                                                                    \
-    KC_SLSH,    KC_7,    KC_8,    KC_9, ___x___,  SYSTEM,   KC_LT, KC_MINS,   KC_GT, ___x___, \
-    KC_MINS,    KC_4,    KC_5,    KC_6, ___x___, ___x___, OSM_GUI, OSM_CTL, OSM_SFT, OSM_ALT, \
-    ___x___,    KC_1,    KC_2,    KC_3, ___x___, ___x___, KC_LBRC,  KC_EQL, KC_RBRC, ___x___, \
-                                  KC_0,  QK_OSS, ___x___, _______
+    KC_SLSH,    KC_7,    KC_8,    KC_9, KC_ASTR,  SYSTEM,   KC_LT,   KC_GT,  KC_EQL, ___x___, \
+    KC_MINS,    KC_4,    KC_5,    KC_6, KC_PLUS, ___x___, OSM_GUI, OSM_CTL, OSM_SFT, OSM_ALT, \
+     KC_DOT,    KC_1,    KC_2,    KC_3, KC_COMM, ___x___, KC_LBRC, KC_RBRC, ___x___, ___x___, \
+                                  KC_0, ___x___, ___x___, _______
 // clang-format on
 
 /**
@@ -194,10 +191,10 @@ enum layers_keymap {
  */
 // clang-format off
 #define SYMBOL_split_3x5_2                                                                    \
-    KC_DQUO,  KC_ESC, CK_ELPS, KC_COLN,   KC_AT, KC_CIRC, KC_LPRN, KC_SCLN, KC_RPRN, KC_PERC, \
-    KC_EXLM, KC_PLUS, KC_MINS,  KC_EQL, KC_HASH, KC_AMPR, ___x___, KC_UNDS, ___x___, ___x___, \
-    KC_TILD,  KC_DLR, KC_ASTR, KC_SLSH, KC_QUES, KC_PIPE, KC_LCBR, KC_BSLS, KC_RCBR,  KC_GRV, \
-                               ___x___,  QK_OSS, _______, _______
+    KC_DQUO, ___x___, CK_ELPS, KC_COLN,   KC_AT, KC_CIRC, KC_LPRN, KC_RPRN, KC_SCLN, KC_PERC, \
+    KC_EXLM, KC_PLUS, KC_MINS,  KC_EQL, KC_HASH, KC_AMPR, KC_UNDS, ___x___, ___x___, ___x___, \
+    KC_TILD,  KC_DLR, KC_ASTR, KC_SLSH, KC_QUES, KC_PIPE, KC_LCBR, KC_RCBR, KC_BSLS,  KC_GRV, \
+                               ___x___,  KC_ESC, _______, _______
 // clang-format on
 
 /**
