@@ -21,9 +21,9 @@
 #include "quantum.h"
 
 #if defined(KEYBOARD_bastardkb_charybdis)
-#include "charybdis.h"
+#    include "charybdis.h"
 #elif defined(KEYBOARD_bastardkb_dilemma)
-#include "dilemma.h"
+#    include "dilemma.h"
 #endif
 
 /**
@@ -33,26 +33,26 @@
  */
 enum keycodes_user {
 #ifdef POINTING_DEVICE_ENABLE
-#if defined(KEYBOARD_bastardkb_charybdis)
-  KEYCODE_USER_BEGIN = CHARYBDIS_SAFE_RANGE,
-#elif defined(KEYBOARD_bastardkb_dilemma)
-  KEYCODE_USER_BEGIN = DILEMMA_SAFE_RANGE,
-#elif defined(VIA_ENABLE)
-  KEYCODE_USER_BEGIN = USER00,
+#    if defined(KEYBOARD_bastardkb_charybdis)
+    KEYCODE_USER_BEGIN = CHARYBDIS_SAFE_RANGE,
+#    elif defined(KEYBOARD_bastardkb_dilemma)
+    KEYCODE_USER_BEGIN = DILEMMA_SAFE_RANGE,
+#    elif defined(VIA_ENABLE)
+    KEYCODE_USER_BEGIN = USER00,
+#    else
+    KEYCODE_USER_BEGIN = SAFE_RANGE,
+#    endif
 #else
-  KEYCODE_USER_BEGIN = SAFE_RANGE,
+    KEYCODE_USER_BEGIN = SAFE_RANGE,
 #endif
-#else
-  KEYCODE_USER_BEGIN = SAFE_RANGE,
-#endif
-  // Oneshot mods.
-  OSM_ALT = KEYCODE_USER_BEGIN,
-  OSM_CTL,
-  OSM_GUI,
-  OSM_SFT,
-  // Compose.
-  COMPOSE,
-  SAFE_RANGE_KEYMAP,
+    // Oneshot mods.
+    OSM_ALT = KEYCODE_USER_BEGIN,
+    OSM_CTL,
+    OSM_GUI,
+    OSM_SFT,
+    // Compose.
+    COMPOSE,
+    SAFE_RANGE_KEYMAP,
 };
 
 // This keymap uses ASCG home row mods.
@@ -111,20 +111,20 @@ enum keycodes_user {
  *
  * docs.qmk.fm/using-qmk/software-features/feature_userspace#customized-functions.
  */
-bool process_record_keymap(uint16_t keycode, keyrecord_t *record);
-void matrix_scan_keymap(void);
+bool          process_record_keymap(uint16_t keycode, keyrecord_t *record);
+void          matrix_scan_keymap(void);
 layer_state_t layer_state_set_keymap(layer_state_t state);
-void keyboard_post_init_keymap(void);
-void oneshot_locked_mods_changed_keymap(uint8_t mods);
-void shutdown_keymap(void);
+void          keyboard_post_init_keymap(void);
+void          oneshot_locked_mods_changed_keymap(uint8_t mods);
+void          shutdown_keymap(void);
 
 enum layers_keymap {
-  _DVORAK = 0,
-  _MOTION,  // Navigation.
-  _SYMBOL,  // Symbols.
-  _NUMBER,  // Numbers.
-  _EXTEND,  // Extend.
-  _SYSTEM,  // Special.
+    _DVORAK = 0,
+    _MOTION, // Navigation.
+    _SYMBOL, // Symbols.
+    _NUMBER, // Numbers.
+    _EXTEND, // Extend.
+    _SYSTEM, // Special.
 };
 
 // Layers.
@@ -228,11 +228,10 @@ enum layers_keymap {
            k00, k01, k02, k03, k04, k05, k06, k07, k08, k09, \
            k10, k11, k12, k13, k14, k15, k16, k17, k18, k19, \
            k20, k21, k22, k23, k24, k25, k26, k27, k28, k29, \
-                   k33, k34, KC_NO, KC_NO, k35, k36
+           k33, k34, OSM(MOD_LGUI), OSM(MOD_LCTL), k35, k36
 // clang-format on
 
-#define LAYOUT_split_3x5_2_to_split_3x5_3(...) \
-  _LAYOUT_split_3x5_2_to_split_3x5_3(__VA_ARGS__)
+#define LAYOUT_split_3x5_2_to_split_3x5_3(...) _LAYOUT_split_3x5_2_to_split_3x5_3(__VA_ARGS__)
 
 /* Converts the 3x5_2 layouts into 3x5_3 layouts. */
 #define DVORAK_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(DVORAK_split_3x5_2)
