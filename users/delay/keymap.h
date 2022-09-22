@@ -21,9 +21,9 @@
 #include "quantum.h"
 
 #if defined(KEYBOARD_bastardkb_charybdis)
-#    include "charybdis.h"
+#include "charybdis.h"
 #elif defined(KEYBOARD_bastardkb_dilemma)
-#    include "dilemma.h"
+#include "dilemma.h"
 #endif
 
 /**
@@ -33,26 +33,26 @@
  */
 enum keycodes_user {
 #ifdef POINTING_DEVICE_ENABLE
-#    if defined(KEYBOARD_bastardkb_charybdis)
-    KEYCODE_USER_BEGIN = CHARYBDIS_SAFE_RANGE,
-#    elif defined(KEYBOARD_bastardkb_dilemma)
-    KEYCODE_USER_BEGIN = DILEMMA_SAFE_RANGE,
-#    elif defined(VIA_ENABLE)
-    KEYCODE_USER_BEGIN = USER00,
-#    else
-    KEYCODE_USER_BEGIN = SAFE_RANGE,
-#    endif
+#if defined(KEYBOARD_bastardkb_charybdis)
+  KEYCODE_USER_BEGIN = CHARYBDIS_SAFE_RANGE,
+#elif defined(KEYBOARD_bastardkb_dilemma)
+  KEYCODE_USER_BEGIN = DILEMMA_SAFE_RANGE,
+#elif defined(VIA_ENABLE)
+  KEYCODE_USER_BEGIN = USER00,
 #else
-    KEYCODE_USER_BEGIN = SAFE_RANGE,
+  KEYCODE_USER_BEGIN = SAFE_RANGE,
 #endif
-    // Oneshot mods.
-    OSM_ALT = KEYCODE_USER_BEGIN,
-    OSM_CTL,
-    OSM_GUI,
-    OSM_SFT,
-    // Compose.
-    COMPOSE,
-    SAFE_RANGE_KEYMAP,
+#else
+  KEYCODE_USER_BEGIN = SAFE_RANGE,
+#endif
+  // Oneshot mods.
+  OSM_ALT = KEYCODE_USER_BEGIN,
+  OSM_CTL,
+  OSM_GUI,
+  OSM_SFT,
+  // Compose.
+  COMPOSE,
+  SAFE_RANGE_KEYMAP,
 };
 
 // This keymap uses ASCG home row mods.
@@ -64,24 +64,24 @@ enum keycodes_user {
 
 #ifdef KEYMAP_DELAY_HOMEROW
 // Home row mods for Dvorak layer.
-#    define HOME_A LALT_T(KC_A)
-#    define HOME_O LGUI_T(KC_O)
-#    define HOME_E LCTL_T(KC_E)
-#    define HOME_U LSFT_T(KC_U)
-#    define HOME_H RSFT_T(KC_H)
-#    define HOME_T RCTL_T(KC_T)
-#    define HOME_N LGUI_T(KC_N)
-#    define HOME_S RALT_T(KC_S)
+#define HOME_A LALT_T(KC_A)
+#define HOME_O LGUI_T(KC_O)
+#define HOME_E LCTL_T(KC_E)
+#define HOME_U LSFT_T(KC_U)
+#define HOME_H RSFT_T(KC_H)
+#define HOME_T RCTL_T(KC_T)
+#define HOME_N LGUI_T(KC_N)
+#define HOME_S RALT_T(KC_S)
 #else
-#    define HOME_A KC_A
-#    define HOME_O KC_O
-#    define HOME_E KC_E
-#    define HOME_U KC_U
-#    define HOME_H KC_H
-#    define HOME_T KC_T
-#    define HOME_N KC_N
-#    define HOME_S KC_S
-#endif// KEYMAP_DELAY_HOMEROW
+#define HOME_A KC_A
+#define HOME_O KC_O
+#define HOME_E KC_E
+#define HOME_U KC_U
+#define HOME_H KC_H
+#define HOME_T KC_T
+#define HOME_N KC_N
+#define HOME_S KC_S
+#endif  // KEYMAP_DELAY_HOMEROW
 
 #define VIM_DOWN LALT(KC_DOWN)
 #define VIM_LEFT LALT(KC_LEFT)
@@ -122,20 +122,20 @@ enum keycodes_user {
  *
  * docs.qmk.fm/using-qmk/software-features/feature_userspace#customized-functions.
  */
-bool          process_record_keymap(uint16_t keycode, keyrecord_t *record);
-void          matrix_scan_keymap(void);
+bool process_record_keymap(uint16_t keycode, keyrecord_t *record);
+void matrix_scan_keymap(void);
 layer_state_t layer_state_set_keymap(layer_state_t state);
-void          keyboard_post_init_keymap(void);
-void          oneshot_locked_mods_changed_keymap(uint8_t mods);
-void          shutdown_keymap(void);
+void keyboard_post_init_keymap(void);
+void oneshot_locked_mods_changed_keymap(uint8_t mods);
+void shutdown_keymap(void);
 
 enum layers_keymap {
-    _DVORAK = 0,
-    _MOTION, // Navigation.
-    _SYMBOL, // Symbols.
-    _NUMBER, // Numbers.
-    _EXTEND, // Extend.
-    _SYSTEM, // Special.
+  _DVORAK = 0,
+  _MOTION,  // Navigation.
+  _SYMBOL,  // Symbols.
+  _NUMBER,  // Numbers.
+  _EXTEND,  // Extend.
+  _SYSTEM,  // Special.
 };
 
 // Layers.
@@ -164,7 +164,7 @@ enum layers_keymap {
 #define DVORAK_split_3x5_2                                                                    \
     KC_QUOT, KC_COMM,  KC_DOT,    KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L, \
      HOME_A,  HOME_O,  HOME_E,  HOME_U,    KC_I,    KC_D,  HOME_H,  HOME_T,  HOME_N,  HOME_S, \
-    ___x___,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
+    KC_COLN,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
                                 MOTION,  KC_SPC,  SYMBOL,  NUMBER
 // clang-format on
 
@@ -200,10 +200,10 @@ enum layers_keymap {
  */
 // clang-format off
 #define NUMBER_split_3x5_2                                                                    \
-    KC_SLSH,    KC_7,    KC_8,    KC_9, KC_ASTR,  SYSTEM,   KC_LT,   KC_GT,  KC_EQL, ___x___, \
+    KC_SLSH,    KC_7,    KC_8,    KC_9, KC_ASTR,  SYSTEM,   KC_LT,  KC_EQL,   KC_GT, ___x___, \
     KC_MINS,    KC_4,    KC_5,    KC_6, KC_PLUS, ___x___, OSM_SFT, OSM_CTL, OSM_GUI, OSM_ALT, \
-     KC_DOT,    KC_1,    KC_2,    KC_3, KC_COMM, ___x___, KC_LBRC, KC_RBRC, ___x___, ___x___, \
-                               ___x___,    KC_0, ___x___, _______
+     KC_DOT,    KC_1,    KC_2,    KC_3, KC_COMM, ___x___, KC_LBRC, ___x___, KC_RBRC, ___x___, \
+                               _______,    KC_0, ___x___, _______
 // clang-format on
 
 /**
@@ -211,9 +211,9 @@ enum layers_keymap {
  */
 // clang-format off
 #define SYMBOL_split_3x5_2                                                                    \
-    KC_DQUO, KC_CIRC, KC_UNDS, KC_COLN,   KC_AT, CK_ELPS, KC_LPRN, KC_RPRN, KC_SCLN, KC_PERC, \
+    KC_DQUO, KC_CIRC, KC_UNDS, KC_COLN,   KC_AT, CK_ELPS, KC_LPRN, KC_SCLN, KC_RPRN, KC_PERC, \
     KC_EXLM, KC_PLUS, KC_MINS,  KC_EQL, KC_HASH, KC_AMPR, OSM_SFT, OSM_CTL, OSM_GUI, OSM_ALT, \
-    KC_TILD,  KC_DLR, KC_ASTR, KC_SLSH, KC_QUES, KC_PIPE, KC_LCBR, KC_RCBR, KC_BSLS,  KC_GRV, \
+    KC_TILD,  KC_DLR, KC_ASTR, KC_SLSH, KC_QUES, KC_PIPE, KC_LCBR, KC_BSLS, KC_RCBR,  KC_GRV, \
                                _______,  KC_ESC, ___x___, _______
 // clang-format on
 
@@ -245,7 +245,8 @@ enum layers_keymap {
                 k33, k34,   QK_OSC,   QK_OSS, k35, k36
 // clang-format on
 
-#define LAYOUT_split_3x5_2_to_split_3x5_3(...) _LAYOUT_split_3x5_2_to_split_3x5_3(__VA_ARGS__)
+#define LAYOUT_split_3x5_2_to_split_3x5_3(...) \
+  _LAYOUT_split_3x5_2_to_split_3x5_3(__VA_ARGS__)
 
 /* Converts the 3x5_2 layouts into 3x5_3 layouts. */
 #define DVORAK_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(DVORAK_split_3x5_2)
