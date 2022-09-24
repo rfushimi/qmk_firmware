@@ -50,8 +50,8 @@ enum keycodes_user {
   OSM_CTL,
   OSM_GUI,
   OSM_SFT,
-  // Compose.
-  COMPOSE,
+  // Custom keycodes.
+  CK_DOUBLE_COLON,
   SAFE_RANGE_KEYMAP,
 };
 
@@ -86,11 +86,16 @@ enum keycodes_user {
 #define VIM_DOWN LALT(KC_DOWN)
 #define VIM_LEFT LALT(KC_LEFT)
 #define VIM_RIGHT LALT(KC_RIGHT)
-#define VIM_SHIFT_LEFT LALT(LSFT(KC_LEFT))
-#define VIM_SHIFT_RIGHT LALT(LSFT(KC_RIGHT))
+#define VIM_TAB_LEFT LALT(LSFT(KC_LEFT))
+#define VIM_TAB_RIGHT LALT(LSFT(KC_RIGHT))
 #define VIM_UP LALT(KC_UP)
 #define VIM_TERMINAL LCTL(LALT(KC_T))
 #define VIM_TERMINAL_ESCAPE LCTL(KC_ESC)
+#define VIM_CMP_DOWN LCTL(KC_J)
+#define VIM_CMP_UP LCTL(KC_K)
+#define VIM_CMP_SELECT LCTL(KC_Y)
+#define VIM_SCROLL_DOWN LCTL(KC_D)
+#define VIM_SCROLL_UP LCTL(KC_U)
 
 #define SC_CUT LGUI(KC_X)
 #define SC_COPY LGUI(KC_C)
@@ -107,12 +112,18 @@ enum keycodes_user {
 #define LAUNCHR SC_LAUNCHER
 #define WS_PREV WS_PREVIOUS
 #define CK_ELPS CK_ELLIPSIS
+#define CK_DCOL CK_DOUBLE_COLON
 #define VIM_D VIM_DOWN
 #define VIM_L VIM_LEFT
 #define VIM_R VIM_RIGHT
-#define VIM_S_L VIM_SHIFT_LEFT
-#define VIM_S_R VIM_SHIFT_RIGHT
+#define VIM_T_L VIM_TAB_LEFT
+#define VIM_T_R VIM_TAB_RIGHT
 #define VIM_U VIM_UP
+#define V_CMP_D VIM_CMP_DOWN
+#define V_CMP_U VIM_CMP_UP
+#define V_CMP_S VIM_CMP_SELECT
+#define V_SCL_D VIM_SCROLL_DOWN
+#define V_SCL_U VIM_SCROLL_UP
 #define VIMTERM VIM_TERMINAL
 #define VIMTESC VIM_TERMINAL_ESCAPE
 
@@ -180,7 +191,7 @@ enum layers_keymap {
     LAUNCHR, RCS_TAB,  KC_TAB, CTL_TAB,  SYSTEM, ___x___, KC_HOME,   KC_UP,  KC_END, KC_BSPC, \
     OSM_ALT, OSM_GUI, OSM_CTL, OSM_SFT, ___x___, ___x___, KC_LEFT, KC_DOWN, KC_RGHT,  KC_ENT, \
      SC_CUT, WS_PREV, SC_COPY, WS_NEXT, SC_PSTE, ___x___, ___x___, ___x___, ___x___, ___x___, \
-                               _______, ___x___, ___x___, _______
+                               _______, ___x___, _______, _______
 // clang-format on
 
 /**
@@ -189,9 +200,9 @@ enum layers_keymap {
  */
 // clang-format off
 #define EXTEND_split_3x5_2                                                                    \
-    ___x___, ___x___, VIM_S_L, VIM_S_R, ___x___, ___x___, VIM_S_L,   VIM_U, VIM_S_R, VIMTESC, \
-    OSM_ALT, OSM_GUI, OSM_CTL, OSM_SFT, ___x___, ___x___,   VIM_L,   VIM_D,   VIM_R, VIMTERM, \
-    ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
+    VIMTESC, VIM_T_L, VIMTERM, VIM_T_R, ___x___, ___x___, V_SCL_U,   VIM_U, V_SCL_D, ___x___, \
+    OSM_ALT, OSM_GUI, OSM_CTL, OSM_SFT, ___x___, ___x___,   VIM_L,   VIM_D,   VIM_R, ___x___, \
+    ___x___, V_CMP_S, V_CMP_D, V_CMP_U, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
                                _______, ___x___, ___x___, _______
 // clang-format on
 
@@ -211,8 +222,8 @@ enum layers_keymap {
  */
 // clang-format off
 #define SYMBOL_split_3x5_2                                                                    \
-    KC_DQUO, KC_CIRC, KC_UNDS, KC_COLN,   KC_AT, CK_ELPS, KC_LPRN, KC_SCLN, KC_RPRN, KC_PERC, \
-    KC_EXLM, KC_PLUS, KC_MINS,  KC_EQL, KC_HASH, KC_AMPR, OSM_SFT, OSM_CTL, OSM_GUI, OSM_ALT, \
+    KC_DQUO, CK_DCOL, KC_UNDS, KC_PLUS,   KC_AT, CK_ELPS, KC_LPRN, KC_SCLN, KC_RPRN, KC_PERC, \
+    KC_EXLM, KC_CIRC, KC_MINS, KC_COLN, KC_HASH, KC_AMPR, OSM_SFT, OSM_CTL, OSM_GUI, OSM_ALT, \
     KC_TILD,  KC_DLR, KC_ASTR, KC_SLSH, KC_QUES, KC_PIPE, KC_LCBR, KC_BSLS, KC_RCBR,  KC_GRV, \
                                _______,  KC_ESC, ___x___, _______
 // clang-format on
@@ -242,7 +253,7 @@ enum layers_keymap {
            k00, k01, k02, k03, k04, k05, k06, k07, k08, k09, \
            k10, k11, k12, k13, k14, k15, k16, k17, k18, k19, \
            k20, k21, k22, k23, k24, k25, k26, k27, k28, k29, \
-                k33, k34,   QK_OSC,   QK_OSS, k35, k36
+           k33, k34, OSM(MOD_LCTL), OSM(MOD_LSFT), k35, k36
 // clang-format on
 
 #define LAYOUT_split_3x5_2_to_split_3x5_3(...) \

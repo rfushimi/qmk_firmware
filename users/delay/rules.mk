@@ -15,7 +15,6 @@ endif
 # Include common sources.
 SRC += $(USER_PATH)/keymap.c
 SRC += $(USER_PATH)/features/achordion.c
-SRC += $(USER_PATH)/features/compose.c
 SRC += $(USER_PATH)/features/custom_shift_keys.c
 SRC += $(USER_PATH)/features/oneshot_mod.c
 SRC += $(USER_PATH)/features/tap_dance.c

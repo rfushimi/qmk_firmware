@@ -28,7 +28,6 @@
 #ifdef KEYMAP_DELAY_HOMEROW
 #    include "features/achordion.h"
 #endif // KEYMAP_DELAY_HOMEROW
-#include "features/compose.h"
 #include "features/custom_shift_keys.h"
 #include "features/oneshot_mod.h"
 
@@ -219,6 +218,12 @@ static bool process_record_user_internal(uint16_t keycode, keyrecord_t* record) 
             clear_oneshot_mods();
             clear_oneshot_locked_mods();
             del_mods(MOD_MASK_SHIFT);
+            break;
+        case CK_DOUBLE_COLON:
+            if (record->event.pressed) {
+                tap_code16(KC_COLON);
+                tap_code16(KC_COLON);
+            }
             break;
     }
     return true;
