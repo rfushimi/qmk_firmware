@@ -145,12 +145,14 @@ enum layers_keymap {
   _MOTION,  // Navigation.
   _SYMBOL,  // Symbols.
   _NUMBER,  // Numbers.
-  _EXTEND,  // Extend.
+  _EXTSYM,  // Symbols extended.
+  _EXTNUM,  // Numbers extended.
   _SYSTEM,  // Special.
 };
 
 // Layers.
-#define EXTEND MO(_EXTEND)
+#define EXTNUM MO(_EXTNUM)
+#define EXTSYM MO(_EXTSYM)
 #define MOTION MO(_MOTION)
 #define NUMBER MO(_NUMBER)
 #define SYMBOL MO(_SYMBOL)
@@ -176,7 +178,7 @@ enum layers_keymap {
     KC_QUOT, KC_COMM,  KC_DOT,    KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L, \
      HOME_A,  HOME_O,  HOME_E,  HOME_U,    KC_I,    KC_D,  HOME_H,  HOME_T,  HOME_N,  HOME_S, \
     KC_COLN,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
-                                MOTION,  KC_SPC,  SYMBOL,  NUMBER
+                                KC_SPC,  MOTION,  NUMBER,  SYMBOL
 // clang-format on
 
 /**
@@ -191,30 +193,7 @@ enum layers_keymap {
     LAUNCHR, RCS_TAB,  KC_TAB, CTL_TAB,  SYSTEM, ___x___, KC_HOME,   KC_UP,  KC_END, KC_BSPC, \
     OSM_ALT, OSM_GUI, OSM_CTL, OSM_SFT, ___x___, ___x___, KC_LEFT, KC_DOWN, KC_RGHT,  KC_ENT, \
      SC_CUT, WS_PREV, SC_COPY, WS_NEXT, SC_PSTE, ___x___, ___x___, ___x___, ___x___, ___x___, \
-                               _______, ___x___, _______, _______
-// clang-format on
-
-/**
- * \brief Extended layer, with convenience one-hand shortcuts, and Vim
- * navigation on the off-hand.
- */
-// clang-format off
-#define EXTEND_split_3x5_2                                                                    \
-    VIMTESC, VIM_T_L, VIMTERM, VIM_T_R, ___x___, ___x___, V_SCL_U,   VIM_U, V_SCL_D, ___x___, \
-    OSM_ALT, OSM_GUI, OSM_CTL, OSM_SFT, ___x___, ___x___,   VIM_L,   VIM_D,   VIM_R, ___x___, \
-    ___x___, V_CMP_S, V_CMP_D, V_CMP_U, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
-                               _______, ___x___, ___x___, _______
-// clang-format on
-
-/**
- * \brief Numrow.
- */
-// clang-format off
-#define NUMBER_split_3x5_2                                                                    \
-    KC_SLSH,    KC_7,    KC_8,    KC_9, KC_ASTR,  SYSTEM,   KC_LT,  KC_EQL,   KC_GT, ___x___, \
-    KC_MINS,    KC_4,    KC_5,    KC_6, KC_PLUS, ___x___, OSM_SFT, OSM_CTL, OSM_GUI, OSM_ALT, \
-     KC_DOT,    KC_1,    KC_2,    KC_3, KC_COMM, ___x___, KC_LBRC, ___x___, KC_RBRC, ___x___, \
-                               _______,    KC_0, ___x___, _______
+                               ___x___, _______, _______, _______
 // clang-format on
 
 /**
@@ -225,7 +204,41 @@ enum layers_keymap {
     KC_DQUO, CK_DCOL, KC_UNDS, KC_PLUS,   KC_AT, CK_ELPS, KC_LPRN, KC_SCLN, KC_RPRN, KC_PERC, \
     KC_EXLM, KC_CIRC, KC_MINS, KC_COLN, KC_HASH, KC_AMPR, OSM_SFT, OSM_CTL, OSM_GUI, OSM_ALT, \
     KC_TILD,  KC_DLR, KC_ASTR, KC_SLSH, KC_QUES, KC_PIPE, KC_LCBR, KC_BSLS, KC_RCBR,  KC_GRV, \
-                               _______,  KC_ESC, ___x___, _______
+                                KC_ESC, _______, _______, ___x___
+// clang-format on
+
+/**
+ * \brief Extended symbol layer, for extra symbols.
+ */
+// clang-format off
+#define EXTSYM_split_3x5_2                                                                    \
+    ___x___, ___x___, ___x___, ___x___, ___x___, ___x___,   KC_LT,  KC_EQL,   KC_GT, ___x___, \
+    ___x___, ___x___, ___x___, CK_DCOL, ___x___, ___x___, OSM_SFT, OSM_CTL, OSM_GUI, OSM_ALT, \
+    ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, KC_LBRC, ___x___, KC_RBRC, ___x___, \
+                               ___x___, _______, ___x___, _______
+// clang-format on
+
+/**
+ * \brief Numrow.
+ */
+// clang-format off
+#define NUMBER_split_3x5_2                                                                    \
+    KC_SLSH,    KC_7,    KC_8,    KC_9, KC_ASTR,  SYSTEM,   KC_LT,  KC_EQL,   KC_GT, ___x___, \
+    KC_MINS,    KC_4,    KC_5,    KC_6, KC_PLUS, ___x___, OSM_SFT, OSM_CTL, OSM_GUI, OSM_ALT, \
+     KC_DOT,    KC_1,    KC_2,    KC_3, KC_COMM, ___x___, KC_LBRC, ___x___, KC_RBRC, ___x___, \
+                                  KC_0, _______, _______, ___x___
+// clang-format on
+
+/**
+ * \brief Extended layer, with convenience one-hand shortcuts, and Vim
+ * navigation on the off-hand.
+ */
+// clang-format off
+#define EXTNUM_split_3x5_2                                                                    \
+    VIMTESC, VIM_T_L, VIMTERM, VIM_T_R, ___x___, ___x___, V_SCL_U,   VIM_U, V_SCL_D, ___x___, \
+    OSM_ALT, OSM_GUI, OSM_CTL, OSM_SFT, ___x___, ___x___,   VIM_L,   VIM_D,   VIM_R, V_CMP_S, \
+    ___x___, ___x___, V_CMP_D, V_CMP_U, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
+                               ___x___, _______, _______, ___x___
 // clang-format on
 
 /**
@@ -253,7 +266,7 @@ enum layers_keymap {
            k00, k01, k02, k03, k04, k05, k06, k07, k08, k09, \
            k10, k11, k12, k13, k14, k15, k16, k17, k18, k19, \
            k20, k21, k22, k23, k24, k25, k26, k27, k28, k29, \
-           k33, k34, OSM(MOD_LCTL), OSM(MOD_LSFT), k35, k36
+           OSM(MOD_LCTL), k33, k34, k35, k36, OSM(MOD_LSFT)
 // clang-format on
 
 #define LAYOUT_split_3x5_2_to_split_3x5_3(...) \
@@ -264,5 +277,6 @@ enum layers_keymap {
 #define MOTION_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(MOTION_split_3x5_2)
 #define NUMBER_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(NUMBER_split_3x5_2)
 #define SYMBOL_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(SYMBOL_split_3x5_2)
-#define EXTEND_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(EXTEND_split_3x5_2)
+#define EXTSYM_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(EXTSYM_split_3x5_2)
+#define EXTNUM_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(EXTNUM_split_3x5_2)
 #define SYSTEM_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(SYSTEM_split_3x5_2)

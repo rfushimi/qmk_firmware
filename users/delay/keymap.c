@@ -274,7 +274,7 @@ __attribute__((weak)) void matrix_scan_keymap(void) {}
 
 /** Called on layer change. */
 layer_state_t layer_state_set_user(layer_state_t state) {
-    return layer_state_set_keymap(update_tri_layer_state(state, _MOTION, _NUMBER, _EXTEND));
+    return layer_state_set_keymap(update_tri_layer_state(update_tri_layer_state(state, _MOTION, _SYMBOL, _EXTSYM), _MOTION, _NUMBER, _EXTNUM));
 }
 
 __attribute__((weak)) layer_state_t layer_state_set_keymap(layer_state_t state) {
