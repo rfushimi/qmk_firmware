@@ -192,7 +192,7 @@ enum layers_keymap {
 #define MOTION_split_3x5_2                                                                    \
     LAUNCHR, RCS_TAB,  KC_TAB, CTL_TAB,  SYSTEM, ___x___, KC_HOME,   KC_UP,  KC_END, KC_BSPC, \
     OSM_ALT, OSM_GUI, OSM_CTL, OSM_SFT, ___x___, ___x___, KC_LEFT, KC_DOWN, KC_RGHT,  KC_ENT, \
-     SC_CUT, WS_PREV, SC_COPY, WS_NEXT, SC_PSTE, ___x___, ___x___, ___x___, ___x___, ___x___, \
+     SC_CUT, WS_PREV, SC_COPY, WS_NEXT, SC_PSTE, ___x___, KC_WH_U, KC_WH_D, ___x___, ___x___, \
                                ___x___, _______, _______, _______
 // clang-format on
 
