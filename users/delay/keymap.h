@@ -142,7 +142,7 @@ enum layers_keymap {
 #define ESC_SYM LT(_SYMBOL, KC_ESC)
 
 // Tap dances.
-#define QK_OSA OSM(MOD_LCTL)
+#define QK_OSA OSM(MOD_LALT)
 #define QK_OSC OSM(MOD_LCTL)
 #define QK_OSG OSM(MOD_LGUI)
 #define QK_OSS OSM(MOD_LSFT)
@@ -162,7 +162,7 @@ enum layers_keymap {
     KC_QUOT, KC_COMM,  KC_DOT,    KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L, \
      HOME_A,  HOME_O,  HOME_E,  HOME_U,    KC_I,    KC_D,  HOME_H,  HOME_T,  HOME_N,  HOME_S, \
     KC_COLN,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
-                                QK_OSG,  SPC_MO, ESC_SYM,  QK_OSC
+                                QK_OSS,  SPC_MO, ESC_SYM,  QK_OSC
 // clang-format on
 
 /**
@@ -227,7 +227,7 @@ enum layers_keymap {
            k00, k01, k02, k03, k04, k05, k06, k07, k08, k09, \
            k10, k11, k12, k13, k14, k15, k16, k17, k18, k19, \
            k20, k21, k22, k23, k24, k25, k26, k27, k28, k29, \
-                 k33, k34, QK_OSA, QK_OSS, k35, k36
+                 k33, k34, QK_OSA, QK_OSG, k35, k36
 // clang-format on
 
 #define LAYOUT_split_3x5_2_to_split_3x5_3(...) \
