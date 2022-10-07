@@ -177,7 +177,7 @@ enum layers_keymap {
     LAUNCHR, RCS_TAB,  KC_TAB, CTL_TAB,  SYSTEM, ___x___, KC_HOME,   KC_UP,  KC_END, KC_BSPC, \
     OSM_ALT, OSM_GUI, OSM_CTL, OSM_SFT, ___x___, ___x___, KC_LEFT, KC_DOWN, KC_RGHT,  KC_ENT, \
     ___x___, WS_PREV, ___x___, WS_NEXT, ___x___, ___x___, KC_WH_U, KC_WH_D, ___x___, ___x___, \
-                               ___x___, _______, _______, _______
+                               _______, _______, _______, _______
 // clang-format on
 
 /**
@@ -188,7 +188,7 @@ enum layers_keymap {
      KC_ESC, CK_DCOL, KC_UNDS, KC_COLN,   KC_AT,  SYSTEM, KC_LPRN, KC_SCLN, KC_RPRN, KC_PERC, \
     KC_EXLM, KC_CIRC, KC_MINS, KC_PLUS, KC_HASH, KC_AMPR, OSM_SFT, OSM_CTL, OSM_GUI, OSM_ALT, \
     KC_TILD,  KC_DLR, KC_ASTR, KC_SLSH, KC_QUES, KC_PIPE, KC_LCBR, KC_BSLS, KC_RCBR,  KC_GRV, \
-                               _______, _______, _______, ___x___
+                               _______, _______, _______, _______
 // clang-format on
 
 /**
@@ -199,7 +199,7 @@ enum layers_keymap {
     KC_SLSH,    KC_7,    KC_8,    KC_9, KC_ASTR, ___x___,   KC_LT,  KC_EQL,   KC_GT, ___x___, \
     KC_MINS,    KC_4,    KC_5,    KC_6, KC_PLUS, ___x___, OSM_SFT, OSM_CTL, OSM_GUI, OSM_ALT, \
      KC_DOT,    KC_1,    KC_2,    KC_3, KC_COMM, ___x___, KC_LBRC,    KC_0, KC_RBRC, CK_ELPS, \
-                               ___x___, _______, _______, ___x___
+                               _______, _______, _______, _______
 // clang-format on
 
 /**
