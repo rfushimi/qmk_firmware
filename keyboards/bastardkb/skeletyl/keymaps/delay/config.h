@@ -22,12 +22,20 @@
 #    undef MASTER_RIGHT
 
 // To use the handedness pin, resistors need to be installed on the adapter PCB.
+#ifdef SPLINKY_BETA_PINOUT
 #    define SPLIT_HAND_PIN GP13
+#else
+#    define SPLIT_HAND_PIN GP15
+#endif // SPLINKY_BETA_PINOUT
 #    define SPLIT_HAND_PIN_LOW_IS_LEFT // High -> right, Low -> left.
 
 #    undef SOFT_SERIAL_PIN
 #    define SERIAL_USART_FULL_DUPLEX // Enable full duplex operation mode.
 #    define SERIAL_USART_TX_PIN GP1  // USART TX pin
+#ifdef SPLINKY_BETA_PINOUT
 #    define SERIAL_USART_RX_PIN GP12 // USART RX pin
+#else
+#    define SERIAL_USART_RX_PIN GP14 // USART RX pin
+#endif // SPLINKY_BETA_PINOUT
 #    define SERIAL_USART_PIN_SWAP
 #endif

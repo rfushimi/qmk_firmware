@@ -53,6 +53,7 @@ bool is_oneshot_mod_ignore_key(uint16_t keycode) {
         case MOTION:
         case NUMBER:
         case SPC_MO:
+        case ESC_SYM:
         case SYMBOL:
         case OSM_ALT:
         case OSM_CTL:
@@ -275,7 +276,7 @@ __attribute__((weak)) void matrix_scan_keymap(void) {}
 
 /** Called on layer change. */
 layer_state_t layer_state_set_user(layer_state_t state) {
-    return layer_state_set_keymap(update_tri_layer_state(state, _MOTION, _SYMBOL, _EXTSYM));
+    return layer_state_set_keymap(update_tri_layer_state(state, _MOTION, _SYMBOL, _NUMBER));
 }
 
 __attribute__((weak)) layer_state_t layer_state_set_keymap(layer_state_t state) {
