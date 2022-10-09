@@ -185,10 +185,10 @@ enum layers_keymap {
  */
 // clang-format off
 #define SYMBOL_split_3x5_2                                                                    \
-     KC_ESC, CK_DCOL, KC_UNDS, KC_COLN,   KC_AT,  SYSTEM, KC_LPRN, KC_SCLN, KC_RPRN, KC_PERC, \
+    KC_DQUO, CK_DCOL, KC_UNDS, KC_COLN,   KC_AT,  SYSTEM, KC_LPRN, KC_SCLN, KC_RPRN, KC_PERC, \
     KC_EXLM, KC_CIRC, KC_MINS, KC_PLUS, KC_HASH, KC_AMPR, OSM_SFT, OSM_CTL, OSM_GUI, OSM_ALT, \
     KC_TILD,  KC_DLR, KC_ASTR, KC_SLSH, KC_QUES, KC_PIPE, KC_LCBR, KC_BSLS, KC_RCBR,  KC_GRV, \
-                               _______, _______, _______, _______
+                                KC_ESC, _______, _______, _______
 // clang-format on
 
 /**
