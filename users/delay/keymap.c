@@ -25,9 +25,6 @@
 #    include "quantum/rgblight/rgblight_list.h"
 #endif // RGB_MATRIX_ENABLE
 
-#ifdef KEYMAP_DELAY_HOMEROW
-#    include "features/achordion.h"
-#endif // KEYMAP_DELAY_HOMEROW
 #include "features/custom_shift_keys.h"
 #include "features/oneshot_mod.h"
 
@@ -39,22 +36,13 @@ typedef struct {
 } osm_state_t;
 
 bool is_oneshot_mod_cancel_key(uint16_t keycode) {
-    switch (keycode) {
-        case MOTION:
-        case NUMBER:
-            return true;
-        default:
-            return false;
-    }
+    return false;
 }
 
 bool is_oneshot_mod_ignore_key(uint16_t keycode) {
     switch (keycode) {
-        case MOTION:
-        case NUMBER:
         case SPC_MO:
         case ESC_SYM:
-        case SYMBOL:
         case OSM_ALT:
         case OSM_CTL:
         case OSM_GUI:
@@ -66,16 +54,12 @@ bool is_oneshot_mod_ignore_key(uint16_t keycode) {
 }
 
 const custom_shift_key_t custom_shift_keys[] = {
-    {KC_DOT, KC_DOT},                     // Don't shift .
-    {KC_COMMA, KC_COMMA},                 // Don't shift ,
     {KC_EQUAL, KC_EQUAL},                 // Don't shift =
     {KC_SLASH, KC_SLASH},                 // Don't shift /
     {KC_BACKSLASH, KC_BACKSLASH},         // Don't shift backslash
     {KC_GRAVE, KC_GRAVE},                 // Don't shift `
     {KC_LEFT_BRACKET, KC_LEFT_BRACKET},   // Don't shift [
     {KC_RIGHT_BRACKET, KC_RIGHT_BRACKET}, // Don't shift ]
-    {KC_SEMICOLON, KC_SEMICOLON},         // Don't shift ;
-    {KC_QUOTE, KC_QUOTE},                 // Don't shift '
 };
 uint8_t NUM_CUSTOM_SHIFT_KEYS = sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
 
@@ -125,20 +109,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t* record) {
 
 #ifdef TAPPING_FORCE_HOLD_PER_KEY
 bool get_tapping_force_hold(uint16_t keycode, keyrecord_t* record) {
-    // If you quickly hold a tap-hold key after tapping it, the tap action is
-    // repeated. Key repeating is useful e.g. for Vim navigation keys, but can
-    // lead to missed triggers in fast typing. Here, returning true means we
-    // instead want to "force hold" and disable key repeating.
-    switch (keycode) {
-#    ifdef KEYMAP_DELAY_HOMEROW
-        // Repeating is useful for Vim navigation keys.
-        case HOME_U:
-        case HOME_H:
-            return false; // Enable key repeating.
-#    endif                // KEYMAP_DELAY_HOMEROW
-        default:
-            return true; // Otherwise, force hold and disable key repeating.
-    }
+    return true;
 }
 #endif // TAPPING_FORCE_HOLD_PER_KEY
 
@@ -163,46 +134,6 @@ bool caps_word_press_user(uint16_t keycode) {
     }
 }
 
-#ifdef KEYMAP_DELAY_HOMEROW
-bool achordion_chord(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record, uint16_t other_keycode, keyrecord_t* other_record) {
-#    if 0
-    // Exceptionally consider the following chords as holds, even though they are on the same hand in Dvorak.
-    switch (tap_hold_keycode) {
-        case HOME_S: // S + H and S + G.
-            if (other_keycode == HOME_H || other_keycode == KC_G) {
-                return true;
-            }
-            break;
-    }
-
-    // Also allow same-hand holds when the other key is in the rows below the alphas. I need the `% (MATRIX_ROWS / 2)` because my keyboard is split.
-    if (other_record->event.key.row % (MATRIX_ROWS / 2) >= 3) {
-        return true;
-    }
-#    endif
-
-    // Otherwise, follow the opposite hands rule.
-    return achordion_opposite_hands(tap_hold_record, other_record);
-}
-
-bool achordion_eager_mod(uint8_t mod) {
-    switch (mod) {
-        case MOD_LSFT:
-        case MOD_RSFT:
-        case MOD_LGUI:
-        case MOD_RGUI:
-            return true; // Eagerly apply Ctrl and Gui mods.
-
-        default:
-            return false;
-    }
-}
-
-uint16_t achordion_timeout(uint16_t tap_hold_keycode) {
-    return 800; // Use a timeout of 800 ms.
-}
-#endif // KEYMAP_DELAY_HOMEROW
-
 static bool process_record_user_internal(uint16_t keycode, keyrecord_t* record) {
     if (!process_record_keymap(keycode, record)) {
         return false;
@@ -210,22 +141,11 @@ static bool process_record_user_internal(uint16_t keycode, keyrecord_t* record) 
     if (!process_custom_shift_keys(keycode, record)) {
         return false;
     }
-#ifdef KEYMAP_DELAY_HOMEROW
-    if (!process_achordion(keycode, record)) {
-        return false;
-    }
-#endif // KEYMAP_DELAY_HOMEROW
     switch (keycode) {
         case KC_ESCAPE:
             clear_oneshot_mods();
             clear_oneshot_locked_mods();
             del_mods(MOD_MASK_SHIFT);
-            break;
-        case CK_DOUBLE_COLON:
-            if (record->event.pressed) {
-                tap_code16(KC_COLON);
-                tap_code16(KC_COLON);
-            }
             break;
     }
     return true;
@@ -266,9 +186,6 @@ void rgb_matrix_reset(void) {
 #endif // RGB_MATRIX_ENABLE
 
 void matrix_scan_user(void) {
-#ifdef KEYMAP_DELAY_HOMEROW
-    achordion_task();
-#endif // KEYMAP_DELAY_HOMEROW
     matrix_scan_keymap();
 }
 

@@ -51,45 +51,15 @@ enum keycodes_user {
   OSM_GUI,
   OSM_SFT,
   // Custom keycodes.
-  CK_DOUBLE_COLON,
   SAFE_RANGE_KEYMAP,
 };
 
-// This keymap uses ASCG home row mods.
+// This keymap uses ASCG home row mods (on layers).
 //
 //             Left hand                          Right hand
 // ╭───────┬───────┬───────┬───────╮   ╭───────┬───────┬───────┬───────╮
 // │  Alt  │  Gui  │ Ctrl  │ Shift │   │ Shift │ Ctrl  │  Gui  │  Alt  │
 // ╰───────┴───────┴───────┴───────╯   ╰───────┴───────┴───────┴───────╯
-
-#ifdef KEYMAP_DELAY_HOMEROW
-// Home row mods for Dvorak layer.
-#define HOME_A LALT_T(KC_A)
-#define HOME_O LGUI_T(KC_O)
-#define HOME_E LCTL_T(KC_E)
-#define HOME_U LSFT_T(KC_U)
-#define HOME_H RSFT_T(KC_H)
-#define HOME_T RCTL_T(KC_T)
-#define HOME_N LGUI_T(KC_N)
-#define HOME_S RALT_T(KC_S)
-#else
-#define HOME_A KC_A
-#define HOME_O KC_O
-#define HOME_E KC_E
-#define HOME_U KC_U
-#define HOME_H KC_H
-#define HOME_T KC_T
-#define HOME_N KC_N
-#define HOME_S KC_S
-#endif  // KEYMAP_DELAY_HOMEROW
-
-#define VIM_TAB_LEFT LALT(LSFT(KC_LEFT))
-#define VIM_TAB_RIGHT LALT(LSFT(KC_RIGHT))
-#define VIM_TERMINAL LCTL(LALT(KC_T))
-#define VIM_TERMINAL_ESCAPE LCTL(KC_ESC)
-#define VIM_CMP_DOWN LCTL(KC_J)
-#define VIM_CMP_UP LCTL(KC_K)
-#define VIM_CMP_SELECT LCTL(KC_Y)
 
 #define SC_PASTE_NO_FORMAT LGUI(S(KC_V))
 #define SC_LAUNCHER LGUI(KC_SPACE)
@@ -99,18 +69,9 @@ enum keycodes_user {
 #define CK_ELLIPSIS LALT(KC_SEMICOLON)
 
 // Shorthands.
-#define SC_PSTE SC_PASTE
 #define LAUNCHR SC_LAUNCHER
 #define WS_PREV WS_PREVIOUS
 #define CK_ELPS CK_ELLIPSIS
-#define CK_DCOL CK_DOUBLE_COLON
-#define VIM_T_L VIM_TAB_LEFT
-#define VIM_T_R VIM_TAB_RIGHT
-#define V_CMP_D VIM_CMP_DOWN
-#define V_CMP_U VIM_CMP_UP
-#define V_CMP_S VIM_CMP_SELECT
-#define VIMTERM VIM_TERMINAL
-#define VIMTESC VIM_TERMINAL_ESCAPE
 
 /**
  * \brief Similar to `_kb`, `_user`, `_user_keymap`, and other variants, but for
@@ -134,9 +95,6 @@ enum layers_keymap {
 };
 
 // Layers.
-#define MOTION MO(_MOTION)
-#define NUMBER MO(_NUMBER)
-#define SYMBOL MO(_SYMBOL)
 #define SYSTEM OSL(_SYSTEM)
 #define SPC_MO LT(_MOTION, KC_SPACE)
 #define ESC_SYM LT(_SYMBOL, KC_ESC)
@@ -160,7 +118,7 @@ enum layers_keymap {
 // clang-format off
 #define DVORAK_split_3x5_2                                                                    \
     KC_QUOT, KC_COMM,  KC_DOT,    KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L, \
-     HOME_A,  HOME_O,  HOME_E,  HOME_U,    KC_I,    KC_D,  HOME_H,  HOME_T,  HOME_N,  HOME_S, \
+       KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S, \
     KC_COLN,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
                                 QK_OSS,  SPC_MO, ESC_SYM,  QK_OSC
 // clang-format on
@@ -174,10 +132,10 @@ enum layers_keymap {
  */
 // clang-format off
 #define MOTION_split_3x5_2                                                                    \
-    LAUNCHR, RCS_TAB,  KC_TAB, CTL_TAB,  SYSTEM, ___x___, KC_HOME,   KC_UP,  KC_END, KC_BSPC, \
+    LAUNCHR, RCS_TAB,  KC_TAB, CTL_TAB, ___x___, ___x___, KC_HOME,   KC_UP,  KC_END, KC_BSPC, \
     OSM_ALT, OSM_GUI, OSM_CTL, OSM_SFT, ___x___, ___x___, KC_LEFT, KC_DOWN, KC_RGHT,  KC_ENT, \
-    ___x___, WS_PREV, ___x___, WS_NEXT, ___x___, ___x___, KC_WH_U, KC_WH_D, ___x___, ___x___, \
-                               _______, _______, _______, _______
+    ___x___, WS_PREV, ___x___, WS_NEXT, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
+                                SYSTEM, _______, _______, _______
 // clang-format on
 
 /**
@@ -185,10 +143,10 @@ enum layers_keymap {
  */
 // clang-format off
 #define SYMBOL_split_3x5_2                                                                    \
-    KC_DQUO, CK_DCOL, KC_UNDS, KC_COLN,   KC_AT,  SYSTEM, KC_LPRN, KC_SCLN, KC_RPRN, KC_PERC, \
-    KC_EXLM, KC_CIRC, KC_MINS, KC_PLUS, KC_HASH, KC_AMPR, OSM_SFT, OSM_CTL, OSM_GUI, OSM_ALT, \
-    KC_TILD,  KC_DLR, KC_ASTR, KC_SLSH, KC_QUES, KC_PIPE, KC_LCBR, KC_BSLS, KC_RCBR,  KC_GRV, \
-                                KC_ESC, _______, _______, _______
+    ___x___, KC_EXLM, KC_UNDS, KC_HASH,   KC_AT, KC_PERC, KC_PLUS, KC_MINS,  KC_EQL,  KC_GRV, \
+    ___x___, KC_LBRC, KC_LCBR, KC_LPRN, KC_PIPE, KC_AMPR, KC_RPRN, KC_RCBR, KC_RBRC, KC_SCLN, \
+    ___x___, KC_CIRC, KC_ASTR,  KC_DLR, ___x___, ___x___, KC_SLSH, KC_QUES, KC_BSLS, KC_TILD, \
+                               _______, _______, _______,  SYSTEM
 // clang-format on
 
 /**
@@ -196,10 +154,10 @@ enum layers_keymap {
  */
 // clang-format off
 #define NUMBER_split_3x5_2                                                                    \
-    KC_SLSH,    KC_7,    KC_8,    KC_9, KC_ASTR, ___x___,   KC_LT,  KC_EQL,   KC_GT, ___x___, \
-    KC_MINS,    KC_4,    KC_5,    KC_6, KC_PLUS, ___x___, OSM_SFT, OSM_CTL, OSM_GUI, OSM_ALT, \
-     KC_DOT,    KC_1,    KC_2,    KC_3, KC_COMM, ___x___, KC_LBRC,    KC_0, KC_RBRC, CK_ELPS, \
-                               _______, _______, _______, _______
+      KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10, \
+       KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0, \
+    ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
+                               ___x___, _______, _______, ___x___
 // clang-format on
 
 /**
@@ -227,7 +185,7 @@ enum layers_keymap {
            k00, k01, k02, k03, k04, k05, k06, k07, k08, k09, \
            k10, k11, k12, k13, k14, k15, k16, k17, k18, k19, \
            k20, k21, k22, k23, k24, k25, k26, k27, k28, k29, \
-                 k33, k34, QK_OSA, QK_OSG, k35, k36
+                k33, k34,   QK_OSA, QK_OSG,   k35, k36
 // clang-format on
 
 #define LAYOUT_split_3x5_2_to_split_3x5_3(...) \
