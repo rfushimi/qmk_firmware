@@ -45,13 +45,8 @@ enum keycodes_user {
 #else
   KEYCODE_USER_BEGIN = SAFE_RANGE,
 #endif
-  // Oneshot mods.
-  OSM_ALT = KEYCODE_USER_BEGIN,
-  OSM_CTL,
-  OSM_GUI,
-  OSM_SFT,
   // Custom keycodes.
-  SAFE_RANGE_KEYMAP,
+  SAFE_RANGE_KEYMAP = KEYCODE_USER_BEGIN,
 };
 
 // This keymap uses ASCG home row mods (on layers).
@@ -63,14 +58,11 @@ enum keycodes_user {
 
 #define SC_PASTE_NO_FORMAT LGUI(S(KC_V))
 #define SC_LAUNCHER LGUI(KC_SPACE)
-#define WS_PREVIOUS LCTL(LALT(KC_LEFT))
-#define WS_NEXT LCTL(LALT(KC_RIGHT))
 
 #define CK_ELLIPSIS LALT(KC_SEMICOLON)
 
 // Shorthands.
 #define LAUNCHR SC_LAUNCHER
-#define WS_PREV WS_PREVIOUS
 #define CK_ELPS CK_ELLIPSIS
 
 /**
@@ -97,13 +89,13 @@ enum layers_keymap {
 // Layers.
 #define SYSTEM OSL(_SYSTEM)
 #define SPC_MO LT(_MOTION, KC_SPACE)
-#define ESC_SYM LT(_SYMBOL, KC_ESC)
+#define ENT_SY LT(_SYMBOL, KC_ENTER)
 
-// Tap dances.
-#define QK_OSA OSM(MOD_LALT)
-#define QK_OSC OSM(MOD_LCTL)
-#define QK_OSG OSM(MOD_LGUI)
-#define QK_OSS OSM(MOD_LSFT)
+  // Oneshot mods.
+#define OSM_ALT OSM(MOD_LALT)
+#define OSM_CTL OSM(MOD_LCTL)
+#define OSM_GUI OSM(MOD_LGUI)
+#define OSM_SFT OSM(MOD_LSFT)
 
 // Ctrl-Tab.
 #define CTL_TAB C(KC_TAB)
@@ -120,7 +112,7 @@ enum layers_keymap {
     KC_QUOT, KC_COMM,  KC_DOT,    KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L, \
        KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S, \
     KC_COLN,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
-                                QK_OSS,  SPC_MO, ESC_SYM,  QK_OSC
+                               OSM_SFT,  SPC_MO,  ENT_SY, OSM_CTL
 // clang-format on
 
 /**
@@ -133,8 +125,8 @@ enum layers_keymap {
 // clang-format off
 #define MOTION_split_3x5_2                                                                    \
     LAUNCHR, RCS_TAB,  KC_TAB, CTL_TAB, ___x___, ___x___, KC_HOME,   KC_UP,  KC_END, KC_BSPC, \
-    OSM_ALT, OSM_GUI, OSM_CTL, OSM_SFT, ___x___, ___x___, KC_LEFT, KC_DOWN, KC_RGHT,  KC_ENT, \
-    ___x___, WS_PREV, ___x___, WS_NEXT, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
+    OSM_ALT, OSM_GUI, OSM_CTL, OSM_SFT, ___x___, ___x___, KC_LEFT, KC_DOWN, KC_RGHT,  KC_ESC, \
+    A(KC_1), A(KC_2), A(KC_3), A(KC_4), A(KC_5), A(KC_6), A(KC_7), A(KC_8), A(KC_9), A(KC_0), \
                                 SYSTEM, _______, _______, _______
 // clang-format on
 
@@ -143,9 +135,9 @@ enum layers_keymap {
  */
 // clang-format off
 #define SYMBOL_split_3x5_2                                                                    \
-    ___x___, KC_EXLM, KC_UNDS, KC_HASH,   KC_AT, KC_PERC, KC_PLUS, KC_MINS,  KC_EQL,  KC_GRV, \
-    ___x___, KC_LBRC, KC_LCBR, KC_LPRN, KC_PIPE, KC_AMPR, KC_RPRN, KC_RCBR, KC_RBRC, KC_SCLN, \
-    ___x___, KC_CIRC, KC_ASTR,  KC_DLR, ___x___, ___x___, KC_SLSH, KC_QUES, KC_BSLS, KC_TILD, \
+    ___x___,   KC_LT, KC_QUES,   KC_GT, KC_COLN, ___x___, KC_LBRC, KC_PERC, KC_RBRC,  KC_GRV, \
+    KC_EXLM, KC_PLUS, KC_MINS,  KC_EQL, KC_HASH, KC_CIRC, KC_LPRN, KC_UNDS, KC_RPRN, KC_SCLN, \
+    KC_TILD, KC_BSLS, KC_ASTR, KC_SLSH, KC_AMPR, KC_PIPE, KC_LCBR,  KC_DLR, KC_RCBR,   KC_AT, \
                                _______, _______, _______,  SYSTEM
 // clang-format on
 
@@ -156,7 +148,7 @@ enum layers_keymap {
 #define NUMBER_split_3x5_2                                                                    \
       KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10, \
        KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0, \
-    ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
+    ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, C(KC_A), ___x___, ___x___, \
                                ___x___, _______, _______, ___x___
 // clang-format on
 
@@ -185,7 +177,7 @@ enum layers_keymap {
            k00, k01, k02, k03, k04, k05, k06, k07, k08, k09, \
            k10, k11, k12, k13, k14, k15, k16, k17, k18, k19, \
            k20, k21, k22, k23, k24, k25, k26, k27, k28, k29, \
-                k33, k34,   QK_OSA, QK_OSG,   k35, k36
+                k33, k34,  OSM_ALT,  OSM_GUI, k35, k36
 // clang-format on
 
 #define LAYOUT_split_3x5_2_to_split_3x5_3(...) \

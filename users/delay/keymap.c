@@ -26,32 +26,6 @@
 #endif // RGB_MATRIX_ENABLE
 
 #include "features/custom_shift_keys.h"
-#include "features/oneshot_mod.h"
-
-typedef struct {
-    oneshot_mod_state_t lalt;
-    oneshot_mod_state_t lctl;
-    oneshot_mod_state_t lgui;
-    oneshot_mod_state_t lsft;
-} osm_state_t;
-
-bool is_oneshot_mod_cancel_key(uint16_t keycode) {
-    return false;
-}
-
-bool is_oneshot_mod_ignore_key(uint16_t keycode) {
-    switch (keycode) {
-        case SPC_MO:
-        case ESC_SYM:
-        case OSM_ALT:
-        case OSM_CTL:
-        case OSM_GUI:
-        case OSM_SFT:
-            return true;
-        default:
-            return false;
-    }
-}
 
 const custom_shift_key_t custom_shift_keys[] = {
     {KC_EQUAL, KC_EQUAL},                 // Don't shift =
@@ -134,7 +108,11 @@ bool caps_word_press_user(uint16_t keycode) {
     }
 }
 
-static bool process_record_user_internal(uint16_t keycode, keyrecord_t* record) {
+__attribute__((weak)) bool process_record_keymap(uint16_t keycode, keyrecord_t* record) {
+    return true;
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     if (!process_record_keymap(keycode, record)) {
         return false;
     }
@@ -149,32 +127,6 @@ static bool process_record_user_internal(uint16_t keycode, keyrecord_t* record) 
             break;
     }
     return true;
-}
-
-__attribute__((weak)) bool process_record_keymap(uint16_t keycode, keyrecord_t* record) {
-    return true;
-}
-
-bool process_record_user(uint16_t keycode, keyrecord_t* record) {
-    static osm_state_t osm_state = {
-        .lalt = ONESHOT_UP_UNQUEUED,
-        .lctl = ONESHOT_UP_UNQUEUED,
-        .lgui = ONESHOT_UP_UNQUEUED,
-        .lsft = ONESHOT_UP_UNQUEUED,
-    };
-    oneshot_mod_pre(&osm_state.lalt, KC_LALT, OSM_ALT, keycode, record);
-    oneshot_mod_pre(&osm_state.lctl, KC_LCTL, OSM_CTL, keycode, record);
-    oneshot_mod_pre(&osm_state.lgui, KC_LGUI, OSM_GUI, keycode, record);
-    oneshot_mod_pre(&osm_state.lsft, KC_LSFT, OSM_SFT, keycode, record);
-
-    const bool result = process_record_user_internal(keycode, record);
-
-    oneshot_mod_post(&osm_state.lalt, KC_LALT, OSM_ALT, keycode, record);
-    oneshot_mod_post(&osm_state.lctl, KC_LCTL, OSM_CTL, keycode, record);
-    oneshot_mod_post(&osm_state.lgui, KC_LGUI, OSM_GUI, keycode, record);
-    oneshot_mod_post(&osm_state.lsft, KC_LSFT, OSM_SFT, keycode, record);
-
-    return result;
 }
 
 #ifdef RGB_MATRIX_ENABLE
