@@ -146,9 +146,9 @@ enum layers_keymap {
  */
 // clang-format off
 #define NUMBER_split_3x5_2                                                                    \
-      KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10, \
-       KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0, \
-    ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, C(KC_A), ___x___, ___x___, \
+    ___x___,    KC_7,    KC_8,    KC_9, ___x___,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10, \
+    C(KC_A),    KC_4,    KC_5,    KC_6, ___x___,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5, \
+    ___x___,    KC_1,    KC_2,    KC_3, ___x___, ___x___, ___x___,    KC_0, ___x___, ___x___, \
                                ___x___, _______, _______, ___x___
 // clang-format on
 
