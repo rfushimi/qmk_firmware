@@ -46,6 +46,8 @@ enum keycodes_user {
   KEYCODE_USER_BEGIN = SAFE_RANGE,
 #endif
   // Custom keycodes.
+  ALPHA_DVORAK,
+  ALPHA_RSTHD,
   SAFE_RANGE_KEYMAP = KEYCODE_USER_BEGIN,
 };
 
@@ -80,6 +82,7 @@ void shutdown_keymap(void);
 
 enum layers_keymap {
   _DVORAK = 0,
+  _RSTHD, // Alternative layout.
   _MOTION,  // Navigation.
   _SYMBOL,  // Symbols.
   _NUMBER,  // Numbers.
@@ -90,6 +93,11 @@ enum layers_keymap {
 #define SYSTEM OSL(_SYSTEM)
 #define SPC_MO LT(_MOTION, KC_SPACE)
 #define ENT_SY LT(_SYMBOL, KC_ENTER)
+
+#define BSP_SFT MT(MOD_LSFT, KC_BACKSPACE)
+#define E_MO LT(_MOTION, KC_E)
+#define SPC_SYM LT(_SYMBOL, KC_SPACE)
+#define ENT_CTL MT(MOD_LCTL, KC_ENTER)
 
   // Oneshot mods.
 #define OSM_ALT OSM(MOD_LALT)
@@ -104,6 +112,9 @@ enum layers_keymap {
 // Shorthands for readability.
 #define ___x___ KC_NO
 
+#define DVORAK ALPHA_DVORAK
+#define RSTHD ALPHA_RSTHD
+
 /**
  * \brief Mostly vanilla Dvorak layout.
  */
@@ -113,6 +124,16 @@ enum layers_keymap {
        KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S, \
     KC_QUOT,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
                                OSM_SFT,  SPC_MO,  ENT_SY, OSM_CTL
+
+/**
+ * \brief Mostly vanilla Dvorak layout.
+ */
+// clang-format off
+#define RSTHD_split_3x5_2                                                                     \
+       KC_J,    KC_C,    KC_Y,    KC_F,    KC_K,    KC_Z,    KC_L, KC_COLN,    KC_U,    KC_Q, \
+       KC_R,    KC_S,    KC_T,    KC_H,    KC_D,    KC_M,    KC_N,    KC_A,    KC_I,    KC_O, \
+    KC_SLSH,    KC_V,    KC_G,    KC_P,    KC_B,    KC_X,    KC_W,  KC_DOT, KC_COLN, KC_MINS, \
+                               BSP_SFT,    E_MO, SPC_SYM, ENT_CTL
 // clang-format on
 
 /**
@@ -158,7 +179,7 @@ enum layers_keymap {
 // clang-format off
 #define SYSTEM_split_3x5_2                                                                    \
     ___x___, ___x___, ___x___, ___x___, RGB_TOG, RGB_TOG, ___x___, ___x___, ___x___, ___x___, \
-    ___x___, ___x___, ___x___, ___x___, EEP_RST, EEP_RST, ___x___, ___x___, ___x___, ___x___, \
+    ___x___,   RSTHD,  DVORAK, ___x___, EEP_RST, EEP_RST, ___x___,  DVORAK,   RSTHD, ___x___, \
     ___x___, ___x___, ___x___, ___x___, QK_BOOT, QK_BOOT, ___x___, ___x___, ___x___, ___x___, \
                                ___x___, ___x___, ___x___, ___x___
 // clang-format on
@@ -185,6 +206,7 @@ enum layers_keymap {
 
 /* Converts the 3x5_2 layouts into 3x5_3 layouts. */
 #define DVORAK_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(DVORAK_split_3x5_2)
+#define RSTHD_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(RSTHD_split_3x5_2)
 #define MOTION_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(MOTION_split_3x5_2)
 #define NUMBER_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(NUMBER_split_3x5_2)
 #define SYMBOL_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(SYMBOL_split_3x5_2)

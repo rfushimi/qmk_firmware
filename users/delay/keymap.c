@@ -125,6 +125,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
             clear_oneshot_locked_mods();
             del_mods(MOD_MASK_SHIFT);
             break;
+
+        case ALPHA_DVORAK:
+            default_layer_set(_DVORAK);
+            break;
+        case ALPHA_RSTHD:
+            default_layer_set(_RSTHD);
+            break;
     }
     return true;
 }
