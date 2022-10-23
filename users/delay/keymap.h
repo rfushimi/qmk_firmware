@@ -46,8 +46,6 @@ enum keycodes_user {
   KEYCODE_USER_BEGIN = SAFE_RANGE,
 #endif
   // Custom keycodes.
-  ALPHA_DVORAK,
-  ALPHA_RSTHD,
   SAFE_RANGE_KEYMAP = KEYCODE_USER_BEGIN,
 };
 
@@ -112,6 +110,8 @@ enum layers_keymap {
 // Shorthands for readability.
 #define ___x___ KC_NO
 
+#define ALPHA_DVORAK DF(_DVORAK)
+#define ALPHA_RSTHD DF(_RSTHD)
 #define DVORAK ALPHA_DVORAK
 #define RSTHD ALPHA_RSTHD
 
