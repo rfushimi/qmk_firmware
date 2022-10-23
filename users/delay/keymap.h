@@ -94,6 +94,7 @@ enum layers_keymap {
 
 #define BSP_SFT MT(MOD_LSFT, KC_BACKSPACE)
 #define E_MO LT(_MOTION, KC_E)
+#define E_SYM LT(_SYMBOL, KC_E)
 #define SPC_SYM LT(_SYMBOL, KC_SPACE)
 #define ENT_CTL MT(MOD_LCTL, KC_ENTER)
 
@@ -130,10 +131,11 @@ enum layers_keymap {
  */
 // clang-format off
 #define RSTHD_split_3x5_2                                                                     \
-       KC_J,    KC_C,    KC_Y,    KC_F,    KC_K,    KC_Z,    KC_L, KC_COLN,    KC_U,    KC_Q, \
+       KC_J,    KC_C,    KC_Y,    KC_F,    KC_K,    KC_Z,    KC_L, KC_COMM,    KC_U,    KC_Q, \
        KC_R,    KC_S,    KC_T,    KC_H,    KC_D,    KC_M,    KC_N,    KC_A,    KC_I,    KC_O, \
-    KC_SLSH,    KC_V,    KC_G,    KC_P,    KC_B,    KC_X,    KC_W,  KC_DOT, KC_COLN, KC_MINS, \
+    KC_SLSH,    KC_V,    KC_G,    KC_P,    KC_B,    KC_X,    KC_W,  KC_DOT, KC_COLN, KC_QUOT, \
                                BSP_SFT,    E_MO, SPC_SYM, ENT_CTL
+                               // BSP_SFT,  SPC_MO,   E_SYM, ENT_CTL
 // clang-format on
 
 /**
