@@ -93,10 +93,12 @@ enum layers_keymap {
 #define ENT_SY LT(_SYMBOL, KC_ENTER)
 
 #define BSP_SFT MT(MOD_LSFT, KC_BACKSPACE)
+#define BSPC_MO LT(_MOTION, KC_BACKSPACE)
 #define E_MO LT(_MOTION, KC_E)
 #define E_SYM LT(_SYMBOL, KC_E)
 #define SPC_SYM LT(_SYMBOL, KC_SPACE)
 #define ENT_CTL MT(MOD_LCTL, KC_ENTER)
+#define MOTION MO(_MOTION)
 
   // Oneshot mods.
 #define OSM_ALT OSM(MOD_LALT)
@@ -124,7 +126,7 @@ enum layers_keymap {
     KC_COLN, KC_COMM,  KC_DOT,    KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L, \
        KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S, \
     KC_QUOT,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
-                               OSM_SFT,  SPC_MO,  ENT_SY, OSM_CTL
+                               BSP_SFT,  MOTION, SPC_SYM, ENT_CTL
 
 /**
  * \brief Mostly vanilla Dvorak layout.
