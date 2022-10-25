@@ -123,10 +123,10 @@ enum layers_keymap {
  */
 // clang-format off
 #define DVORAK_split_3x5_2                                                                    \
-    KC_COLN, KC_COMM,  KC_DOT,    KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L, \
+    KC_QUOT, KC_COMM,  KC_DOT,    KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L, \
        KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S, \
-    KC_QUOT,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
-                               BSP_SFT,  MOTION, SPC_SYM, ENT_CTL
+    KC_COLN,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
+                               KC_LSFT,  MOTION, SPC_SYM, ENT_CTL
 
 /**
  * \brief Mostly vanilla Dvorak layout.
@@ -136,7 +136,7 @@ enum layers_keymap {
        KC_J,    KC_C,    KC_Y,    KC_F,    KC_K,    KC_Z,    KC_L, KC_COMM,    KC_U,    KC_Q, \
        KC_R,    KC_S,    KC_T,    KC_H,    KC_D,    KC_M,    KC_N,    KC_A,    KC_I,    KC_O, \
     KC_SLSH,    KC_V,    KC_G,    KC_P,    KC_B,    KC_X,    KC_W,  KC_DOT, KC_COLN, KC_QUOT, \
-                               BSP_SFT,    E_MO, SPC_SYM, ENT_CTL
+                               KC_LSFT,    E_MO, SPC_SYM, ENT_CTL
                                // BSP_SFT,  SPC_MO,   E_SYM, ENT_CTL
 // clang-format on
 
