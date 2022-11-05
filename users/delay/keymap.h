@@ -223,6 +223,7 @@ enum layers_4x6_keymap {
 
 #define RAISE MO(_RAISE)
 #define LOWER MO(_LOWER)
+#define LOW_SPC LT(_LOWER, KC_SPACE)
 
 /**
  * \brief Mostly vanilla Dvorak layout.
@@ -231,9 +232,9 @@ enum layers_4x6_keymap {
 #define DVORAK_split_4x6_5                                                                                        \
      KC_GRV,     KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_ESC,  \
     KC_QUES,  KC_QUOT, KC_COMM,  KC_DOT,    KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L, KC_SLSH,  \
-     KC_TAB,     KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S, KC_COLN,  \
-    KC_LSFT,  KC_SCLN,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, KC_RSFT,  \
-                                KC_BSPC,   RAISE,   RAISE,   LOWER,  KC_SPC,  KC_ENT,                             \
+     KC_TAB,     KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S, KC_SCLN,  \
+    KC_LSFT,  KC_COLN,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, KC_RSFT,  \
+                                KC_LSFT,   RAISE, KC_LALT, KC_LGUI, LOW_SPC, ENT_CTL,                             \
                                          KC_RCTL, KC_LALT, KC_LGUI, KC_LCTL
 // clang-format on
 
@@ -243,9 +244,9 @@ enum layers_4x6_keymap {
 // clang-format off
 #define RAISE_split_4x6_5                                                                                       \
     _______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10, _______, \
-    _______, ___x___, RCS_TAB, LAUNCHR, CTL_TAB, ___x___, ___x___, ___x___,   KC_UP, ___x___, ___x___, _______, \
-    _______, KC_LALT, KC_LGUI, KC_LCTL, KC_LSFT, ___x___, ___x___, KC_LEFT, KC_DOWN, KC_RGHT, ___x___, _______, \
-    _______, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, _______, \
+    _______, LAUNCHR, RCS_TAB,  KC_TAB, CTL_TAB, ___x___, ___x___, ___x___,   KC_UP, ___x___, ___x___, _______, \
+    _______, KC_LALT, KC_LGUI, KC_LCTL, KC_LSFT, ___x___, ___x___, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, _______, \
+    _______, A(KC_1), A(KC_2), A(KC_3), A(KC_4), A(KC_5), A(KC_6), A(KC_7), A(KC_8), A(KC_9), A(KC_0), _______, \
                                _______, _______, QK_BOOT, _______, _______, _______,                            \
                                         _______, EEP_RST, _______, _______
 // clang-format on
@@ -256,7 +257,7 @@ enum layers_4x6_keymap {
 // clang-format off
 #define LOWER_split_4x6_5                                                                    \
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-    _______, ___x___,   KC_LT, KC_QUES,   KC_GT, KC_COLN, ___x___, KC_LBRC, KC_PERC, KC_RBRC,  KC_GRV, _______, \
+    _______,  KC_ESC,   KC_LT, KC_QUES,   KC_GT, KC_COLN, ___x___, KC_LBRC, KC_PERC, KC_RBRC,  KC_GRV, _______, \
     _______, KC_EXLM, KC_PLUS, KC_MINS,  KC_EQL, KC_HASH, KC_CIRC, KC_LPRN, KC_UNDS, KC_RPRN, KC_SCLN, _______, \
     _______, KC_TILD, KC_BSLS, KC_ASTR, KC_SLSH, KC_AMPR, KC_PIPE, KC_LCBR,  KC_DLR, KC_RCBR,   KC_AT, _______, \
                                _______, _______, _______, QK_BOOT, _______, _______,                            \
