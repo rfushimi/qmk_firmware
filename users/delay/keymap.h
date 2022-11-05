@@ -21,9 +21,9 @@
 #include "quantum.h"
 
 #if defined(KEYBOARD_bastardkb_charybdis)
-#include "charybdis.h"
+#    include "charybdis.h"
 #elif defined(KEYBOARD_bastardkb_dilemma)
-#include "dilemma.h"
+#    include "dilemma.h"
 #endif
 
 /**
@@ -33,20 +33,20 @@
  */
 enum keycodes_user {
 #ifdef POINTING_DEVICE_ENABLE
-#if defined(KEYBOARD_bastardkb_charybdis)
-  KEYCODE_USER_BEGIN = CHARYBDIS_SAFE_RANGE,
-#elif defined(KEYBOARD_bastardkb_dilemma)
-  KEYCODE_USER_BEGIN = DILEMMA_SAFE_RANGE,
-#elif defined(VIA_ENABLE)
-  KEYCODE_USER_BEGIN = USER00,
+#    if defined(KEYBOARD_bastardkb_charybdis)
+    KEYCODE_USER_BEGIN = CHARYBDIS_SAFE_RANGE,
+#    elif defined(KEYBOARD_bastardkb_dilemma)
+    KEYCODE_USER_BEGIN = DILEMMA_SAFE_RANGE,
+#    elif defined(VIA_ENABLE)
+    KEYCODE_USER_BEGIN = USER00,
+#    else
+    KEYCODE_USER_BEGIN = SAFE_RANGE,
+#    endif
 #else
-  KEYCODE_USER_BEGIN = SAFE_RANGE,
+    KEYCODE_USER_BEGIN = SAFE_RANGE,
 #endif
-#else
-  KEYCODE_USER_BEGIN = SAFE_RANGE,
-#endif
-  // Custom keycodes.
-  SAFE_RANGE_KEYMAP = KEYCODE_USER_BEGIN,
+    // Custom keycodes.
+    SAFE_RANGE_KEYMAP = KEYCODE_USER_BEGIN,
 };
 
 // This keymap uses ASCG home row mods (on layers).
@@ -71,20 +71,20 @@ enum keycodes_user {
  *
  * docs.qmk.fm/using-qmk/software-features/feature_userspace#customized-functions.
  */
-bool process_record_keymap(uint16_t keycode, keyrecord_t *record);
-void matrix_scan_keymap(void);
+bool          process_record_keymap(uint16_t keycode, keyrecord_t *record);
+void          matrix_scan_keymap(void);
 layer_state_t layer_state_set_keymap(layer_state_t state);
-void keyboard_post_init_keymap(void);
-void oneshot_locked_mods_changed_keymap(uint8_t mods);
-void shutdown_keymap(void);
+void          keyboard_post_init_keymap(void);
+void          oneshot_locked_mods_changed_keymap(uint8_t mods);
+void          shutdown_keymap(void);
 
-enum layers_keymap {
-  _DVORAK = 0,
-  _RSTHD, // Alternative layout.
-  _MOTION,  // Navigation.
-  _SYMBOL,  // Symbols.
-  _NUMBER,  // Numbers.
-  _SYSTEM,  // Special.
+enum layers_3x5_keymap {
+    _DVORAK = 0,
+    _RSTHD,  // Alternative layout.
+    _MOTION, // Navigation.
+    _SYMBOL, // Symbols.
+    _NUMBER, // Numbers.
+    _SYSTEM, // Special.
 };
 
 // Layers.
@@ -100,7 +100,7 @@ enum layers_keymap {
 #define ENT_CTL MT(MOD_LCTL, KC_ENTER)
 #define MOTION MO(_MOTION)
 
-  // Oneshot mods.
+// Oneshot mods.
 #define OSM_ALT OSM(MOD_LALT)
 #define OSM_CTL OSM(MOD_LCTL)
 #define OSM_GUI OSM(MOD_LGUI)
@@ -129,7 +129,7 @@ enum layers_keymap {
                                KC_LSFT,  MOTION, SPC_SYM, ENT_CTL
 
 /**
- * \brief Mostly vanilla Dvorak layout.
+ * \brief RSTHD layout.
  */
 // clang-format off
 #define RSTHD_split_3x5_2                                                                     \
@@ -190,7 +190,7 @@ enum layers_keymap {
 
 // clang-format off
 /**
- * \brief Converts a 3x5_2 layout into the more community 3x5_3 layout.
+ * \brief Converts a 3x5_2 layout into the more common 3x5_3 layout.
  *
  * In other words, converts a split-34 keymap into a split-36 one.
  */
@@ -205,8 +205,7 @@ enum layers_keymap {
                 k33, k34,  OSM_ALT,  OSM_GUI, k35, k36
 // clang-format on
 
-#define LAYOUT_split_3x5_2_to_split_3x5_3(...) \
-  _LAYOUT_split_3x5_2_to_split_3x5_3(__VA_ARGS__)
+#define LAYOUT_split_3x5_2_to_split_3x5_3(...) _LAYOUT_split_3x5_2_to_split_3x5_3(__VA_ARGS__)
 
 /* Converts the 3x5_2 layouts into 3x5_3 layouts. */
 #define DVORAK_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(DVORAK_split_3x5_2)
@@ -215,3 +214,51 @@ enum layers_keymap {
 #define NUMBER_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(NUMBER_split_3x5_2)
 #define SYMBOL_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(SYMBOL_split_3x5_2)
 #define SYSTEM_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(SYSTEM_split_3x5_2)
+
+enum layers_4x6_keymap {
+    _BASE = 0,
+    _RAISE,
+    _LOWER,
+};
+
+#define RAISE MO(_RAISE)
+#define LOWER MO(_LOWER)
+
+/**
+ * \brief Mostly vanilla Dvorak layout.
+ */
+// clang-format off
+#define DVORAK_split_4x6_5                                                                                        \
+     KC_GRV,     KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_ESC,  \
+    KC_QUES,  KC_QUOT, KC_COMM,  KC_DOT,    KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L, KC_SLSH,  \
+     KC_TAB,     KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S, KC_COLN,  \
+    KC_LSFT,  KC_SCLN,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, KC_RSFT,  \
+                                KC_BSPC,   RAISE,   RAISE,   LOWER,  KC_SPC,  KC_ENT,                             \
+                                         KC_RCTL, KC_LALT, KC_LGUI, KC_LCTL
+// clang-format on
+
+/**
+ * \brief Raise layer, with navigation and convenience one-hand shortcuts.
+ */
+// clang-format off
+#define RAISE_split_4x6_5                                                                                       \
+    _______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10, _______, \
+    _______, ___x___, RCS_TAB, LAUNCHR, CTL_TAB, ___x___, ___x___, ___x___,   KC_UP, ___x___, ___x___, _______, \
+    _______, KC_LALT, KC_LGUI, KC_LCTL, KC_LSFT, ___x___, ___x___, KC_LEFT, KC_DOWN, KC_RGHT, ___x___, _______, \
+    _______, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, _______, \
+                               _______, _______, QK_BOOT, _______, _______, _______,                            \
+                                        _______, EEP_RST, _______, _______
+// clang-format on
+
+/**
+ * \brief Lower layer, with symbols.
+ */
+// clang-format off
+#define LOWER_split_4x6_5                                                                    \
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+    _______, ___x___,   KC_LT, KC_QUES,   KC_GT, KC_COLN, ___x___, KC_LBRC, KC_PERC, KC_RBRC,  KC_GRV, _______, \
+    _______, KC_EXLM, KC_PLUS, KC_MINS,  KC_EQL, KC_HASH, KC_CIRC, KC_LPRN, KC_UNDS, KC_RPRN, KC_SCLN, _______, \
+    _______, KC_TILD, KC_BSLS, KC_ASTR, KC_SLSH, KC_AMPR, KC_PIPE, KC_LCBR,  KC_DLR, KC_RCBR,   KC_AT, _______, \
+                               _______, _______, _______, QK_BOOT, _______, _______,                            \
+                                        _______, _______, EEP_RST, _______
+// clang-format on
