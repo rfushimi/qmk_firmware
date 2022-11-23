@@ -90,6 +90,7 @@ enum layers_3x5_keymap {
 // Layers.
 #define SYSTEM OSL(_SYSTEM)
 #define SPC_MO LT(_MOTION, KC_SPACE)
+#define ESC_MO LT(_MOTION, KC_ESCAPE)
 #define ENT_SY LT(_SYMBOL, KC_ENTER)
 
 #define BSP_SFT MT(MOD_LSFT, KC_BACKSPACE)
@@ -126,7 +127,7 @@ enum layers_3x5_keymap {
     KC_QUOT, KC_COMM,  KC_DOT,    KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L, \
        KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S, \
     KC_COLN,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
-                               KC_LSFT,  MOTION, SPC_SYM, ENT_CTL
+                               KC_LSFT,  ESC_MO, SPC_SYM, ENT_CTL
 
 /**
  * \brief RSTHD layout.
