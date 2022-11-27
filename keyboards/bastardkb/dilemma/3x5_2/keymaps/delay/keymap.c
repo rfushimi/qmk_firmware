@@ -28,10 +28,11 @@
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_DVORAK] = LAYOUT_dilemma(DVORAK_split_3x5_2),
+  [_APTv3] = LAYOUT_dilemma(APTv3_split_3x5_2),
+  [_RSTHD] = LAYOUT_dilemma(RSTHD_split_3x5_2),
   [_MOTION] = LAYOUT_dilemma(MOTION_split_3x5_2),
-  [_NUMBER] = LAYOUT_dilemma(NUMBER_split_3x5_2),
   [_SYMBOL] = LAYOUT_dilemma(SYMBOL_split_3x5_2),
-  [_EXTEND] = LAYOUT_dilemma(EXTEND_split_3x5_2),
+  [_NUMBER] = LAYOUT_dilemma(NUMBER_split_3x5_2),
   [_SYSTEM] = LAYOUT_dilemma(SYSTEM_split_3x5_2),
 };
 // clang-format on
@@ -463,8 +464,6 @@ bool oled_task_user(void) {
     oled_write_P(PSTR("SYM"), /* inverted = */ current_layer == _SYMBOL);
     oled_write_P(PSTR(" "), /* inverted = */ false);
     oled_write_P(PSTR("NUM"), /* inverted = */ current_layer == _NUMBER);
-    oled_write_P(PSTR(" "), /* inverted = */ false);
-    oled_write_P(PSTR("EXT"), /* inverted = */ current_layer == _EXTEND);
     oled_write_P(PSTR(" "), /* inverted = */ false);
     oled_write_P(PSTR("SYS"), /* inverted = */ current_layer == _SYSTEM);
     oled_write_P("\n", false);
