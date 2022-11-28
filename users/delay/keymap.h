@@ -144,6 +144,30 @@ enum layers_3x5_keymap {
 // clang-format on
 
 /**
+ * \brief Adaptation of the APTmak layout.
+ *
+ *     / w f p b j l u y '
+ *     r s t h k v n a i o
+ *     x c g d q z m , . ;
+ *               e
+ *
+ *      Alt: 20.65%
+ *     Roll: 55.18%   (In: 29.59% Out: 25.59%)
+ *      One:  3.34%   (In:  2.34% Out:  1.00%)
+ *      Red:  8.85%
+ *
+ *     SFB: 0.62%
+ *     DFB: 4.19%
+ */
+// clang-format off
+#define APTmak_split_3x5_2                                                                    \
+    KC_SLSH,    KC_W,    KC_F,    KC_P,    KC_B,    KC_J,    KC_L,    KC_U,    KC_Y, KC_QUOT, \
+       KC_R,    KC_S,    KC_T,    KC_H,    KC_K,    KC_V,    KC_N,    KC_A,    KC_I,    KC_O, \
+       KC_X,    KC_C,    KC_G,    KC_D,    KC_Q,    KC_Z,    KC_M, KC_COMM,  KC_DOT, KC_COLN, \
+                               KC_LSFT,  SPC_MO,   E_SYM, ENT_CTL
+// clang-format on
+
+/**
  * \brief Adaptation of the APTv3 layout.
  *
  *     w g d f b  q l u o y
