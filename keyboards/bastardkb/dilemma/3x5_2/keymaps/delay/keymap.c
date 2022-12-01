@@ -17,7 +17,7 @@
 
 #include "dilemma.h"
 #include QMK_KEYBOARD_H
-#include "users/delay/keymap.h"
+#include "users/delay/delay.h"
 
 #ifdef OLED_ENABLE
 #include "oled_driver.h"

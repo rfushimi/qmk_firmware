@@ -16,7 +16,7 @@
  */
 
 #include QMK_KEYBOARD_H
-#include "users/delay/keymap.h"
+#include "users/delay/delay.h"
 
 #define LAYOUT_scylla(...) LAYOUT_split_4x6_5(__VA_ARGS__)
 

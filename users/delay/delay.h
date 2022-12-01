@@ -227,7 +227,7 @@ enum layers_3x5_keymap {
 // clang-format off
 #define SYSTEM_split_3x5_2                                                                    \
     ___x___, ___x___, ___x___, ___x___, RGB_TOG, RGB_TOG, ___x___, ___x___, ___x___, ___x___, \
-    ___x___,   RSTHD,  DVORAK,   APTv3, EEP_RST, EEP_RST,   APTv3,  DVORAK,   RSTHD, ___x___, \
+    ___x___,   RSTHD,  DVORAK,   APTv3,  EE_CLR,  EE_CLR,   APTv3,  DVORAK,   RSTHD, ___x___, \
     ___x___, ___x___, ___x___, ___x___, QK_BOOT, QK_BOOT, ___x___, ___x___, ___x___, ___x___, \
                                ___x___, ___x___, ___x___, ___x___
 // clang-format on
@@ -294,7 +294,7 @@ enum layers_4x6_keymap {
     _______, KC_LALT, KC_LGUI, KC_LCTL, KC_LSFT, ___x___, ___x___, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, _______, \
     _______, A(KC_1), A(KC_2), A(KC_3), A(KC_4), A(KC_5), A(KC_6), A(KC_7), A(KC_8), A(KC_9), A(KC_0), _______, \
                                _______, _______, QK_BOOT, _______, _______, _______,                            \
-                                        _______, EEP_RST, _______, _______
+                                        _______,  EE_CLR, _______, _______
 // clang-format on
 
 /**
@@ -307,5 +307,5 @@ enum layers_4x6_keymap {
     _______, KC_EXLM, KC_PLUS, KC_MINS,  KC_EQL, KC_HASH, KC_CIRC, KC_LPRN, KC_UNDS, KC_RPRN, KC_SCLN, _______, \
     _______, KC_TILD, KC_BSLS, KC_ASTR, KC_SLSH, KC_AMPR, KC_PIPE, KC_LCBR,  KC_DLR, KC_RCBR,   KC_AT, _______, \
                                _______, _______, _______, QK_BOOT, _______, _______,                            \
-                                        _______, _______, EEP_RST, _______
+                                        _______, _______,  EE_CLR, _______
 // clang-format on

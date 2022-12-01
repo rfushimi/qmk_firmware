@@ -17,12 +17,11 @@
 
 #include "action_util.h"
 #include "config.h"
-#include "keymap.h"
+#include "delay.h"
 #include "quantum.h"
 
 #ifdef RGB_MATRIX_ENABLE
 #    include "quantum/rgb_matrix/rgb_matrix.h"
-#    include "quantum/rgblight/rgblight_list.h"
 #endif // RGB_MATRIX_ENABLE
 
 #include "features/custom_shift_keys.h"

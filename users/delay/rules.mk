@@ -13,7 +13,7 @@ ifndef SPACE_CADET_ENABLE
 endif
 
 # Include common sources.
-SRC += $(USER_PATH)/keymap.c
+SRC += $(USER_PATH)/delay.c
 # SRC += $(USER_PATH)/features/achordion.c
 SRC += $(USER_PATH)/features/custom_shift_keys.c
 # SRC += $(USER_PATH)/features/oneshot_mod.c

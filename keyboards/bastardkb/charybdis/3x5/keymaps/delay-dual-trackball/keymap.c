@@ -16,7 +16,7 @@
  */
 
 #include QMK_KEYBOARD_H
-#include "users/delay/keymap.h"
+#include "users/delay/delay.h"
 
 #define LAYOUT_charybdis_3x5_delay(...) LAYOUT_split_3x5_3(__VA_ARGS__)
 #define DRAGSCROLL_PADDING 6

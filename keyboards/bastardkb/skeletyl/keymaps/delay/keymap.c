@@ -16,7 +16,7 @@
  */
 
 #include QMK_KEYBOARD_H
-#include "users/delay/keymap.h"
+#include "users/delay/delay.h"
 
 #define LAYOUT_skeletyl(...) LAYOUT_split_3x5_3(__VA_ARGS__)
 

@@ -16,7 +16,7 @@
  */
 
 #include QMK_KEYBOARD_H
-#include "keymaps/split34.h"
+#include "users/delay/delay.h"
 
 // clang-format off
 #define _LAYOUT_split_3x5_to_3x6(                                   \
@@ -33,10 +33,12 @@
 #define LAYOUT_tbkmini(...) LAYOUT_split_3x5_to_3x6(__VA_ARGS__)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_BASE] = LAYOUT_tbkmini(DVORAK_split_3x5_3),
-  [_NAV] = LAYOUT_tbkmini(NAV_split_3x5_3),
-  [_SYM] = LAYOUT_tbkmini(SYM_split_3x5_3),
-  [_NUM] = LAYOUT_tbkmini(NUM_split_3x5_3),
-  [_SPEC] = LAYOUT_tbkmini(SPEC_split_3x5_3),
+  [_DVORAK] = LAYOUT_tbkmini(DVORAK_split_3x5_3),
+  [_APTv3] = LAYOUT_tbkmini(APTv3_split_3x5_3),
+  [_RSTHD] = LAYOUT_tbkmini(RSTHD_split_3x5_3),
+  [_MOTION] = LAYOUT_tbkmini(MOTION_split_3x5_3),
+  [_SYMBOL] = LAYOUT_tbkmini(SYMBOL_split_3x5_3),
+  [_NUMBER] = LAYOUT_tbkmini(NUMBER_split_3x5_3),
+  [_SYSTEM] = LAYOUT_tbkmini(SYSTEM_split_3x5_3),
 };
 // clang-format on
