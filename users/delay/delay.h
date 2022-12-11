@@ -129,8 +129,8 @@ enum layers_3x5_keymap {
 #define DVORAK_split_3x5_2                                                                    \
     KC_QUOT, KC_COMM,  KC_DOT,    KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L, \
        KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S, \
-    KC_COLN,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
-                               KC_LSFT,  ESC_MO, SPC_SYM, ENT_CTL
+    KC_SCLN,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
+                               KC_LSFT,  MOTION, SPC_SYM, ENT_CTL
 
 /**
  * \brief Adaptation of the RSTHD layout.
@@ -193,9 +193,9 @@ enum layers_3x5_keymap {
  */
 // clang-format off
 #define MOTION_split_3x5_2                                                                    \
-    LAUNCHR, RCS_TAB,  KC_TAB, CTL_TAB, ___x___, ___x___, KC_HOME,   KC_UP,  KC_END, KC_BTN3, \
+    LAUNCHR, RCS_TAB,  KC_TAB, CTL_TAB, ___x___, ___x___, KC_HOME,   KC_UP,  KC_END, ___x___, \
     OSM_ALT, OSM_GUI, OSM_CTL, OSM_SFT, ___x___, ___x___, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, \
-    A(KC_1), A(KC_2), A(KC_3), A(KC_4), A(KC_5), A(KC_6), A(KC_7), A(KC_8), A(KC_9), A(KC_0), \
+    A(KC_1), A(KC_2), A(KC_3), A(KC_4), A(KC_5), ___x___, ___x___, ___x___, ___x___, ___x___, \
                                 SYSTEM, _______, _______, _______
 // clang-format on
 
@@ -204,7 +204,7 @@ enum layers_3x5_keymap {
  */
 // clang-format off
 #define SYMBOL_split_3x5_2                                                                    \
-    ___x___,   KC_LT, KC_QUES,   KC_GT, ___x___, ___x___, KC_LBRC, KC_PERC, KC_RBRC,  KC_GRV, \
+     KC_ESC,   KC_LT, KC_QUES,   KC_GT, KC_COLN, ___x___, KC_LBRC, KC_PERC, KC_RBRC,  KC_GRV, \
     KC_EXLM, KC_PLUS, KC_MINS,  KC_EQL, KC_HASH, KC_CIRC, KC_LPRN, KC_UNDS, KC_RPRN, KC_SCLN, \
     KC_TILD, KC_BSLS, KC_ASTR, KC_SLSH, KC_AMPR, KC_PIPE, KC_LCBR,  KC_DLR, KC_RCBR,   KC_AT, \
                                _______, _______, _______,  SYSTEM
@@ -216,7 +216,7 @@ enum layers_3x5_keymap {
 // clang-format off
 #define NUMBER_split_3x5_2                                                                    \
     ___x___,    KC_7,    KC_8,    KC_9, ___x___,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10, \
-    C(KC_A),    KC_4,    KC_5,    KC_6, ___x___,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5, \
+    ___x___,    KC_4,    KC_5,    KC_6, ___x___,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5, \
     ___x___,    KC_1,    KC_2,    KC_3, ___x___, ___x___, ___x___,    KC_0, ___x___, ___x___, \
                                ___x___, _______, _______, ___x___
 // clang-format on
@@ -246,7 +246,7 @@ enum layers_3x5_keymap {
            k00, k01, k02, k03, k04, k05, k06, k07, k08, k09, \
            k10, k11, k12, k13, k14, k15, k16, k17, k18, k19, \
            k20, k21, k22, k23, k24, k25, k26, k27, k28, k29, \
-                k33, k34,  OSM_ALT,  OSM_GUI, k35, k36
+                k33, k34,  KC_LALT,  KC_LGUI, k35, k36
 // clang-format on
 
 #define LAYOUT_split_3x5_2_to_split_3x5_3(...) _LAYOUT_split_3x5_2_to_split_3x5_3(__VA_ARGS__)
