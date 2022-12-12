@@ -130,7 +130,7 @@ enum layers_3x5_keymap {
     KC_QUOT, KC_COMM,  KC_DOT,    KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L, \
        KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S, \
     KC_SCLN,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
-                               KC_LSFT,  MOTION, SPC_SYM, ENT_CTL
+                               KC_LSFT,  SPC_MO, SPC_SYM, ENT_CTL
 
 /**
  * \brief Adaptation of the RSTHD layout.
@@ -207,7 +207,7 @@ enum layers_3x5_keymap {
      KC_ESC,   KC_LT, KC_QUES,   KC_GT, KC_COLN, ___x___, KC_LBRC, KC_PERC, KC_RBRC,  KC_GRV, \
     KC_EXLM, KC_PLUS, KC_MINS,  KC_EQL, KC_HASH, KC_CIRC, KC_LPRN, KC_UNDS, KC_RPRN, KC_SCLN, \
     KC_TILD, KC_BSLS, KC_ASTR, KC_SLSH, KC_AMPR, KC_PIPE, KC_LCBR,  KC_DLR, KC_RCBR,   KC_AT, \
-                               _______, _______, _______,  SYSTEM
+                               _______, BSPC_MO, _______,  SYSTEM
 // clang-format on
 
 /**
