@@ -156,7 +156,7 @@ bool process_achordion(uint16_t keycode, keyrecord_t* record) {
         }
 
         recursively_process_record(record, achordion_state); // Re-process event.
-        return false;                                        // Block the original event.
+        return false; // Block the original event.
     }
 
     return true;

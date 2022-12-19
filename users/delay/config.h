@@ -82,12 +82,10 @@
 #    define QUICK_TAP_TERM 75
 #endif // QUICK_TAP_TERM
 
-#if 0
 /**
  * \brief Customize the TAPPING_TERM for specific keys.
  */
-#    define TAPPING_TERM_PER_KEY
-#endif
+// #define TAPPING_TERM_PER_KEY
 
 /**
  * \brief Enable rapid switch from tap to hold.
@@ -118,8 +116,6 @@
  *     LT(2, a)🠗 e🠗 LT(2, a)🠕 e🠕 ➞ ae
  * With `HOLD_ON_OTHER_KEY_PRESS`, within `TAPPING_TERM`:
  *     LT(2, a)🠗 e🠗 LT(2, a)🠕 e🠕 ➞ <mapping of e on layer>
- *
- * https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold#hold-on-other-key-press
  */
 // #define HOLD_ON_OTHER_KEY_PRESS
 
@@ -130,8 +126,6 @@
  *     LT(2, a)🠗 e🠗 LT(2, a)🠕 e🠕 ➞ ae
  * With `HOLD_ON_OTHER_KEY_PRESS`, within `TAPPING_TERM`:
  *     LT(2, a)🠗 e🠗 LT(2, a)🠕 e🠕 ➞ <mapping of e on layer>
- *
- * https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold#hold-on-other-key-press
  */
 // #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 
@@ -143,11 +137,9 @@
  * With `PERMISSIVE_HOLD`, within `TAPPING_TERM`:
  *   Mod(a)🠗 e🠗 e🠕 Mod(a)🠕 ➞ Mod+e
  *
- * https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold#permissive-hold
- *
  * See precondition.github.io/home-row-mods#permissive-hold.
  */
-#define PERMISSIVE_HOLD
+// #define PERMISSIVE_HOLD
 
 /**
  * \brief Prevent normal rollover on alphas from accidentally triggering mods.
@@ -160,10 +152,8 @@
  *   Mod(a)🠗 e🠗 Mod(a)🠕 e🠕 ➞ ae
  *
  * https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold#ignore-mod-tap-interrupt
- *
- * See https://precondition.github.io/home-row-mods#ignore-mod-tap-interrupt.
  */
-#define IGNORE_MOD_TAP_INTERRUPT
+#define IGNORE_MOD_TAP_INTERRUPT_PER_KEY
 
 #ifdef RGB_MATRIX_ENABLE
 #    ifdef __arm__

@@ -18,6 +18,7 @@
 #include "action_util.h"
 #include "config.h"
 #include "delay.h"
+#include "features/achordion.h"
 #include "quantum.h"
 
 #ifdef RGB_MATRIX_ENABLE
@@ -112,6 +113,9 @@ __attribute__((weak)) bool process_record_keymap(uint16_t keycode, keyrecord_t* 
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+    if (!process_achordion(keycode, record)) {
+        return false;
+    }
     if (!process_record_keymap(keycode, record)) {
         return false;
     }
@@ -137,10 +141,47 @@ void rgb_matrix_reset(void) {
 #endif // RGB_MATRIX_ENABLE
 
 void matrix_scan_user(void) {
+    achordion_task();
     matrix_scan_keymap();
 }
 
 __attribute__((weak)) void matrix_scan_keymap(void) {}
+
+bool achordion_chord(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record, uint16_t other_keycode, keyrecord_t* other_record) {
+    // Exceptionally consider the following chords as holds, even though they
+    // might be on the same hand, because they are layer taps.
+    switch (tap_hold_keycode) {
+        case QK_LAYER_TAP ... QK_LAYER_TAP_MAX: {
+            switch
+                QK_LAYER_TAP_GET_LAYER(tap_hold_keycode) {
+                    case _MOTION:
+                    case _SYMBOL:
+                        return true;
+                }
+
+            break;
+        }
+        case ENT_CTL:
+            return true;
+    }
+
+    // Also allow same-hand holds when the other key is in the rows below the
+    // alphas. I need the `% (MATRIX_ROWS / 2)` because my keyboard is split.
+    if (other_record->event.key.row % (MATRIX_ROWS / 2) >= 4) {
+        return true;
+    }
+
+    // Otherwise, follow the opposite hands rule.
+    return achordion_opposite_hands(tap_hold_record, other_record);
+}
+
+uint16_t achordion_timeout(uint16_t tap_hold_keycode) {
+    return 500; // TODO: revert to 500.
+}
+
+bool achordion_eager_mod(uint8_t mod) {
+    return false;
+}
 
 /** Called on layer change. */
 layer_state_t layer_state_set_user(layer_state_t state) {
@@ -164,28 +205,41 @@ void eeconfig_init_user(void) {
 #endif // RGB_MATRIX_ENABLE
 }
 
+#ifdef IGNORE_MOD_TAP_INTERRUPT_PER_KEY
+bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t* record) {
+    switch (keycode) {
+        case QK_LAYER_TAP ... QK_LAYER_TAP_MAX: {
+            switch
+                QK_LAYER_TAP_GET_LAYER(keycode) {
+                    case _MOTION:
+                    case _SYMBOL:
+                        return false;
+                }
+            break;
+        }
+        default:
+            break;
+    }
+    return true;
+}
+#endif // IGNORE_MOD_TAP_INTERRUPT_PER_KEY
+
 /**
- * \brief Called when a one-shot layer "lock" status changes.
+ * \brief Called when a one-shot layer status changes.
  *
  * This is called automatically by the QMK framework when a one-shot layer is
  * activated and deactivated.
- * The only one-shot layer in this layout is the one-shot shift layer.  Turns
- * the RGBs solid blue when this layer is activated, and back to default when
- * deactivated.
  */
-void oneshot_locked_mods_changed_user(uint8_t mods) {
+void oneshot_layer_changed_user(uint8_t layer) {
 #ifdef RGB_MATRIX_ENABLE
-    if (mods & MOD_MASK_SHIFT) {
+    if (layer == _SYSTEM) {
         rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
         rgb_matrix_sethsv_noeeprom(HSV_BLUE);
-    } else if (!mods) {
+    } else {
         rgb_matrix_reload_from_eeprom(); // Load default values.
     }
 #endif // RGB_MATRIX_ENABLE
-    oneshot_locked_mods_changed_keymap(mods);
 }
-
-__attribute__((weak)) void oneshot_locked_mods_changed_keymap(uint8_t mods) {}
 
 #ifdef RGB_MATRIX_ENABLE
 // Forward-declare this helper function since it is defined in rgb_matrix.c.
