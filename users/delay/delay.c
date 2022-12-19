@@ -130,9 +130,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 
 #ifdef RGB_MATRIX_ENABLE
 void rgb_matrix_reset(void) {
-    rgb_matrix_mode(RGB_MATRIX_STARTUP_MODE);
-    rgb_matrix_sethsv(RGB_MATRIX_STARTUP_HSV);
-    rgb_matrix_set_speed(RGB_MATRIX_STARTUP_SPD);
+    rgb_matrix_mode(RGB_MATRIX_DEFAULT_MODE);
+    rgb_matrix_sethsv(RGB_MATRIX_DEFAULT_HSV);
+    rgb_matrix_set_speed(RGB_MATRIX_DEFAULT_SPD);
 }
 #endif // RGB_MATRIX_ENABLE
 
