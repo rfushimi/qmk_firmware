@@ -44,11 +44,6 @@
 /** \brief Only uses 16 bits for layers.  Limits available layers to 16.  */
 #define LAYER_STATE_16BIT
 
-#ifdef VIA_ENABLE
-/* VIA configuration. */
-#    define DYNAMIC_KEYMAP_LAYER_COUNT 9
-#endif // VIA_ENABLE
-
 #ifndef NO_ACTION_ONESHOT
 /**
  * \brief Tapping this number of times holds the key until tapped once again.
@@ -139,7 +134,7 @@
  *
  * See precondition.github.io/home-row-mods#permissive-hold.
  */
-// #define PERMISSIVE_HOLD
+#define PERMISSIVE_HOLD
 
 /**
  * \brief Prevent normal rollover on alphas from accidentally triggering mods.

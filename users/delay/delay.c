@@ -18,7 +18,6 @@
 #include "action_util.h"
 #include "config.h"
 #include "delay.h"
-#include "features/achordion.h"
 #include "quantum.h"
 
 #ifdef RGB_MATRIX_ENABLE
@@ -113,9 +112,6 @@ __attribute__((weak)) bool process_record_keymap(uint16_t keycode, keyrecord_t* 
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
-    if (!process_achordion(keycode, record)) {
-        return false;
-    }
     if (!process_record_keymap(keycode, record)) {
         return false;
     }
@@ -141,47 +137,10 @@ void rgb_matrix_reset(void) {
 #endif // RGB_MATRIX_ENABLE
 
 void matrix_scan_user(void) {
-    achordion_task();
     matrix_scan_keymap();
 }
 
 __attribute__((weak)) void matrix_scan_keymap(void) {}
-
-bool achordion_chord(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record, uint16_t other_keycode, keyrecord_t* other_record) {
-    // Exceptionally consider the following chords as holds, even though they
-    // might be on the same hand, because they are layer taps.
-    switch (tap_hold_keycode) {
-        case QK_LAYER_TAP ... QK_LAYER_TAP_MAX: {
-            switch
-                QK_LAYER_TAP_GET_LAYER(tap_hold_keycode) {
-                    case _MOTION:
-                    case _SYMBOL:
-                        return true;
-                }
-
-            break;
-        }
-        case ENT_CTL:
-            return true;
-    }
-
-    // Also allow same-hand holds when the other key is in the rows below the
-    // alphas. I need the `% (MATRIX_ROWS / 2)` because my keyboard is split.
-    if (other_record->event.key.row % (MATRIX_ROWS / 2) >= 4) {
-        return true;
-    }
-
-    // Otherwise, follow the opposite hands rule.
-    return achordion_opposite_hands(tap_hold_record, other_record);
-}
-
-uint16_t achordion_timeout(uint16_t tap_hold_keycode) {
-    return 500; // TODO: revert to 500.
-}
-
-bool achordion_eager_mod(uint8_t mod) {
-    return false;
-}
 
 /** Called on layer change. */
 layer_state_t layer_state_set_user(layer_state_t state) {
