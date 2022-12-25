@@ -107,14 +107,7 @@ bool caps_word_press_user(uint16_t keycode) {
     }
 }
 
-__attribute__((weak)) bool process_record_keymap(uint16_t keycode, keyrecord_t* record) {
-    return true;
-}
-
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
-    if (!process_record_keymap(keycode, record)) {
-        return false;
-    }
     if (!process_custom_shift_keys(keycode, record)) {
         return false;
     }
@@ -129,88 +122,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 }
 
 #ifdef RGB_MATRIX_ENABLE
-void rgb_matrix_reset(void) {
-    rgb_matrix_mode(RGB_MATRIX_DEFAULT_MODE);
-    rgb_matrix_sethsv(RGB_MATRIX_DEFAULT_HSV);
-    rgb_matrix_set_speed(RGB_MATRIX_DEFAULT_SPD);
-}
-#endif // RGB_MATRIX_ENABLE
-
-void matrix_scan_user(void) {
-    matrix_scan_keymap();
-}
-
-__attribute__((weak)) void matrix_scan_keymap(void) {}
-
-/** Called on layer change. */
-layer_state_t layer_state_set_user(layer_state_t state) {
-    return layer_state_set_keymap(update_tri_layer_state(state, _MOTION, _SYMBOL, _NUMBER));
-}
-
-__attribute__((weak)) layer_state_t layer_state_set_keymap(layer_state_t state) {
-    return state;
-}
-
-void keyboard_post_init_user(void) {
-    oneshot_enable();
-    keyboard_post_init_keymap();
-}
-
-__attribute__((weak)) void keyboard_post_init_keymap(void) {}
-
-void eeconfig_init_user(void) {
-#ifdef RGB_MATRIX_ENABLE
-    eeconfig_update_rgb_matrix_default();
-#endif // RGB_MATRIX_ENABLE
-}
-
-#ifdef IGNORE_MOD_TAP_INTERRUPT_PER_KEY
-bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t* record) {
-    switch (keycode) {
-        case QK_LAYER_TAP ... QK_LAYER_TAP_MAX: {
-            switch
-                QK_LAYER_TAP_GET_LAYER(keycode) {
-                    case _MOTION:
-                    case _SYMBOL:
-                        return false;
-                }
-            break;
-        }
-        default:
-            break;
-    }
-    return true;
-}
-#endif // IGNORE_MOD_TAP_INTERRUPT_PER_KEY
-
-/**
- * \brief Called when a one-shot layer status changes.
- *
- * This is called automatically by the QMK framework when a one-shot layer is
- * activated and deactivated.
- */
-void oneshot_layer_changed_user(uint8_t layer) {
-#ifdef RGB_MATRIX_ENABLE
-    if (layer == _SYSTEM) {
-        rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
-        rgb_matrix_sethsv_noeeprom(HSV_BLUE);
-    } else {
-        rgb_matrix_reload_from_eeprom(); // Load default values.
-    }
-#endif // RGB_MATRIX_ENABLE
-}
-
-#ifdef RGB_MATRIX_ENABLE
 // Forward-declare this helper function since it is defined in rgb_matrix.c.
 void rgb_matrix_update_pwm_buffers(void);
 #endif // RGB_MATRIX_ENABLE
 
 void shutdown_user(void) {
-#ifdef RGBLIGHT_ENABLE
-    rgblight_enable_noeeprom();
-    rgblight_mode_noeeprom(1);
-    rgblight_setrgb_red();
-#endif // RGBLIGHT_ENABLE
 #ifdef RGB_MATRIX_ENABLE
     rgb_matrix_set_color_all(RGB_RED);
     rgb_matrix_update_pwm_buffers();
@@ -218,7 +134,4 @@ void shutdown_user(void) {
 #ifdef OLED_ENABLE
     oled_off();
 #endif // OLED_ENABLE
-    shutdown_keymap();
 }
-
-__attribute__((weak)) void shutdown_keymap(void) {}
