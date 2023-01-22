@@ -27,6 +27,8 @@
 #include "features/custom_shift_keys.h"
 
 const custom_shift_key_t custom_shift_keys[] = {
+    {KC_COMMA, KC_HASH},                  // Shifts , to #
+    {KC_DOT, KC_EXLM},                    // Shifts . to !
     {KC_EQUAL, KC_EQUAL},                 // Don't shift =
     {KC_SLASH, KC_SLASH},                 // Don't shift /
     {KC_BACKSLASH, KC_BACKSLASH},         // Don't shift backslash
@@ -119,6 +121,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
             break;
     }
     return true;
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+  return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
 }
 
 #ifdef RGB_MATRIX_ENABLE

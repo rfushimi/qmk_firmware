@@ -22,8 +22,8 @@
 /**
  * \brief Flash each side with `-bl dfu-split-*` to set handedness in memory eg.
  *
- *     `qmk flash -bl dfu-split-left -kb <keyboard> -km delay`
- *     `qmk flash -bl dfu-split-right -kb <keyboard> -km delay`
+ *     `qmk flash -bl uf2-split-left -kb <keyboard> -km delay`
+ *     `qmk flash -bl uf2-split-right -kb <keyboard> -km delay`
  *
  * The handedness needs only be set once.  The actual firmware image is
  * unchanged.  This means that even though the commands above will keep working,
@@ -41,24 +41,22 @@
 #    define SPLIT_LAYER_STATE_ENABLE
 #endif // SPLIT_KEYBOARD
 
-/** \brief Only uses 16 bits for layers.  Limits available layers to 16.  */
+/** \brief Only uses 16 bits for layers. Limits available layers to 16.  */
 #define LAYER_STATE_16BIT
 
-#ifndef NO_ACTION_ONESHOT
 /**
  * \brief Tapping this number of times holds the key until tapped once again.
  *
  * https://beta.docs.qmk.fm/using-qmk/software-features/one_shot_keys
  */
-#    define ONESHOT_TAP_TOGGLE 2
+#define ONESHOT_TAP_TOGGLE 2
 
 /**
  * \brief Time (in ms) before the one shot key is released.
  *
  * https://beta.docs.qmk.fm/using-qmk/software-features/one_shot_keys
  */
-#    define ONESHOT_TIMEOUT 1500
-#endif // NO_ACTION_ONESHOT
+#define ONESHOT_TIMEOUT 1500
 
 /**
  * \brief Configure the global tapping term (default: 200ms).
@@ -92,7 +90,7 @@
  *   https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold#tapping-force-hold
  *   https://precondition.github.io/home-row-mods#tapping-force-hold
  */
-#define TAPPING_FORCE_HOLD_PER_KEY
+// #define TAPPING_FORCE_HOLD_PER_KEY
 
 /*
  * Tap-or-Hold decision modes, per keymap.
@@ -134,7 +132,7 @@
  *
  * See precondition.github.io/home-row-mods#permissive-hold.
  */
-#define PERMISSIVE_HOLD
+// #define PERMISSIVE_HOLD
 
 /**
  * \brief Prevent normal rollover on alphas from accidentally triggering mods.
@@ -148,7 +146,7 @@
  *
  * https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold#ignore-mod-tap-interrupt
  */
-#define IGNORE_MOD_TAP_INTERRUPT
+// #define IGNORE_MOD_TAP_INTERRUPT
 
 #ifdef RGB_MATRIX_ENABLE
 // Enable all animations, assume enough memory.

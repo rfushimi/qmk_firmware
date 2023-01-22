@@ -48,31 +48,21 @@ enum keycodes_user {
 
 enum layers_3x5_keymap {
     _DVORAK = 0,
-    _APTmak, // Alternative layout.
-    _APTv3,  // Alternative layout.
-    _RSTHD,  // Alternative layout.
-    _MOTION, // Navigation.
-    _WINMGT, // Window management.
-    _SYMBOL, // Symbols.
-    _NUMBER, // Numbers.
-    _SYSTEM, // Special.
+    _NAV,
+    _LOWER,
+    _RAISE,
+    _ADJUST,
+    _SYSTEM,
+    _SPECIAL,
 };
 
 // Layers.
-#define BSPC_MO LT(_MOTION, KC_BACKSPACE)
-#define BSP_SFT MT(MOD_LSFT, KC_BACKSPACE)
-#define ENT_CTL MT(MOD_LCTL, KC_ENTER)
-#define ENT_NUM LT(_NUMBER, KC_ENTER)
-#define ENT_SYM LT(_SYMBOL, KC_ENTER)
-#define ESC_MO LT(_MOTION, KC_ESCAPE)
-#define E_MO LT(_MOTION, KC_E)
-#define E_SYM LT(_SYMBOL, KC_E)
-#define MOTION MO(_MOTION)
-#define NUMBER MO(_NUMBER)
-#define WINMGT MO(_WINMGT)
-#define SPC_MO LT(_MOTION, KC_SPACE)
-#define SPC_SYM LT(_SYMBOL, KC_SPACE)
+#define NAV MO(_NAV)
+#define LOWER MO(_LOWER)
+#define RAISE MO(_RAISE)
+#define ADJUST MO(_ADJUST)
 #define SYSTEM OSL(_SYSTEM)
+#define SPECIAL MO(_SPECIAL)
 
 // Oneshot mods.
 #define OSM_ALT OSM(MOD_LALT)
@@ -91,19 +81,10 @@ enum layers_3x5_keymap {
 #define DEL_WRD C(KC_BACKSPACE)
 #define ALT_SPC A(KC_SPACE)
 #define ALT_ENT A(KC_ENTER)
-#define LAUNCHR G(KC_SPACE)
+#define LAUNCHR A(KC_P)
 
 #define WS_LEFT G(A(KC_LEFT))
 #define WS_RGHT G(A(KC_RIGHT))
-
-#define ALPHA_APTmak DF(_APTmak)
-#define ALPHA_APTv3 DF(_APTv3)
-#define ALPHA_DVORAK DF(_DVORAK)
-#define ALPHA_RSTHD DF(_RSTHD)
-#define APTmak ALPHA_APTmak
-#define APTv3 ALPHA_APTv3
-#define DVORAK ALPHA_DVORAK
-#define RSTHD ALPHA_RSTHD
 
 /**
  * \brief Adaptation of the Dvorak layout.
@@ -112,85 +93,52 @@ enum layers_3x5_keymap {
 #define DVORAK_split_3x5_2                                                                    \
     KC_QUOT, KC_COMM,  KC_DOT,    KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L, \
        KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S, \
-    KC_SCLN,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
-                               KC_LSFT,  SPC_MO, SPC_SYM, ENT_NUM
-// clang-format on
-
-/**
- * \brief Adaptation of the RSTHD layout.
- */
-// clang-format off
-#define RSTHD_split_3x5_2                                                                     \
-       KC_J,    KC_C,    KC_Y,    KC_F,    KC_K,    KC_Z,    KC_L, KC_COMM,    KC_U,    KC_Q, \
-       KC_R,    KC_S,    KC_T,    KC_H,    KC_D,    KC_M,    KC_N,    KC_A,    KC_I,    KC_O, \
-    KC_SLSH,    KC_V,    KC_G,    KC_P,    KC_B,    KC_X,    KC_W,  KC_DOT, KC_COLN, KC_QUOT, \
-                               KC_LSFT,    E_MO, SPC_SYM, ENT_NUM
-// clang-format on
-
-/**
- * \brief Adaptation of Apsu's APTmak layout.
- */
-// clang-format off
-#define APTmak_split_3x5_2                                                                    \
-       KC_V,    KC_W,    KC_F,    KC_P,    KC_B,    KC_J,    KC_L,    KC_U,    KC_Y, KC_QUOT, \
-       KC_R,    KC_S,    KC_T,    KC_H,    KC_K,    KC_X,    KC_N,    KC_A,    KC_I,    KC_O, \
-    KC_LSFT,    KC_C,    KC_G,    KC_D,    KC_Q,    KC_Z,    KC_M, KC_COMM,  KC_DOT, KC_LSFT, \
-                               KC_LCTL,  SPC_MO,   E_SYM, ENT_NUM
-// clang-format on
-
-/**
- * \brief Adaptation of the APTv3 layout.
- */
-// clang-format off
-#define APTv3_split_3x5_2                                                                     \
-       KC_W,    KC_G,    KC_D,    KC_F,    KC_B,    KC_Q,    KC_L,    KC_U,    KC_O,    KC_Y, \
-       KC_R,    KC_S,    KC_T,    KC_H,    KC_K,    KC_J,    KC_N,    KC_E,    KC_A,    KC_I, \
-       KC_X,    KC_C,    KC_M,    KC_P,    KC_V,    KC_Z, KC_COMM,  KC_DOT, KC_QUOT, KC_COLN, \
-                               KC_LSFT,  ESC_MO, SPC_SYM, ENT_NUM
+    SPECIAL,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
+                                 LOWER,     NAV,  KC_SPC,   RAISE
 // clang-format on
 
 /**
  * \brief Navigation layer.
  */
 // clang-format off
-#define MOTION_split_3x5_2                                                                    \
-    LAUNCHR, RCS_TAB,  KC_TAB, CTL_TAB, ___x___, ___x___, ___x___,   KC_UP, ___x___, ___x___, \
-    OSM_CTL, OSM_ALT, OSM_GUI, OSM_SFT, ___x___, ___x___, KC_LEFT, KC_DOWN, KC_RGHT, ___x___, \
+#define NAV_split_3x5_2                                                                       \
+    LAUNCHR, RCS_TAB,  KC_TAB, CTL_TAB, ___x___, ___x___, ___x___, KC_BSPC, DEL_WRD, KC_BTN3, \
+    OSM_CTL, OSM_ALT, OSM_GUI, OSM_SFT, ___x___, ___x___, OSM_SFT, OSM_GUI, OSM_ALT, OSM_CTL, \
     ___x___, ___x___, KC_DOWN,   KC_UP, ___x___, ___x___, KC_LEFT, KC_RGHT, ___x___, ___x___, \
-                                SYSTEM, _______, ___x___, ___x___
+                               _______, _______,  KC_ENT, ___x___
 // clang-format on
 
 /**
- * \brief Window management layer, with convenience left-hand shortcuts for right-hand mouse.
+ * \brief Common symbols.
  */
 // clang-format off
-#define WINMGT_split_3x5_2                                                                    \
-      GA(1),   GA(2),   GA(3),   GA(4),   GA(5), WS_LEFT,   KC_F7,   KC_F8,   KC_F9, WS_RGHT, \
-    A(KC_1), A(KC_2), A(KC_3), A(KC_4), A(KC_5), ___x___,   KC_F4,   KC_F5,   KC_F6, ___x___, \
-    KC_LSFT, ___x___, ___x___, ___x___, ___x___, ___x___,   KC_F1,   KC_F2,   KC_F3, KC_LSFT, \
-                               ___x___, ___x___, ALT_SPC, ALT_ENT
+#define LOWER_split_3x5_2                                                                     \
+    ___x___,   KC_LT,   KC_AT,   KC_GT, ___x___,  KC_EQL, ___x___, KC_PLUS, ___x___, KC_PERC, \
+    KC_TILD, KC_BSLS, KC_ASTR, KC_SLSH, ___x___, KC_CIRC, KC_LPRN, KC_MINS, KC_RPRN, KC_SCLN, \
+    ___x___, KC_LBRC, ___x___, KC_RBRC, ___x___,  KC_GRV, KC_LCBR, KC_QUES, KC_RCBR, ___x___, \
+                               _______,  SYSTEM, ___x___, _______
 // clang-format on
 
 /**
- * \brief Symbols.
+ * \brief Numpad and related symbols.
  */
 // clang-format off
-#define SYMBOL_split_3x5_2                                                                    \
-     KC_ESC,   KC_LT, KC_QUES,   KC_GT, KC_COLN, ___x___, KC_LBRC, KC_PERC, KC_RBRC,  KC_GRV, \
-    KC_EXLM, KC_PLUS, KC_MINS,  KC_EQL, KC_HASH, KC_CIRC, KC_LPRN, KC_UNDS, KC_RPRN, KC_SCLN, \
-    KC_TILD, KC_BSLS, KC_ASTR, KC_SLSH, KC_AMPR, KC_PIPE, KC_LCBR,  KC_DLR, KC_RCBR,   KC_AT, \
-                               DEL_WRD, KC_BSPC, _______,  SYSTEM
+#define RAISE_split_3x5_2                                                                     \
+     KC_ESC,    KC_7,    KC_8,    KC_9, KC_COLN, ___x___, ___x___, ___x___, ___x___, ___x___, \
+    KC_UNDS,    KC_4,    KC_5,    KC_6, KC_AMPR, ___x___, ___x___, ___x___, ___x___, ___x___, \
+     KC_DLR,    KC_1,    KC_2,    KC_3, KC_PIPE, ___x___, ___x___, ___x___, ___x___, ___x___, \
+                               _______,    KC_0,  SYSTEM, _______
 // clang-format on
 
 /**
- * \brief Numrow.
+ * \brief Numpad and related symbols.
  */
 // clang-format off
-#define NUMBER_split_3x5_2                                                                    \
-    ___x___,    KC_7,    KC_8,    KC_9, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
-    ___x___,    KC_4,    KC_5,    KC_6, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
-    ___x___,    KC_1,    KC_2,    KC_3, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
-                                KC_DOT,    KC_0, ___x___, _______
+#define ADJUST_split_3x5_2                                                                    \
+    ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
+    OSM_CTL, OSM_ALT, OSM_GUI, OSM_SFT, ___x___, ___x___, OSM_SFT, OSM_GUI, OSM_ALT, OSM_CTL, \
+    ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
+                               _______, ___x___, ___x___, _______
 // clang-format on
 
 /**
@@ -199,9 +147,20 @@ enum layers_3x5_keymap {
 // clang-format off
 #define SYSTEM_split_3x5_2                                                                    \
     ___x___, ___x___, ___x___, ___x___, RGB_TOG, RGB_TOG, ___x___, ___x___, ___x___, ___x___, \
-      RSTHD,   APTv3,  APTmak,  DVORAK,  EE_CLR,  EE_CLR,  DVORAK,  APTmak,   APTv3,   RSTHD, \
+    ___x___, ___x___, ___x___, ___x___,  EE_CLR,  EE_CLR, ___x___, ___x___, ___x___, ___x___, \
     ___x___, ___x___, ___x___, ___x___, QK_BOOT, QK_BOOT, ___x___, ___x___, ___x___, ___x___, \
                                ___x___, ___x___, ___x___, ___x___
+// clang-format on
+
+/**
+ * \brief Window management layer, with convenience left-hand shortcuts for right-hand mouse.
+ */
+// clang-format off
+#define SPECIAL_split_3x5_2                                                                   \
+      GA(1),   GA(2),   GA(3),   GA(4),   GA(5), ___x___, WS_LEFT, ___x___, WS_RGHT, ___x___, \
+    A(KC_1), A(KC_2), A(KC_3), A(KC_4), A(KC_5), ___x___, ___x___, ___x___, ___x___, ___x___, \
+    ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
+                               ___x___, ___x___, ALT_SPC, ALT_ENT
 // clang-format on
 
 /**
@@ -218,18 +177,16 @@ enum layers_3x5_keymap {
            k00, k01, k02, k03, k04, k05, k06, k07, k08, k09, \
            k10, k11, k12, k13, k14, k15, k16, k17, k18, k19, \
            k20, k21, k22, k23, k24, k25, k26, k27, k28, k29, \
-                k33, k34,   WINMGT,  KC_LCTL, k35, k36
+                k33, k34,  KC_LSFT,  KC_LCTL, k35, k36
 // clang-format on
 
 #define LAYOUT_split_3x5_2_to_split_3x5_3(...) _LAYOUT_split_3x5_2_to_split_3x5_3(__VA_ARGS__)
 
 /* Converts the 3x5_2 layouts into 3x5_3 layouts. */
 #define DVORAK_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(DVORAK_split_3x5_2)
-#define APTmak_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(APTmak_split_3x5_2)
-#define APTv3_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(APTv3_split_3x5_2)
-#define RSTHD_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(RSTHD_split_3x5_2)
-#define MOTION_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(MOTION_split_3x5_2)
-#define WINMGT_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(WINMGT_split_3x5_2)
-#define NUMBER_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(NUMBER_split_3x5_2)
-#define SYMBOL_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(SYMBOL_split_3x5_2)
+#define NAV_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(NAV_split_3x5_2)
+#define LOWER_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(LOWER_split_3x5_2)
+#define RAISE_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(RAISE_split_3x5_2)
+#define ADJUST_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(ADJUST_split_3x5_2)
 #define SYSTEM_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(SYSTEM_split_3x5_2)
+#define SPECIAL_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(SPECIAL_split_3x5_2)
