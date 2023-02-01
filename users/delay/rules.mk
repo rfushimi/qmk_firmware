@@ -35,7 +35,3 @@ ifeq ($(strip $(OLED_ENABLE)), yes)
 	DEFERRED_EXEC_ENABLE = yes
 endif
 endif
-
-ifeq ($(strip $(1ST_GEN_SPLINKY)), yes)
-	OPT_DEFS += -DSPLINKY_BETA_PINOUT
-endif

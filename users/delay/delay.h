@@ -108,9 +108,9 @@ enum layers_3x5_keymap {
  */
 // clang-format off
 #define NAV_split_3x5_2                                                                       \
-    LAUNCHR, RCS_TAB,  KC_TAB, CTL_TAB, ___x___, ___x___, ___x___, KC_BSPC, DEL_WRD, KC_BTN3, \
-    OSM_CTL, OSM_ALT, OSM_GUI, OSM_SFT, ___x___, ___x___, OSM_SFT, OSM_GUI, OSM_ALT, OSM_CTL, \
-    ___x___, ___x___, KC_DOWN,   KC_UP, ___x___, ___x___, KC_LEFT, KC_RGHT, ___x___, ___x___, \
+    LAUNCHR, RCS_TAB,  KC_TAB, CTL_TAB, ___x___, ___x___, KC_HOME,   KC_UP,  KC_END, DEL_WRD, \
+    OSM_GUI, OSM_ALT, OSM_CTL, OSM_SFT, ___x___, ___x___, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, \
+    ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, KC_BTN3, \
                                _______, _______,  KC_ENT, ___x___
 // clang-format on
 
@@ -119,9 +119,9 @@ enum layers_3x5_keymap {
  */
 // clang-format off
 #define LOWER_split_3x5_2                                                                     \
-    ___x___,   KC_LT,   KC_AT,   KC_GT, ___x___,  KC_EQL, ___x___, KC_PLUS, ___x___, KC_PERC, \
-    KC_TILD, KC_BSLS, KC_ASTR, KC_SLSH, ___x___, KC_CIRC, KC_LPRN, KC_MINS, KC_RPRN, KC_SCLN, \
-    ___x___, KC_LBRC, ___x___, KC_RBRC, ___x___,  KC_GRV, KC_LCBR, KC_QUES, KC_RCBR, ___x___, \
+    ___x___, ___x___,   KC_LT,   KC_GT, ___x___, ___x___, KC_LBRC, KC_RBRC, ___x___, KC_PERC, \
+    ___x___, ___x___, ___x___, ___x___, ___x___, KC_CIRC, KC_LPRN, KC_RPRN, ___x___, KC_SCLN, \
+    ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, KC_LCBR, KC_RCBR, ___x___, ___x___, \
                                _______,  SYSTEM, ___x___, _______
 // clang-format on
 
@@ -130,9 +130,9 @@ enum layers_3x5_keymap {
  */
 // clang-format off
 #define RAISE_split_3x5_2                                                                     \
-     KC_ESC,    KC_7,    KC_8,    KC_9, KC_COLN, ___x___, ___x___, ___x___, ___x___, ___x___, \
-    KC_UNDS,    KC_4,    KC_5,    KC_6, KC_AMPR, ___x___, ___x___, ___x___, ___x___, ___x___, \
-     KC_DLR,    KC_1,    KC_2,    KC_3, KC_PIPE, ___x___, ___x___, ___x___, ___x___, ___x___, \
+     KC_ESC,    KC_7,    KC_8,    KC_9, KC_COLN, ___x___, KC_CIRC, KC_UNDS,  KC_DLR,  KC_GRV, \
+     KC_EQL,    KC_4,    KC_5,    KC_6, KC_AMPR, ___x___, KC_PLUS, KC_MINS,   KC_AT, KC_QUES, \
+    ___x___,    KC_1,    KC_2,    KC_3, KC_PIPE, ___x___, KC_SLSH, KC_ASTR, KC_BSLS, KC_TILD, \
                                _______,    KC_0,  SYSTEM, _______
 // clang-format on
 
@@ -141,9 +141,9 @@ enum layers_3x5_keymap {
  */
 // clang-format off
 #define ADJUST_split_3x5_2                                                                    \
-    ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
-    OSM_CTL, OSM_ALT, OSM_GUI, OSM_SFT, ___x___, ___x___, OSM_SFT, OSM_GUI, OSM_ALT, OSM_CTL, \
-    ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
+    ___x___,   KC_F7,   KC_F8,   KC_F9, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
+    ___x___,   KC_F4,   KC_F5,   KC_F6, ___x___, ___x___, OSM_SFT, OSM_CTL, OSM_ALT, OSM_GUI, \
+    ___x___,   KC_F1,   KC_F2,   KC_F3, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
                                _______, ___x___, ___x___, _______
 // clang-format on
 
