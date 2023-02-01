@@ -44,6 +44,10 @@ enum keycodes_user {
 #endif
     // Custom keycodes.
     SAFE_RANGE_KEYMAP = KEYCODE_USER_BEGIN,
+    OSM_ALT,
+    OSM_CTL,
+    OSM_GUI,
+    OSM_SFT,
 };
 
 enum layers_3x5_keymap {
@@ -65,10 +69,12 @@ enum layers_3x5_keymap {
 #define SPECIAL MO(_SPECIAL)
 
 // Oneshot mods.
+#if 0
 #define OSM_ALT OSM(MOD_LALT)
 #define OSM_CTL OSM(MOD_LCTL)
 #define OSM_GUI OSM(MOD_LGUI)
 #define OSM_SFT OSM(MOD_LSFT)
+#endif
 
 // Ctrl-Tab.
 #define CTL_TAB C(KC_TAB)

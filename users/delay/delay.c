@@ -25,6 +25,7 @@
 #endif // RGB_MATRIX_ENABLE
 
 #include "features/custom_shift_keys.h"
+#include "features/osm_callum.h"
 
 const custom_shift_key_t custom_shift_keys[] = {
     {KC_COMMA, KC_HASH},                  // Shifts , to #
@@ -109,7 +110,17 @@ bool caps_word_press_user(uint16_t keycode) {
     }
 }
 
+static oneshot_state osm_sft_state = os_up_unqueued;
+static oneshot_state osm_ctl_state = os_up_unqueued;
+static oneshot_state osm_alt_state = os_up_unqueued;
+static oneshot_state osm_gui_state = os_up_unqueued;
+
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+    update_oneshot(&osm_sft_state, KC_LSFT, OSM_SFT, keycode, record);
+    update_oneshot(&osm_ctl_state, KC_LCTL, OSM_CTL, keycode, record);
+    update_oneshot(&osm_alt_state, KC_LALT, OSM_ALT, keycode, record);
+    update_oneshot(&osm_gui_state, KC_LCMD, OSM_GUI, keycode, record);
+
     if (!process_custom_shift_keys(keycode, record)) {
         return false;
     }
@@ -123,8 +134,35 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     return true;
 }
 
+bool is_oneshot_cancel_key(uint16_t keycode) {
+    switch (keycode) {
+        case LOWER:
+        case RAISE:
+        case NAV:
+            return true;
+        default:
+            return false;
+    }
+}
+
+bool is_oneshot_ignored_key(uint16_t keycode) {
+    switch (keycode) {
+        case LOWER:
+        case RAISE:
+        case NAV:
+        case KC_LSFT:
+        case OSM_SFT:
+        case OSM_CTL:
+        case OSM_ALT:
+        case OSM_GUI:
+            return true;
+        default:
+            return false;
+    }
+}
+
 layer_state_t layer_state_set_user(layer_state_t state) {
-  return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
+    return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
 }
 
 #ifdef RGB_MATRIX_ENABLE
