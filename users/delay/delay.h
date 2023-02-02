@@ -116,7 +116,7 @@ enum layers_3x5_keymap {
 // clang-format off
 #define DEV_split_3x5_2                                                                       \
     ___x___, KC_HASH, KC_EXLM, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
-    ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, OSM_SFT, OSM_CTL, OSM_ALT, OSM_GUI, \
+    ___x___, ___x___, KC_QUES, KC_COLN, ___x___, ___x___, OSM_SFT, OSM_CTL, OSM_ALT, OSM_GUI, \
      KC_EQL,   KC_LT, KC_MINS,   KC_GT, ___x___, ___x___,  KC_DOT, KC_SLSH, KC_TILD, ___x___, \
                                _v_v_v_, ___x___, ___x___, _v_v_v_
 // clang-format on
