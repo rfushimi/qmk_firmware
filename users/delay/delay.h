@@ -66,14 +66,6 @@ enum layers_3x5_keymap {
 #define SYSTEM OSL(_SYSTEM)
 #define SPECIAL MO(_SPECIAL)
 
-// Oneshot mods.
-#if 0
-#define OSM_ALT OSM(MOD_LALT)
-#define OSM_CTL OSM(MOD_LCTL)
-#define OSM_GUI OSM(MOD_LGUI)
-#define OSM_SFT OSM(MOD_LSFT)
-#endif
-
 // Ctrl-Tab.
 #define CTL_TAB C(KC_TAB)
 #define RCS_TAB RCS(KC_TAB)
@@ -81,11 +73,9 @@ enum layers_3x5_keymap {
 // Shorthands for readability.
 #define ___x___ KC_NO
 #define _v_v_v_ KC_TRANSPARENT
-#define GA(key) G(A(KC_##key))
 
 #define DEL_WRD C(KC_BACKSPACE)
 #define LAUNCHR A(KC_P)
-#define CONSOLE A(KC_ENTER)
 
 /**
  * \brief Adaptation of the Dvorak layout.
@@ -94,7 +84,7 @@ enum layers_3x5_keymap {
 #define DVORAK_split_3x5_2                                                                    \
     KC_QUOT, KC_COMM,  KC_DOT,    KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L, \
        KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S, \
-    KC_SLSH,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
+    KC_COLN,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
                                    NAV, KC_LSFT,  KC_SPC,     SYM
 // clang-format on
 
@@ -105,29 +95,29 @@ enum layers_3x5_keymap {
 #define NAV_split_3x5_2                                                                       \
     ___x___, ___x___,  KC_TAB, ___x___, ___x___, ___x___, KC_HOME,   KC_UP,  KC_END, DEL_WRD, \
     OSM_GUI, OSM_ALT, OSM_CTL, OSM_SFT, ___x___, ___x___, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, \
-    KC_QUES, KC_LBRC, KC_LCBR, KC_LPRN, KC_SCLN, KC_EXCL, KC_RPRN, KC_RCBR, KC_RBRC, KC_HASH, \
+    ___x___, KC_LBRC, KC_LCBR, KC_LPRN,   KC_LT,   KC_GT, KC_RPRN, KC_RCBR, KC_RBRC, KC_SCLN, \
                                _v_v_v_,  SYSTEM,  KC_ENT, _______
 // clang-format on
 
 /**
- * \brief Numpad and related symbols.
+ * \brief Numpad and symbols.
  */
 // clang-format off
 #define SYM_split_3x5_2                                                                       \
-    ___x___,    KC_7,    KC_8,    KC_9, KC_SLSH, ___x___, KC_CIRC, KC_UNDS,  KC_DLR,  KC_GRV, \
-     KC_EQL,    KC_4,    KC_5,    KC_6, KC_AMPR, ___x___, KC_PLUS, KC_MINS,   KC_AT, KC_QUES, \
-    KC_PERC,    KC_1,    KC_2,    KC_3, KC_PIPE, ___x___, KC_COLN,  KC_ESC, KC_ASTR, KC_BSLS, \
+     KC_ESC,    KC_7,    KC_8,    KC_9, KC_BSLS, KC_HASH, KC_CIRC, KC_UNDS,  KC_DLR,  KC_GRV, \
+     KC_EQL,    KC_4,    KC_5,    KC_6, KC_AMPR, KC_EXLM, KC_PLUS, KC_MINS,   KC_AT, KC_QUES, \
+    ___x___,    KC_1,    KC_2,    KC_3, KC_PIPE, KC_PERC, KC_COLN, KC_SLSH, KC_ASTR, ___x___, \
                                _______,    KC_0,  SYSTEM, _v_v_v_
 // clang-format on
 
 /**
- * \brief Numpad and related symbols.
+ * \brief Others.
  */
 // clang-format off
 #define ADJUST_split_3x5_2                                                                    \
-    ___x___,   KC_F7,   KC_F8,   KC_F9, ___x___, ___x___,   KC_LT,   KC_GT, KC_MINS,  KC_EQL, \
-    ___x___,   KC_F4,   KC_F5,   KC_F6, ___x___, ___x___, OSM_SFT, OSM_CTL, OSM_ALT, OSM_GUI, \
-    ___x___,   KC_F1,   KC_F2,   KC_F3, ___x___, ___x___,  KC_DOT, KC_SLSH, KC_TILD, ___x___, \
+    ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
+    ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, OSM_SFT, OSM_CTL, OSM_ALT, OSM_GUI, \
+    ___x___, ___x___, ___x___, ___x___, ___x___, ___x___,  KC_DOT, KC_SLSH, KC_TILD, ___x___, \
                                _v_v_v_, ___x___, ___x___, _v_v_v_
 // clang-format on
 
@@ -147,10 +137,10 @@ enum layers_3x5_keymap {
  */
 // clang-format off
 #define SPECIAL_split_3x5_2                                                                   \
-    ___x___, ___x___, RCS_TAB, CTL_TAB, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
+    ___x___, RCS_TAB, LAUNCHR, CTL_TAB, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
     A(KC_1), A(KC_2), A(KC_3), A(KC_4), A(KC_5), A(KC_1), A(KC_2), A(KC_3), A(KC_4), A(KC_5), \
     ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
-                               ___x___, ___x___, LAUNCHR, CONSOLE
+                               ___x___, ___x___, ___x___, ___x___
 // clang-format on
 
 /**
