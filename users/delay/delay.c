@@ -28,8 +28,6 @@
 #include "features/osm_callum.h"
 
 const custom_shift_key_t custom_shift_keys[] = {
-    {KC_COMMA, KC_HASH},                  // Shifts , to #
-    {KC_DOT, KC_EXLM},                    // Shifts . to !
     {KC_EQUAL, KC_EQUAL},                 // Don't shift =
     {KC_SLASH, KC_SLASH},                 // Don't shift /
     {KC_BACKSLASH, KC_BACKSLASH},         // Don't shift backslash
@@ -136,9 +134,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 
 bool is_oneshot_cancel_key(uint16_t keycode) {
     switch (keycode) {
-        case LOWER:
-        case RAISE:
         case NAV:
+        case KC_ESCAPE:
             return true;
         default:
             return false;
@@ -147,9 +144,8 @@ bool is_oneshot_cancel_key(uint16_t keycode) {
 
 bool is_oneshot_ignored_key(uint16_t keycode) {
     switch (keycode) {
-        case LOWER:
-        case RAISE:
         case NAV:
+        case SYM:
         case KC_LSFT:
         case OSM_SFT:
         case OSM_CTL:
@@ -162,7 +158,7 @@ bool is_oneshot_ignored_key(uint16_t keycode) {
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
+    return update_tri_layer_state(state, _NAV, _SYM, _ADJUST);
 }
 
 #ifdef RGB_MATRIX_ENABLE
