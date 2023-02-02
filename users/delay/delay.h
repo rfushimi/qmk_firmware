@@ -54,7 +54,7 @@ enum layers_3x5_keymap {
     _DVORAK = 0,
     _NAV,
     _SYM,
-    _ADJUST,
+    _DEV,
     _SYSTEM,
     _SPECIAL,
 };
@@ -62,7 +62,7 @@ enum layers_3x5_keymap {
 // Layers.
 #define NAV MO(_NAV)
 #define SYM MO(_SYM)
-#define ADJUST MO(_ADJUST)
+#define DEV MO(_DEV)
 #define SYSTEM OSL(_SYSTEM)
 #define SPECIAL MO(_SPECIAL)
 
@@ -93,9 +93,9 @@ enum layers_3x5_keymap {
  */
 // clang-format off
 #define NAV_split_3x5_2                                                                       \
-    ___x___, ___x___,  KC_TAB, ___x___, ___x___, ___x___, KC_HOME,   KC_UP,  KC_END, DEL_WRD, \
+    ___x___, RCS_TAB,  KC_TAB, CTL_TAB, ___x___, ___x___, KC_HOME,   KC_UP,  KC_END, DEL_WRD, \
     OSM_GUI, OSM_ALT, OSM_CTL, OSM_SFT, ___x___, ___x___, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, \
-    ___x___, KC_LBRC, KC_LCBR, KC_LPRN,   KC_LT,   KC_GT, KC_RPRN, KC_RCBR, KC_RBRC, KC_SCLN, \
+    ___x___, KC_LBRC, KC_LCBR, KC_LPRN, ___x___, ___x___, KC_RPRN, KC_RCBR, KC_RBRC, KC_SCLN, \
                                _v_v_v_,  SYSTEM,  KC_ENT, _______
 // clang-format on
 
@@ -114,10 +114,10 @@ enum layers_3x5_keymap {
  * \brief Others.
  */
 // clang-format off
-#define ADJUST_split_3x5_2                                                                    \
-    ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
+#define DEV_split_3x5_2                                                                       \
+    ___x___, KC_HASH, KC_EXLM, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
     ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, OSM_SFT, OSM_CTL, OSM_ALT, OSM_GUI, \
-    ___x___, ___x___, ___x___, ___x___, ___x___, ___x___,  KC_DOT, KC_SLSH, KC_TILD, ___x___, \
+     KC_EQL,   KC_LT, KC_MINS,   KC_GT, ___x___, ___x___,  KC_DOT, KC_SLSH, KC_TILD, ___x___, \
                                _v_v_v_, ___x___, ___x___, _v_v_v_
 // clang-format on
 
@@ -166,6 +166,6 @@ enum layers_3x5_keymap {
 #define DVORAK_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(DVORAK_split_3x5_2)
 #define NAV_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(NAV_split_3x5_2)
 #define SYM_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(SYM_split_3x5_2)
-#define ADJUST_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(ADJUST_split_3x5_2)
+#define DEV_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(DEV_split_3x5_2)
 #define SYSTEM_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(SYSTEM_split_3x5_2)
 #define SPECIAL_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(SPECIAL_split_3x5_2)

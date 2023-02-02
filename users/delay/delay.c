@@ -159,7 +159,7 @@ bool is_oneshot_ignored_key(uint16_t keycode) {
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    return update_tri_layer_state(state, _NAV, _SYM, _ADJUST);
+    return update_tri_layer_state(state, _NAV, _SYM, _DEV);
 }
 
 #ifdef RGB_MATRIX_ENABLE
