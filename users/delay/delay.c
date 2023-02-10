@@ -28,7 +28,6 @@
 #include "features/osm_callum.h"
 
 const custom_shift_key_t custom_shift_keys[] = {
-    {KC_SPACE, KC_ENTER},                 // Shift space to enter
     {KC_EQUAL, KC_EQUAL},                 // Don't shift =
     {KC_SLASH, KC_SLASH},                 // Don't shift /
     {KC_BACKSLASH, KC_BACKSLASH},         // Don't shift backslash
