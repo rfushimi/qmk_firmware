@@ -44,10 +44,13 @@ enum keycodes_user {
 #endif
     // Custom keycodes.
     SAFE_RANGE_KEYMAP = KEYCODE_USER_BEGIN,
+    OSM_RESET,
+#if 0
     OSM_ALT,
     OSM_CTL,
     OSM_GUI,
     OSM_SFT,
+#endif
 };
 
 enum layers_3x5_keymap {
@@ -65,6 +68,12 @@ enum layers_3x5_keymap {
 #define DEV MO(_DEV)
 #define SYSTEM OSL(_SYSTEM)
 #define SPECIAL MO(_SPECIAL)
+
+#define OSM_ALT OSM(MOD_LALT)
+#define OSM_CTL OSM(MOD_LCTL)
+#define OSM_GUI OSM(MOD_LGUI)
+#define OSM_SFT OSM(MOD_LSFT)
+#define OSM_RST OSM_RESET
 
 // Ctrl-Tab.
 #define CTL_TAB C(KC_TAB)
@@ -93,7 +102,7 @@ enum layers_3x5_keymap {
  */
 // clang-format off
 #define NAV_split_3x5_2                                                                       \
-    ___x___, RCS_TAB,  KC_TAB, CTL_TAB, ___x___, ___x___, KC_HOME,   KC_UP,  KC_END, ___x___, \
+    OSM_RST, RCS_TAB,  KC_TAB, CTL_TAB, ___x___, ___x___, KC_HOME,   KC_UP,  KC_END, ___x___, \
     OSM_GUI, OSM_ALT, OSM_CTL, OSM_SFT, ___x___, ___x___, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, \
     ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
                                _v_v_v_,  SYSTEM,  KC_ENT, _______
@@ -104,9 +113,9 @@ enum layers_3x5_keymap {
  */
 // clang-format off
 #define SYM_split_3x5_2                                                                       \
-     KC_ESC,    KC_7,    KC_8,    KC_9, KC_BSLS, KC_HASH, KC_CIRC, KC_UNDS,  KC_DLR,  KC_GRV, \
-     KC_EQL,    KC_4,    KC_5,    KC_6, KC_AMPR, KC_EXLM, KC_PLUS, KC_MINS,   KC_AT, KC_QUES, \
-    ___x___,    KC_1,    KC_2,    KC_3, KC_PIPE, KC_PERC, KC_COLN, KC_SLSH, KC_ASTR, ___x___, \
+    KC_PERC,    KC_7,    KC_8,    KC_9, KC_BSLS, ___x___, KC_CIRC, KC_UNDS,   KC_AT,  KC_GRV, \
+     KC_ESC,    KC_4,    KC_5,    KC_6, KC_AMPR, ___x___, KC_PLUS, KC_MINS,  KC_DLR, KC_QUES, \
+     KC_EQL,    KC_1,    KC_2,    KC_3, KC_PIPE, KC_HASH, KC_COLN, KC_SLSH, KC_ASTR, KC_EXLM, \
                                _______,    KC_0,  SYSTEM, _v_v_v_
 // clang-format on
 
@@ -138,8 +147,8 @@ enum layers_3x5_keymap {
 // clang-format off
 #define SPECIAL_split_3x5_2                                                                   \
     ___x___, RCS_TAB, LAUNCHR, CTL_TAB, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
-    A(KC_1), A(KC_2), A(KC_3), A(KC_4), A(KC_5), A(KC_1), A(KC_2), A(KC_3), A(KC_4), A(KC_5), \
-    ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
+    A(KC_1), A(KC_2), A(KC_3), A(KC_4), A(KC_5), ___x___, ___x___, ___x___, ___x___, ___x___, \
+    C(KC_1), C(KC_2), C(KC_3), C(KC_4), C(KC_5), ___x___, ___x___, ___x___, ___x___, ___x___, \
                                ___x___, ___x___, ___x___, ___x___
 // clang-format on
 
