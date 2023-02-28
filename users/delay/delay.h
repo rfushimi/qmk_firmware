@@ -45,12 +45,10 @@ enum keycodes_user {
     // Custom keycodes.
     SAFE_RANGE_KEYMAP = KEYCODE_USER_BEGIN,
     OSM_RESET,
-#if 0
     OSM_ALT,
     OSM_CTL,
     OSM_GUI,
     OSM_SFT,
-#endif
 };
 
 enum layers_3x5_keymap {
@@ -69,10 +67,12 @@ enum layers_3x5_keymap {
 #define SYSTEM OSL(_SYSTEM)
 #define SPECIAL MO(_SPECIAL)
 
+#if 0
 #define OSM_ALT OSM(MOD_LALT)
 #define OSM_CTL OSM(MOD_LCTL)
 #define OSM_GUI OSM(MOD_LGUI)
 #define OSM_SFT OSM(MOD_LSFT)
+#endif
 #define OSM_RST OSM_RESET
 
 // Ctrl-Tab.
@@ -114,8 +114,8 @@ enum layers_3x5_keymap {
 // clang-format off
 #define SYM_split_3x5_2                                                                       \
     KC_PERC,    KC_7,    KC_8,    KC_9, KC_BSLS, ___x___, KC_CIRC, KC_UNDS,   KC_AT,  KC_GRV, \
-     KC_ESC,    KC_4,    KC_5,    KC_6, KC_AMPR, ___x___, KC_PLUS, KC_MINS,  KC_DLR, KC_QUES, \
-     KC_EQL,    KC_1,    KC_2,    KC_3, KC_PIPE, KC_HASH, KC_COLN, KC_SLSH, KC_ASTR, KC_EXLM, \
+     KC_ESC,    KC_4,    KC_5,    KC_6, KC_AMPR,  KC_EQL, KC_PLUS, KC_MINS,  KC_DLR, KC_QUES, \
+    KC_COLN,    KC_1,    KC_2,    KC_3, KC_PIPE, ___x___, KC_HASH, KC_SLSH, KC_ASTR, KC_EXLM, \
                                _______,    KC_0,  SYSTEM, _v_v_v_
 // clang-format on
 

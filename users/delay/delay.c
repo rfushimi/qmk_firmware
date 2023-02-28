@@ -25,10 +25,7 @@
 #endif // RGB_MATRIX_ENABLE
 
 #include "features/custom_shift_keys.h"
-#include "features/osm_bitmask.h"
-#if 0
 #include "features/osm_callum.h"
-#endif
 
 const custom_shift_key_t custom_shift_keys[] = {
     {KC_EQUAL, KC_EQUAL},                 // Don't shift =
@@ -111,29 +108,23 @@ bool caps_word_press_user(uint16_t keycode) {
     }
 }
 
-#if 0
 static oneshot_state osm_sft_state = os_up_unqueued;
 static oneshot_state osm_ctl_state = os_up_unqueued;
 static oneshot_state osm_alt_state = os_up_unqueued;
 static oneshot_state osm_gui_state = os_up_unqueued;
-#endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
-#if 0
     update_oneshot(&osm_sft_state, KC_LSFT, OSM_SFT, keycode, record);
     update_oneshot(&osm_ctl_state, KC_LCTL, OSM_CTL, keycode, record);
     update_oneshot(&osm_alt_state, KC_LALT, OSM_ALT, keycode, record);
     update_oneshot(&osm_gui_state, KC_LCMD, OSM_GUI, keycode, record);
-#endif
 
-    if (!process_osm(keycode, record->event.pressed, OSM_RESET)) {
-        return false;
-    }
     if (!process_custom_shift_keys(keycode, record)) {
         return false;
     }
     switch (keycode) {
         case KC_ESCAPE:
+        case OSM_RESET:
             clear_oneshot_mods();
             clear_oneshot_locked_mods();
             del_mods(MOD_MASK_SHIFT);
@@ -142,11 +133,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     return true;
 }
 
-#if 0
 bool is_oneshot_cancel_key(uint16_t keycode) {
     switch (keycode) {
         case NAV:
         case KC_ESCAPE:
+        case OSM_RESET:
             return true;
         default:
             return false;
@@ -167,7 +158,6 @@ bool is_oneshot_ignored_key(uint16_t keycode) {
             return false;
     }
 }
-#endif
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     return update_tri_layer_state(state, _NAV, _SYM, _DEV);
