@@ -68,25 +68,6 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
     }
 }
 
-#ifdef TAPPING_TERM_PER_KEY
-__attribute__((weak)) uint16_t get_tapping_term_keymap(uint16_t keycode, keyrecord_t* record) {
-    return TAPPING_TERM;
-}
-
-/**
- * \brief Define key-specific `TAPPING_TERM`.
- */
-uint16_t get_tapping_term(uint16_t keycode, keyrecord_t* record) {
-    return get_tapping_term_keymap(keycode, record);
-}
-#endif // TAPPING_TERM_PER_KEY
-
-#ifdef TAPPING_FORCE_HOLD_PER_KEY
-bool get_tapping_force_hold(uint16_t keycode, keyrecord_t* record) {
-    return true;
-}
-#endif // TAPPING_FORCE_HOLD_PER_KEY
-
 bool caps_word_press_user(uint16_t keycode) {
     switch (keycode) {
         // Keycodes that continue Caps Word, with shift applied.
@@ -124,7 +105,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     }
     switch (keycode) {
         case KC_ESCAPE:
-        case OSM_RESET:
             clear_oneshot_mods();
             clear_oneshot_locked_mods();
             del_mods(MOD_MASK_SHIFT);
@@ -135,9 +115,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 
 bool is_oneshot_cancel_key(uint16_t keycode) {
     switch (keycode) {
-        case NAV:
+        case QK_TRI_LAYER_LOWER:
         case KC_ESCAPE:
-        case OSM_RESET:
             return true;
         default:
             return false;
@@ -146,8 +125,8 @@ bool is_oneshot_cancel_key(uint16_t keycode) {
 
 bool is_oneshot_ignored_key(uint16_t keycode) {
     switch (keycode) {
-        case NAV:
-        case SYM:
+        case QK_TRI_LAYER_LOWER:
+        case QK_TRI_LAYER_UPPER:
         case KC_LSFT:
         case OSM_SFT:
         case OSM_CTL:
@@ -157,10 +136,6 @@ bool is_oneshot_ignored_key(uint16_t keycode) {
         default:
             return false;
     }
-}
-
-layer_state_t layer_state_set_user(layer_state_t state) {
-    return update_tri_layer_state(state, _NAV, _SYM, _DEV);
 }
 
 #ifdef RGB_MATRIX_ENABLE
@@ -173,7 +148,4 @@ void shutdown_user(void) {
     rgb_matrix_set_color_all(RGB_RED);
     rgb_matrix_update_pwm_buffers();
 #endif // RGB_MATRIX_ENABLE
-#ifdef OLED_ENABLE
-    oled_off();
-#endif // OLED_ENABLE
 }

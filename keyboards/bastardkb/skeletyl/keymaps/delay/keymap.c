@@ -24,10 +24,9 @@
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_DVORAK] = LAYOUT_skeletyl(DVORAK_split_3x5_3),
-  [_NAV] = LAYOUT_skeletyl(NAV_split_3x5_3),
-  [_SYM] = LAYOUT_skeletyl(SYM_split_3x5_3),
-  [_DEV] = LAYOUT_skeletyl(DEV_split_3x5_3),
+  [_LOWER] = LAYOUT_skeletyl(LOWER_split_3x5_3),
+  [_UPPER] = LAYOUT_skeletyl(UPPER_split_3x5_3),
+  [_ADJUST] = LAYOUT_skeletyl(ADJUST_split_3x5_3),
   [_SYSTEM] = LAYOUT_skeletyl(SYSTEM_split_3x5_3),
-  [_SPECIAL] = LAYOUT_skeletyl(SPECIAL_split_3x5_3),
 };
 // clang-format on

@@ -26,6 +26,7 @@ COMBO_ENABLE = yes
 DEFERRED_EXEC_ENABLE = yes
 MOUSEKEY_ENABLE = yes
 ONESHOT_ENABLE = yes
+TRI_LAYER_ENABLE = yes
 
 # Drashna's OLED driver for SH1107.
 ifeq ($(strip $(OLED_DRIVER)), custom)
