@@ -40,16 +40,19 @@ uint8_t NUM_CUSTOM_SHIFT_KEYS = sizeof(custom_shift_keys) / sizeof(custom_shift_
 enum combo_events {
     CAPS_LOCK_COMBO, // , and R => activate Caps Lock.
     CAPS_WORD_COMBO, // . and C => activate Caps Word.
+    ESCAPE_COMBO, // C and R => send Escape.
     COMBO_LENGTH
 };
 uint16_t COMBO_LEN = COMBO_LENGTH;
 
 const uint16_t caps_lock_combo[] PROGMEM = {KC_COMMA, KC_R, COMBO_END};
 const uint16_t caps_word_combo[] PROGMEM = {KC_DOT, KC_C, COMBO_END};
+const uint16_t escape_combo[] PROGMEM = {KC_C, KC_R, COMBO_END};
 
 combo_t key_combos[] = {
     [CAPS_LOCK_COMBO] = COMBO_ACTION(caps_lock_combo),
     [CAPS_WORD_COMBO] = COMBO_ACTION(caps_word_combo),
+    [ESCAPE_COMBO] = COMBO(escape_combo, KC_ESCAPE),
 };
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
@@ -76,6 +79,8 @@ bool caps_word_press_user(uint16_t keycode) {
             return true;
 
         // Keycodes that continue Caps Word, without shifting.
+        case QK_TRI_LAYER_LOWER:
+        case QK_TRI_LAYER_UPPER:
         case KC_1 ... KC_0:
         case KC_BSPC:
         case KC_DEL:

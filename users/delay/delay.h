@@ -60,7 +60,7 @@ enum layers_3x5_keymap {
 #define DVORAK_split_3x5_2                                                                    \
     KC_QUOT, KC_COMM,  KC_DOT,    KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L, \
        KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S, \
-    ___x___,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
+    KC_COLN,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
                                TL_LOWR, KC_LSFT,  KC_SPC, TL_UPPR
 // clang-format on
 
@@ -68,7 +68,7 @@ enum layers_3x5_keymap {
  * \brief Mostly navigation focused layer.
  */
 // clang-format off
-#define LOWER_split_3x5_2                                                                       \
+#define LOWER_split_3x5_2                                                                     \
     LAUNCHR, RCS_TAB,  KC_TAB, CTL_TAB, ___x___, ___x___, KC_HOME,   KC_UP,  KC_END, ___x___, \
     A(KC_1), A(KC_2), A(KC_3), A(KC_4), A(KC_5), ___x___, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, \
     OSM_GUI, OSM_ALT, OSM_CTL, OSM_SFT, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
@@ -79,10 +79,10 @@ enum layers_3x5_keymap {
  * \brief Numpad and symbols.
  */
 // clang-format off
-#define UPPER_split_3x5_2                                                                       \
-    KC_PERC,    KC_7,    KC_8,    KC_9, KC_BSLS, ___x___, KC_CIRC,   KC_AT,  KC_DLR,  KC_GRV, \
-    KC_COLN,    KC_4,    KC_5,    KC_6, KC_AMPR, ___x___, KC_PLUS,  KC_ESC, KC_MINS, KC_UNDS, \
-    KC_QUES,    KC_1,    KC_2,    KC_3, KC_PIPE, ___x___, KC_HASH, KC_SLSH, KC_ASTR, KC_EXLM, \
+#define UPPER_split_3x5_2                                                                     \
+    ___x___,    KC_7,    KC_8,    KC_9, KC_PERC, ___x___, KC_CIRC,  KC_DLR,   KC_AT,  KC_GRV, \
+     KC_ESC,    KC_4,    KC_5,    KC_6, KC_AMPR, ___x___, KC_PLUS, KC_MINS, KC_UNDS, KC_QUES, \
+    ___x___,    KC_1,    KC_2,    KC_3, KC_PIPE, KC_BSLS, KC_HASH, KC_SLSH, KC_ASTR, KC_EXLM, \
                                _______,    KC_0,  SYSTEM, _v_v_v_
 // clang-format on
 
@@ -90,7 +90,7 @@ enum layers_3x5_keymap {
  * \brief Others.
  */
 // clang-format off
-#define ADJUST_split_3x5_2                                                                       \
+#define ADJUST_split_3x5_2                                                                    \
     ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
     ___x___, KC_LBRC, KC_LPRN, KC_LCBR, ___x___, ___x___, KC_RCBR, KC_RPRN, KC_RBRC, KC_SCLN, \
       KC_LT,  KC_EQL, KC_MINS,   KC_GT, ___x___, ___x___,  KC_DOT, KC_SLSH, KC_TILD, ___x___, \

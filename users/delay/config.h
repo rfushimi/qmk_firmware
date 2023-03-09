@@ -59,6 +59,13 @@
 #define ONESHOT_TIMEOUT 1500
 
 /**
+ * \brief Configure the global combo term (default: 50ms).
+ */
+#ifndef COMBO_TERM
+#    define COMBO_TERM 30
+#endif // COMBO_TERM
+
+/**
  * \brief Configure the global tapping term (default: 200ms).
  *
  * If you have a lot of accidental mod activations, crank up the tapping term.
