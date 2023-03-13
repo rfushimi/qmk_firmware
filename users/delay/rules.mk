@@ -19,6 +19,7 @@ SRC += $(USER_PATH)/features/custom_shift_keys.c
 # SRC += $(USER_PATH)/features/oneshot_mod.c
 # SRC += $(USER_PATH)/features/osm_bitmask.c
 SRC += $(USER_PATH)/features/osm_callum.c
+SRC += $(USER_PATH)/features/repeat.c
 # SRC += $(USER_PATH)/features/tap_dance.c
 
 CAPS_WORD_ENABLE = yes

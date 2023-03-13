@@ -26,6 +26,7 @@
 
 #include "features/custom_shift_keys.h"
 #include "features/osm_callum.h"
+#include "features/repeat.h"
 
 const custom_shift_key_t custom_shift_keys[] = {
     {KC_EQUAL, KC_EQUAL},                 // Don't shift =
@@ -100,14 +101,21 @@ static oneshot_state osm_alt_state = os_up_unqueued;
 static oneshot_state osm_gui_state = os_up_unqueued;
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+    // One-shot mods.
     update_oneshot(&osm_sft_state, KC_LSFT, OSM_SFT, keycode, record);
     update_oneshot(&osm_ctl_state, KC_LCTL, OSM_CTL, keycode, record);
     update_oneshot(&osm_alt_state, KC_LALT, OSM_ALT, keycode, record);
     update_oneshot(&osm_gui_state, KC_LCMD, OSM_GUI, keycode, record);
 
+    // Repeat.
+    process_repeat_key(keycode == REPEAT, keycode, record);
+
+    // Custom shifted keys.
     if (!process_custom_shift_keys(keycode, record)) {
         return false;
     }
+
+    // Escape resets internal state.
     switch (keycode) {
         case KC_ESCAPE:
             clear_oneshot_mods();
@@ -115,6 +123,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
             del_mods(MOD_MASK_SHIFT);
             break;
     }
+
     return true;
 }
 
