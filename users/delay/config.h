@@ -117,7 +117,7 @@
  * With `HOLD_ON_OTHER_KEY_PRESS`, within `TAPPING_TERM`:
  *     LT(2, a)🠗 e🠗 LT(2, a)🠕 e🠕 ➞ <mapping of e on layer>
  */
-// #define HOLD_ON_OTHER_KEY_PRESS
+#define HOLD_ON_OTHER_KEY_PRESS
 
 /**
  * \brief Faster layer-tap hold trigger.
