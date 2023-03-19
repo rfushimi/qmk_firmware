@@ -14,47 +14,54 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #pragma once
 
-#include "config.h"
 #include "quantum.h"
-
-#ifdef TAP_DANCE_ENABLE
 
 /**
  * Tap-dance possible state.  Supports:
  *   - single tap
  *   - double tap
+ *   - triple tap
  *   - hold
  *   - double hold (ie. double tap and hold)
+ *   - triple hold
  */
 typedef enum {
-  TD_NONE,
-  TD_UNKNOWN,
-  TD_SINGLE_TAP,
-  TD_DOUBLE_TAP,
-  TD_TRIPLE_TAP,
-  TD_SINGLE_HOLD,
-  TD_DOUBLE_HOLD,
-  TD_TRIPLE_HOLD,
+    TD_NONE,
+    TD_UNKNOWN,
+    TD_SINGLE_TAP,
+    TD_DOUBLE_TAP,
+    TD_TRIPLE_TAP,
+    TD_SINGLE_HOLD,
+    TD_DOUBLE_HOLD,
+    TD_TRIPLE_HOLD,
 } td_state_t;
 
 /** One-shot shift tap-dance state. */
 typedef struct {
-  td_state_t td_state;
+    td_state_t td_state;
 } oneshot_shift_td_state_t;
 
-/** Tap-dance `on_dance_finished_fn` callback for one-shot shift implementation.
+/**
+ * Tap-dance `on_dance_finished_fn` callback for one-shot shift implementation.
  */
-void oneshot_shift_td_on_dance_finished(qk_tap_dance_state_t *state,
-                                        void *user_data);
+void oneshot_shift_td_on_dance_finished(tap_dance_state_t *state, void *user_data);
 
 /** Tap-dance `on_dance_reset_fn` callback for one-shot shift implementation. */
-void oneshot_shift_td_on_dance_reset(qk_tap_dance_state_t *state,
-                                     void *user_data);
+void oneshot_shift_td_on_dance_reset(tap_dance_state_t *state, void *user_data);
 
-/** Tap-dance keycodes. */
-enum tap_dances_user {
-  TD_ONESHOT_SHIFT,  // Custom OSM Shift with layer on hold.
-};
-#endif  // TAP_DANCE_ENABLE
+/** One-shot shift tap-dance state. */
+typedef struct {
+    td_state_t td_state;
+    layer_state_t layer;
+    uint8_t mod;
+} oneshot_layer_mod_td_state_t;
+
+/**
+ * Tap-dance `on_dance_finished_fn` callback for one-shot layer on-hold mod implementation.
+ */
+void tap_dance_layer_mod_finished(tap_dance_state_t *state, void *user_data);
+
+void tap_dance_layer_mod_reset(tap_dance_state_t *state, void *user_data);

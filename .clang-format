@@ -1,9 +1,9 @@
 ---
 BasedOnStyle: Google
 AlignAfterOpenBracket: Align
-AlignConsecutiveAssignments: 'true'
-AlignConsecutiveDeclarations: 'true'
-AlignOperands: 'true'
+AlignConsecutiveAssignments: 'false'
+AlignConsecutiveDeclarations: 'false'
+AlignOperands: 'false'
 AllowAllParametersOfDeclarationOnNextLine: 'false'
 AllowShortCaseLabelsOnASingleLine: 'false'
 AllowShortFunctionsOnASingleLine: Empty
@@ -13,9 +13,9 @@ AlwaysBreakAfterReturnType: None
 AlwaysBreakBeforeMultilineStrings: 'false'
 BinPackArguments: 'true'
 BinPackParameters: 'true'
-ColumnLimit: '1000'
+ColumnLimit: '100'
 IndentCaseLabels: 'true'
-IndentPPDirectives: AfterHash
+IndentPPDirectives: None
 IndentWidth: '4'
 MaxEmptyLinesToKeep: '1'
 PointerAlignment: Right

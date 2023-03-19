@@ -26,7 +26,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_DVORAK] = LAYOUT_skeletyl(DVORAK_split_3x5_3),
   [_LOWER] = LAYOUT_skeletyl(LOWER_split_3x5_3),
   [_UPPER] = LAYOUT_skeletyl(UPPER_split_3x5_3),
-  [_ADJUST] = LAYOUT_skeletyl(ADJUST_split_3x5_3),
+  [_SYMBOLS] = LAYOUT_skeletyl(SYMBOLS_split_3x5_3),
   [_SYSTEM] = LAYOUT_skeletyl(SYSTEM_split_3x5_3),
+  [_SHORTCUTS] = LAYOUT_skeletyl(SHORTCUTS_split_3x5_3),
 };
 // clang-format on

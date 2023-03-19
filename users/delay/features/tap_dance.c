@@ -14,11 +14,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include "quantum.h"
 #include "tap_dance.h"
 
-#ifdef TAP_DANCE_ENABLE
-static td_state_t get_current_state(qk_tap_dance_state_t *state) {
+static td_state_t get_current_state(tap_dance_state_t *state) {
     if (state->count == 1) {
         return state->interrupted || !state->pressed ? TD_SINGLE_TAP : TD_SINGLE_HOLD;
     }
@@ -31,9 +31,9 @@ static td_state_t get_current_state(qk_tap_dance_state_t *state) {
     return TD_UNKNOWN;
 }
 
-void oneshot_shift_td_on_dance_finished(qk_tap_dance_state_t *state, void *user_data) {
+void oneshot_shift_td_on_dance_finished(tap_dance_state_t *state, void *user_data) {
     oneshot_shift_td_state_t *const oneshot_shift_td_state = user_data;
-    oneshot_shift_td_state->td_state                       = get_current_state(state);
+    oneshot_shift_td_state->td_state = get_current_state(state);
 
     const uint8_t mod = MOD_LSFT;
     switch (oneshot_shift_td_state->td_state) {
@@ -65,11 +65,42 @@ void oneshot_shift_td_on_dance_finished(qk_tap_dance_state_t *state, void *user_
     }
 }
 
-void oneshot_shift_td_on_dance_reset(qk_tap_dance_state_t *state, void *user_data) {
+void oneshot_shift_td_on_dance_reset(tap_dance_state_t *state, void *user_data) {
     oneshot_shift_td_state_t *const oneshot_shift_td_state = user_data;
     if (oneshot_shift_td_state->td_state == TD_SINGLE_HOLD) {
         del_mods(MOD_LSFT);
     }
     oneshot_shift_td_state->td_state = TD_NONE;
 }
-#endif // TAP_DANCE_ENABLE
+
+void tap_dance_layer_mod_finished(tap_dance_state_t *state, void *user_data) {
+    oneshot_layer_mod_td_state_t *const data = user_data;
+    data->td_state = get_current_state(state);
+
+    switch (data->td_state) {
+        case TD_SINGLE_TAP:
+            if (IS_LAYER_ON(data->layer)) {
+                reset_oneshot_layer();
+            } else {
+                set_oneshot_layer(data->layer, ONESHOT_START);
+            }
+            break;
+        case TD_SINGLE_HOLD:
+            add_mods(data->mod);
+            break;
+        default:
+            break;
+    }
+}
+
+void tap_dance_layer_mod_reset(tap_dance_state_t *state, void *user_data) {
+    oneshot_layer_mod_td_state_t *const data = user_data;
+    if (data->td_state == TD_SINGLE_TAP) {
+        clear_oneshot_layer_state(ONESHOT_PRESSED);
+    } else if (data->td_state == TD_SINGLE_HOLD) {
+        // TODO(delay): add support for toggling the layer if no other key has
+        // been tapped in ~200ms.
+        del_mods(data->mod);
+    }
+    data->td_state = TD_NONE;
+}

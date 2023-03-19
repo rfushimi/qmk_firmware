@@ -19,98 +19,111 @@
 
 #include "quantum.h"
 
-/**
- * \brief Custom keycodes.
- */
+/** Custom keycodes. */
 enum keycodes_user {
-    // Custom keycodes.
     SAFE_RANGE_KEYMAP = QK_USER,
     REPEAT,
     OSM_ALT,
     OSM_CTL,
     OSM_GUI,
     OSM_SFT,
+    KC_RIGHT_ARROW,
+    KC_FAT_RIGHT_ARROW,
 };
 
+/** Layer list. */
 enum layers_3x5_keymap {
     _DVORAK = 0,
     _LOWER,
     _UPPER,
-    _ADJUST,
+    _SYMBOLS,
     _SYSTEM,
+    _SHORTCUTS,
+};
+
+/** Tap-dance keycodes. */
+enum tap_dances_user {
+    TD_ONESHOT_SHIFT,     // Custom OSM Shift with layer on hold.
+    TD_ONESHOT_SHORTCUTS_LAYER_SHIFT, // Custom OSM layer with mod on hold.
 };
 
 // Layers.
 #define SYSTEM OSL(_SYSTEM)
+#define SPC_SYM LT(_SYMBOLS, KC_SPACE)
+#define TD_SHORTCUTS TD(TD_ONESHOT_SHORTCUTS_LAYER_SHIFT)
+#define MO_LOWER MO(_LOWER)
+#define MO_UPPER MO(_UPPER)
+
+// Shorthands for readability.
+#define ___x___ KC_NO
+#define _v_v_v_ KC_TRANSPARENT
+#define TD_SHRT TD_SHORTCUTS
+#define MO_LOWR MO_LOWER
+#define MO_UPPR MO_UPPER
 
 // Ctrl-Tab.
 #define CTL_TAB C(KC_TAB)
 #define RCS_TAB RCS(KC_TAB)
 
-// Shorthands for readability.
-#define ___x___ KC_NO
-#define _v_v_v_ KC_TRANSPARENT
-
 #define DEL_WRD C(KC_BACKSPACE)
-#define LAUNCHR A(KC_P)
+#define LAUNCHR G(KC_SPACE)
 
-/**
- * \brief Adaptation of the Dvorak layout.
- */
+/** Adaptation of the Dvorak layout. */
 // clang-format off
-#define DVORAK_split_3x5_2                                                                    \
-    KC_QUOT, KC_COMM,  KC_DOT,    KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L, \
-       KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S, \
-    KC_COLN,    KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
-                               TL_LOWR, KC_LSFT,  KC_SPC, TL_UPPR
+#define DVORAK_split_3x5_2                                                                        \
+    KC_COLN, KC_COMM,  KC_DOT,    KC_P,    KC_Y,        KC_F,    KC_G,    KC_C,    KC_R,    KC_L, \
+       KC_A,    KC_O,    KC_E,    KC_U,    KC_I,        KC_D,    KC_H,    KC_T,    KC_N,    KC_S, \
+    ___x___,    KC_Q,    KC_J,    KC_K,    KC_X,        KC_B,    KC_M,    KC_W,    KC_V, ___x___, \
+                               MO_LOWR, TD_SHRT,     SPC_SYM, MO_UPPR
+// clang-format on
+
+/** Mostly navigation focused layer. */
+// clang-format off
+#define LOWER_split_3x5_2                                                                         \
+    ___x___, RCS_TAB, LAUNCHR, CTL_TAB, ___x___,     ___x___, KC_HOME,   KC_UP,  KC_END, ___x___, \
+    OSM_ALT, OSM_CTL, OSM_SFT, OSM_GUI, ___x___,     ___x___, KC_LEFT, KC_DOWN, KC_RGHT, ___x___, \
+    ___x___, ___x___, ___x___, ___x___, ___x___,     ___x___, ___x___, ___x___, ___x___, ___x___, \
+                               _v_v_v_,  SYSTEM,     _______, _______
+// clang-format on
+
+/** Numpad and symbols. */
+// clang-format off
+#define UPPER_split_3x5_2                                                                         \
+    ___x___,    KC_7,    KC_8,    KC_9, ___x___,     ___x___, KC_PLUS, KC_SLSH, KC_ASTR, KC_TILD, \
+    ___x___,    KC_4,    KC_5,    KC_6, ___x___,     KC_PIPE,   KC_LT, KC_UNDS,   KC_GT, KC_AMPR, \
+    ___x___,    KC_1,    KC_2,    KC_3, ___x___,     KC_BSLS, KC_LBRC,  KC_EQL, KC_RBRC, ___x___, \
+                               _______,    KC_0,      SYSTEM, _v_v_v_
+// clang-format on
+
+/** Another numpad and symbols. */
+// clang-format off
+#define SYMBOLS_split_3x5_2                                                                       \
+    ___x___,    KC_7,    KC_8,    KC_9, ___x___,      KC_GRV, KC_CIRC, KC_QUES,  KC_DLR,   KC_AT, \
+    ___x___,    KC_4,    KC_5,    KC_6, ___x___,     KC_PERC, KC_LPRN, KC_MINS, KC_RPRN, KC_SCLN, \
+    ___x___,    KC_1,    KC_2,    KC_3, ___x___,     KC_HASH, KC_LCBR, KC_EXLM, KC_RCBR, ___x___, \
+                               _______,    KC_0,     _v_v_v_,  SYSTEM
+// clang-format on
+
+/** Special keycodes/functions. */
+// clang-format off
+#define SYSTEM_split_3x5_2                                                                        \
+    ___x___, ___x___, ___x___, ___x___, RGB_TOG,     RGB_TOG, ___x___, ___x___, ___x___, ___x___, \
+    ___x___, ___x___, ___x___, ___x___,  EE_CLR,      EE_CLR, ___x___, ___x___, ___x___, ___x___, \
+    ___x___, ___x___, ___x___, ___x___, QK_BOOT,     QK_BOOT, ___x___, ___x___, ___x___, ___x___, \
+                               ___x___, ___x___,     ___x___, ___x___
+// clang-format on
+
+/** Convenience shortcuts. */
+// clang-format off
+#define SHORTCUTS_split_3x5_2                                                                     \
+    ___x___, ___x___, ___x___, ___x___, ___x___,     ___x___, ___x___, C(KC_C), C(KC_R), C(KC_L), \
+    A(KC_1), A(KC_2), A(KC_3), A(KC_4), A(KC_5),     C(KC_D), OSM_GUI, OSM_SFT, OSM_CTL, OSM_ALT, \
+    ___x___, G(KC_X), G(KC_C), G(KC_V), ___x___,     ___x___, ___x___, ___x___, ___x___, ___x___, \
+                               ___x___, ___x___,     ___x___, ___x___
 // clang-format on
 
 /**
- * \brief Mostly navigation focused layer.
- */
-// clang-format off
-#define LOWER_split_3x5_2                                                                     \
-    LAUNCHR, RCS_TAB,  KC_TAB, CTL_TAB, ___x___, ___x___, KC_HOME,   KC_UP,  KC_END, ___x___, \
-    OSM_ALT, OSM_GUI, OSM_SFT, OSM_CTL, ___x___, ___x___, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, \
-    A(KC_1), A(KC_2), A(KC_3), A(KC_4), A(KC_5), ___x___, ___x___, ___x___, ___x___, ___x___, \
-                               _v_v_v_,  SYSTEM,  KC_ENT, _______
-// clang-format on
-
-/**
- * \brief Numpad and symbols.
- */
-// clang-format off
-#define UPPER_split_3x5_2                                                                     \
-    ___x___,    KC_7,    KC_8,    KC_9, KC_PERC, ___x___, KC_CIRC,  KC_DLR,   KC_AT,  KC_GRV, \
-    KC_SCLN,    KC_4,    KC_5,    KC_6, KC_AMPR, ___x___, KC_PLUS, KC_MINS, KC_UNDS, KC_QUES, \
-    ___x___,    KC_1,    KC_2,    KC_3, KC_PIPE, KC_BSLS, KC_HASH, KC_SLSH, KC_ASTR, KC_EXLM, \
-                               _______,    KC_0,  SYSTEM, _v_v_v_
-// clang-format on
-
-/**
- * \brief Others.
- */
-// clang-format off
-#define ADJUST_split_3x5_2                                                                    \
-    ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, \
-    ___x___, KC_LBRC, KC_LPRN, KC_LCBR, ___x___, ___x___, KC_RCBR, KC_RPRN, KC_RBRC, ___x___, \
-      KC_LT,  KC_EQL, KC_MINS,   KC_GT, ___x___, ___x___,  KC_DOT, KC_SLSH, KC_TILD, ___x___, \
-                               _v_v_v_, ___x___, ___x___, _v_v_v_
-// clang-format on
-
-/**
- * \brief Special keycodes/functions.
- */
-// clang-format off
-#define SYSTEM_split_3x5_2                                                                    \
-    ___x___, ___x___, ___x___, ___x___, RGB_TOG, RGB_TOG, ___x___, ___x___, ___x___, ___x___, \
-    ___x___, ___x___, ___x___, ___x___,  EE_CLR,  EE_CLR, ___x___, ___x___, ___x___, ___x___, \
-    ___x___, ___x___, ___x___, ___x___, QK_BOOT, QK_BOOT, ___x___, ___x___, ___x___, ___x___, \
-                               ___x___, ___x___, ___x___, ___x___
-// clang-format on
-
-/**
- * \brief Converts a 3x5_2 layout into the more common 3x5_3 layout.
+ * Converts a 3x5_2 layout into the more common 3x5_3 layout.
  *
  * In other words, converts a split-34 keymap into a split-36 one.
  */
@@ -132,5 +145,6 @@ enum layers_3x5_keymap {
 #define DVORAK_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(DVORAK_split_3x5_2)
 #define LOWER_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(LOWER_split_3x5_2)
 #define UPPER_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(UPPER_split_3x5_2)
-#define ADJUST_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(ADJUST_split_3x5_2)
+#define SYMBOLS_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(SYMBOLS_split_3x5_2)
 #define SYSTEM_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(SYSTEM_split_3x5_2)
+#define SHORTCUTS_split_3x5_3 LAYOUT_split_3x5_2_to_split_3x5_3(SHORTCUTS_split_3x5_2)

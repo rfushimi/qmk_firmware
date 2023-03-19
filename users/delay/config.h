@@ -62,7 +62,7 @@
  * \brief Configure the global combo term (default: 50ms).
  */
 #ifndef COMBO_TERM
-#    define COMBO_TERM 30
+#    define COMBO_TERM 25
 #endif // COMBO_TERM
 
 /**
@@ -85,7 +85,7 @@
 /**
  * \brief Customize the TAPPING_TERM for specific keys.
  */
-// #define TAPPING_TERM_PER_KEY
+#define TAPPING_TERM_PER_KEY
 
 /**
  * \brief Enable rapid switch from tap to hold.
