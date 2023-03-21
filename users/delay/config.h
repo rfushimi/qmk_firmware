@@ -85,7 +85,7 @@
 /**
  * \brief Customize the TAPPING_TERM for specific keys.
  */
-#define TAPPING_TERM_PER_KEY
+//#define TAPPING_TERM_PER_KEY
 
 /**
  * \brief Enable rapid switch from tap to hold.
@@ -203,6 +203,7 @@
 #    define RGB_MATRIX_MAXIMUM_BRIGHTNESS 64
 
 // Rainbow swirl as startup mode.
+#    undef RGB_MATRIX_DEFAULT_MODE
 #    define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_RAINBOW_MOVING_CHEVRON
 
 // Slow swirl at startup.

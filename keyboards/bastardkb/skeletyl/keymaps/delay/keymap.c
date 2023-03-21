@@ -16,18 +16,29 @@
  */
 
 #include QMK_KEYBOARD_H
-#include "skeletyl.h"
 #include "users/delay/delay.h"
 
-#define LAYOUT_skeletyl(...) LAYOUT_split_3x5_3(__VA_ARGS__)
+// clang-format off
+#define _LAYOUT(                                             \
+           k00, k01, k02, k03, k04, k05, k06, k07, k08, k09, \
+           k10, k11, k12, k13, k14, k15, k16, k17, k18, k19, \
+           k20, k21, k22, k23, k24, k25, k26, k27, k28, k29, \
+                          k33, k34, k35, k36)                \
+    LAYOUT_split_3x5_3(                                      \
+           k00, k01, k02, k03, k04, k05, k06, k07, k08, k09, \
+           k10, k11, k12, k13, k14, k15, k16, k17, k18, k19, \
+           k20, k21, k22, k23, k24, k25, k26, k27, k28, k29, \
+                   k33, k34, KC_NO, KC_NO, k35, k36)
+// clang-format on
+
+#define LAYOUT(...) _LAYOUT(__VA_ARGS__)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_DVORAK] = LAYOUT_skeletyl(DVORAK_split_3x5_3),
-  [_LOWER] = LAYOUT_skeletyl(LOWER_split_3x5_3),
-  [_UPPER] = LAYOUT_skeletyl(UPPER_split_3x5_3),
-  [_SYMBOLS] = LAYOUT_skeletyl(SYMBOLS_split_3x5_3),
-  [_SYSTEM] = LAYOUT_skeletyl(SYSTEM_split_3x5_3),
-  [_SHORTCUTS] = LAYOUT_skeletyl(SHORTCUTS_split_3x5_3),
+  [_DVORAK] = LAYOUT(DVORAK_split_3x5_2),
+  [_LOWER] = LAYOUT(LOWER_split_3x5_2),
+  [_UPPER] = LAYOUT(UPPER_split_3x5_2),
+  [_SYMBOLS] = LAYOUT(SYMBOLS_split_3x5_2),
+  [_SYSTEM] = LAYOUT(SYSTEM_split_3x5_2),
 };
 // clang-format on

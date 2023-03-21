@@ -27,28 +27,7 @@
 
 #include "features/custom_shift_keys.h"
 #include "features/osm_callum.h"
-#include "features/tap_dance.h"
 #include "features/repeat.h"
-
-static oneshot_layer_mod_td_state_t oneshot_shortcut_layer_td_state = {
-    .td_state = 0,
-    .layer = _SHORTCUTS,
-    .mod = MOD_LSFT,
-};
-
-// All tap dance functions would go here.
-tap_dance_action_t tap_dance_actions[] = {
-    [TD_ONESHOT_SHORTCUTS_LAYER_SHIFT] =
-        {
-            .fn =
-                {
-                    NULL,
-                    tap_dance_layer_mod_finished,
-                    tap_dance_layer_mod_reset,
-                },
-            .user_data = &oneshot_shortcut_layer_td_state,
-        },
-};
 
 const custom_shift_key_t custom_shift_keys[] = {
     {KC_EQUAL, KC_EQUAL},                 // Don't shift =
@@ -61,43 +40,25 @@ const custom_shift_key_t custom_shift_keys[] = {
 uint8_t NUM_CUSTOM_SHIFT_KEYS = sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
 
 enum combo_events {
-    ALPHA_Z_COMBO,         // Q and J => send Z.
-    BACKSPACE_COMBO,       // W and V => send Backspace.
     CAPS_LOCK_COMBO,       // , and R => activate Caps Lock.
     CAPS_WORD_COMBO,       // . and C => activate Caps Word.
-    ENTER_COMBO,           // H and N => send Enter.
-    ESCAPE_COMBO,          // C and R => send Escape.
     TAB_COMBO,             // , and . => send Tab.
-    SINGLE_QUOTE_COMBO,    // H and N => send '.
-    DOUBLE_QUOTE_COMBO,    // O and U => send ".
     RIGHT_ARROW_COMBO,     // G and C => send ->.
     FAT_RIGHT_ARROW_COMBO, // . and P => send =>.
     COMBO_LENGTH
 };
 uint16_t COMBO_LEN = COMBO_LENGTH;
 
-const uint16_t alpha_z_combo[] PROGMEM = {KC_Q, KC_J, COMBO_END};
-const uint16_t backspace_combo[] PROGMEM = {KC_W, KC_V, COMBO_END};
 const uint16_t caps_lock_combo[] PROGMEM = {KC_COMMA, KC_R, COMBO_END};
 const uint16_t caps_word_combo[] PROGMEM = {KC_DOT, KC_C, COMBO_END};
-const uint16_t enter_combo[] PROGMEM = {KC_T, KC_N, COMBO_END};
-const uint16_t escape_combo[] PROGMEM = {KC_C, KC_R, COMBO_END};
 const uint16_t tab_combo[] PROGMEM = {KC_COMMA, KC_DOT, COMBO_END};
-const uint16_t single_quote_combo[] PROGMEM = {KC_O, KC_U, COMBO_END};
-const uint16_t double_quote_combo[] PROGMEM = {KC_H, KC_N, COMBO_END};
 const uint16_t right_arrow_combo[] PROGMEM = {KC_G, KC_C, COMBO_END};
 const uint16_t fat_right_arrow_combo[] PROGMEM = {KC_DOT, KC_P, COMBO_END};
 
 combo_t key_combos[] = {
-    [ALPHA_Z_COMBO] = COMBO(alpha_z_combo, KC_Z),                               // Z.
-    [BACKSPACE_COMBO] = COMBO(backspace_combo, KC_BACKSPACE),                   // Backspace.
     [CAPS_LOCK_COMBO] = COMBO_ACTION(caps_lock_combo),                          // Caps lock.
     [CAPS_WORD_COMBO] = COMBO_ACTION(caps_word_combo),                          // Caps word.
-    [ENTER_COMBO] = COMBO(enter_combo, KC_ENTER),                               // Enter.
-    [ESCAPE_COMBO] = COMBO(escape_combo, KC_ESCAPE),                            // Escape.
     [TAB_COMBO] = COMBO(tab_combo, KC_TAB),                                     // Tab.
-    [SINGLE_QUOTE_COMBO] = COMBO(single_quote_combo, KC_QUOTE),                 // Single quote.
-    [DOUBLE_QUOTE_COMBO] = COMBO(double_quote_combo, KC_DOUBLE_QUOTE),          // Double quote.
     [RIGHT_ARROW_COMBO] = COMBO(right_arrow_combo, KC_RIGHT_ARROW),             // Right arrow.
     [FAT_RIGHT_ARROW_COMBO] = COMBO(fat_right_arrow_combo, KC_FAT_RIGHT_ARROW), // Fat right arrow.
 };
@@ -198,8 +159,8 @@ bool is_oneshot_cancel_key(uint16_t keycode) {
 
 bool is_oneshot_ignored_key(uint16_t keycode) {
     switch (keycode) {
-        case QK_TRI_LAYER_LOWER:
-        case QK_TRI_LAYER_UPPER:
+        case MO_LOWER:
+        case MO_UPPER:
         case KC_LSFT:
         case OSM_SFT:
         case OSM_CTL:
@@ -209,13 +170,6 @@ bool is_oneshot_ignored_key(uint16_t keycode) {
         default:
             return false;
     }
-}
-
-uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
-    if (keycode == TD_SHORTCUTS) {
-        return 90;
-    }
-    return TAPPING_TERM;
 }
 
 #ifdef RGB_MATRIX_ENABLE
