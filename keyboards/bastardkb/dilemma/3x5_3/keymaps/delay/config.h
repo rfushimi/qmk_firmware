@@ -16,3 +16,6 @@
  */
 
 #pragma once
+
+#undef RGB_MATRIX_DEFAULT_VAL
+#define RGB_MATRIX_DEFAULT_VAL 128

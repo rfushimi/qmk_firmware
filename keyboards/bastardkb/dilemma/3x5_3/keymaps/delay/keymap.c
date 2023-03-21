@@ -18,15 +18,27 @@
 #include QMK_KEYBOARD_H
 #include "users/delay/delay.h"
 
-#define LAYOUT_dilemma_3x5_3(...) LAYOUT_split_3x5_3(__VA_ARGS__)
+// clang-format off
+#define _LAYOUT(                                             \
+           k00, k01, k02, k03, k04, k05, k06, k07, k08, k09, \
+           k10, k11, k12, k13, k14, k15, k16, k17, k18, k19, \
+           k20, k21, k22, k23, k24, k25, k26, k27, k28, k29, \
+                          k33, k34, k35, k36)                \
+    LAYOUT_split_3x5_3(                                      \
+           k00, k01, k02, k03, k04, k05, k06, k07, k08, k09, \
+           k10, k11, k12, k13, k14, k15, k16, k17, k18, k19, \
+           k20, k21, k22, k23, k24, k25, k26, k27, k28, k29, \
+                   KC_NO, k33, k34, k35, k36, KC_NO)
+// clang-format on
+
+#define LAYOUT(...) _LAYOUT(__VA_ARGS__)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_DVORAK] = LAYOUT_dilemma_3x5_3(DVORAK_split_3x5_3),
-  [_RSTHD] = LAYOUT_dilemma_3x5_3(RSTHD_split_3x5_3),
-  [_MOTION] = LAYOUT_dilemma_3x5_3(MOTION_split_3x5_3),
-  [_SYMBOL] = LAYOUT_dilemma_3x5_3(SYMBOL_split_3x5_3),
-  [_NUMBER] = LAYOUT_dilemma_3x5_3(NUMBER_split_3x5_3),
-  [_SYSTEM] = LAYOUT_dilemma_3x5_3(SYSTEM_split_3x5_3),
+  [_DVORAK] = LAYOUT(DVORAK_split_3x5_2),
+  [_LOWER] = LAYOUT(LOWER_split_3x5_2),
+  [_UPPER] = LAYOUT(UPPER_split_3x5_2),
+  [_SYMBOLS] = LAYOUT(SYMBOLS_split_3x5_2),
+  [_SYSTEM] = LAYOUT(SYSTEM_split_3x5_2),
 };
 // clang-format on
