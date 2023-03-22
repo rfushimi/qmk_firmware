@@ -77,9 +77,9 @@ enum tap_dances_user {
 // clang-format off
 #define LOWER_split_3x5_2                                                                         \
     G(KC_C), RCS_TAB, LAUNCHR, CTL_TAB, G(KC_V),     ___x___, ___x___, C(KC_C), C(KC_R), C(KC_L), \
-    OSM_ALT, OSM_CTL, OSM_SFT, OSM_GUI, ___x___,     C(KC_D), KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, \
+    OSM_ALT, OSM_CTL, OSM_GUI, OSM_SFT, ___x___,     C(KC_D), KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, \
     A(KC_1), A(KC_2), A(KC_3), A(KC_4), A(KC_5),     ___x___, ___x___,  KC_TAB, ___x___, ___x___, \
-                               _v_v_v_,  SYSTEM,      KC_ENT, KC_BSPC
+                               _v_v_v_,  SYSTEM,     _______,  KC_ENT
 // clang-format on
 
 /** Another numpad and symbols. */
@@ -88,7 +88,7 @@ enum tap_dances_user {
     ___x___,    KC_7,    KC_8,    KC_9, ___x___,      KC_GRV, KC_CIRC, KC_QUES,  KC_DLR,   KC_AT, \
     ___x___,    KC_4,    KC_5,    KC_6, ___x___,     KC_PERC, KC_LPRN, KC_MINS, KC_RPRN, KC_SCLN, \
     ___x___,    KC_1,    KC_2,    KC_3, ___x___,     KC_HASH, KC_LCBR, KC_EXLM, KC_RCBR, ___x___, \
-                                KC_ESC,    KC_0,     _v_v_v_,  SYSTEM
+                               KC_BSPC,    KC_0,     _v_v_v_,  SYSTEM
 // clang-format on
 
 /** Numpad and symbols. */
