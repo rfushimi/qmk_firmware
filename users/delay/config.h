@@ -44,6 +44,10 @@
 /** \brief Only uses 16 bits for layers. Limits available layers to 16.  */
 #define LAYER_STATE_16BIT
 
+#define TRI_LAYER_LOWER_LAYER 2
+#define TRI_LAYER_UPPER_LAYER (TRI_LAYER_LOWER_LAYER + 1)
+#define TRI_LAYER_ADJUST_LAYER (TRI_LAYER_LOWER_LAYER + 2)
+
 /**
  * \brief Tapping this number of times holds the key until tapped once again.
  *

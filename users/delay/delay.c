@@ -87,8 +87,8 @@ bool caps_word_press_user(uint16_t keycode) {
             return true;
 
         // Keycodes that continue Caps Word, without shifting.
-        case MO_LOWER:
-        case MO_UPPER:
+        case QK_TRI_LAYER_LOWER:
+        case QK_TRI_LAYER_UPPER:
         case KC_1 ... KC_0:
         case KC_BSPC:
         case KC_DEL:
@@ -149,7 +149,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 bool is_oneshot_cancel_key(uint16_t keycode) {
     switch (keycode) {
-        case QK_TRI_LAYER_LOWER:
         case KC_ESCAPE:
             return true;
         default:
@@ -159,8 +158,8 @@ bool is_oneshot_cancel_key(uint16_t keycode) {
 
 bool is_oneshot_ignored_key(uint16_t keycode) {
     switch (keycode) {
-        case MO_LOWER:
-        case MO_UPPER:
+        case QK_TRI_LAYER_LOWER:
+        case QK_TRI_LAYER_UPPER:
         case KC_LSFT:
         case OSM_SFT:
         case OSM_CTL:
