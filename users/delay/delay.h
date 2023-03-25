@@ -34,28 +34,26 @@ enum keycodes_user {
 /** Layer list. */
 enum layers_3x5_keymap {
     _DVORAK = 0,
+    _APTMAK,
     _LOWER,
     _UPPER,
     _SYMBOLS,
     _SYSTEM,
 };
 
-/** Tap-dance keycodes. */
-enum tap_dances_user {
-    TD_ONESHOT_SHIFT,     // Custom OSM Shift with layer on hold.
-    TD_ONESHOT_SHORTCUTS_LAYER_SHIFT, // Custom OSM layer with mod on hold.
-};
-
 // Layers.
-#define SYSTEM OSL(_SYSTEM)
-#define SPC_SYM LT(_SYMBOLS, KC_SPACE)
 #define MO_LOWER MO(_LOWER)
 #define MO_UPPER MO(_UPPER)
+#define SYSTEM OSL(_SYSTEM)
+#define SPC_SYM LT(_SYMBOLS, KC_SPACE)
+
+#define DVORAK DF(_DVORAK)
+#define APTMAK DF(_APTMAK)
 
 // Shorthands for readability.
 #define ___x___ KC_NO
 #define _v_v_v_ KC_TRANSPARENT
-#define TD_SHRT TD_SHORTCUTS
+#define E_LSHFT LSFT_T(KC_E)
 #define MO_LOWR MO_LOWER
 #define MO_UPPR MO_UPPER
 
@@ -71,6 +69,15 @@ enum tap_dances_user {
        KC_A,    KC_O,    KC_E,    KC_U,    KC_I,        KC_D,    KC_H,    KC_T,    KC_N,    KC_S, \
     ___x___,    KC_Q,    KC_J,    KC_K,    KC_X,        KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
                                MO_LOWR, KC_LSFT,     SPC_SYM, MO_UPPR
+// clang-format on
+
+/** Adaptation of the APTmak layout. */
+// clang-format off
+#define APTMAK_split_3x5_2                                                                        \
+       KC_V,    KC_W,    KC_F,    KC_P,    KC_B,        KC_J,    KC_L,    KC_U,    KC_Y, KC_QUOT, \
+       KC_R,    KC_S,    KC_T,    KC_H,    KC_K,        KC_X,    KC_N,    KC_A,    KC_I,    KC_O, \
+    ___x___,    KC_C,    KC_G,    KC_D, ___x___,     ___x___,    KC_M, KC_COMM,  KC_DOT, ___x___, \
+                               MO_LOWR, SPC_SYM,     E_LSHFT, MO_UPPR
 // clang-format on
 
 /** Mostly navigation focused layer. */
@@ -104,7 +111,7 @@ enum tap_dances_user {
 // clang-format off
 #define SYSTEM_split_3x5_2                                                                        \
     ___x___, ___x___, ___x___, ___x___, RGB_TOG,     RGB_TOG, ___x___, ___x___, ___x___, ___x___, \
-    ___x___, ___x___, ___x___, ___x___,  EE_CLR,      EE_CLR, ___x___, ___x___, ___x___, ___x___, \
+    ___x___,  APTMAK,  DVORAK, ___x___,  EE_CLR,      EE_CLR, ___x___,  DVORAK,  APTMAK, ___x___, \
     ___x___, ___x___, ___x___, ___x___, QK_BOOT,     QK_BOOT, ___x___, ___x___, ___x___, ___x___, \
                                ___x___, ___x___,     ___x___, ___x___
 // clang-format on
