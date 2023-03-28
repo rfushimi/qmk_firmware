@@ -1,5 +1,6 @@
 # Explicitly enable debug if needed.
 DEBUG_ENABLE = no
+CONSOLE_ENABLE = no
 
 # Disable unused features that are enabled by default.
 ifndef GRAVE_ESC_ENABLE

@@ -17,6 +17,9 @@
 
 #pragma once
 
+// Debug.
+#undef DEBUG_MATRIX_SCAN_RATE
+
 #ifdef SPLIT_KEYBOARD
 #    ifndef SPLIT_HAND_PIN
 /**
