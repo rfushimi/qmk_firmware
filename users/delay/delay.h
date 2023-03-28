@@ -46,6 +46,17 @@ enum layers_3x5_keymap {
 #define DVORAK DF(_DVORAK)
 #define SYSTEM OSL(_SYSTEM)
 
+// Homerow mods.
+#define HMR_A LALT_T(KC_A)
+#define HMR_O LCTL_T(KC_O)
+#define HMR_E LGUI_T(KC_E)
+#define HMR_U LSFT_T(KC_U)
+
+#define HMR_H LSFT_T(KC_H)
+#define HMR_T LGUI_T(KC_T)
+#define HMR_N LCTL_T(KC_N)
+#define HMR_S LALT_T(KC_S)
+
 // Shorthands for readability.
 #define ___x___ KC_NO
 #define _v_v_v_ KC_TRANSPARENT
@@ -60,9 +71,9 @@ enum layers_3x5_keymap {
 // clang-format off
 #define DVORAK_split_3x5_2                                                                        \
     KC_QUOT, KC_COMM,  KC_DOT,    KC_P,    KC_Y,        KC_F,    KC_G,    KC_C,    KC_R,    KC_L, \
-       KC_A,    KC_O,    KC_E,    KC_U,    KC_I,        KC_D,    KC_H,    KC_T,    KC_N,    KC_S, \
+      HMR_A,   HMR_O,   HMR_E,   HMR_U,    KC_I,        KC_D,   HMR_H,   HMR_T,   HMR_N,   HMR_S, \
      REPEAT,    KC_Q,    KC_J,    KC_K,    KC_X,        KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
-                               TL_LOWR, SPC_SFT,     ___x___, TL_UPPR
+                               TL_LOWR,  KC_SPC,     ___x___, TL_UPPR
 // clang-format on
 
 /** Adaptation of the APTmak layout. */
@@ -71,7 +82,7 @@ enum layers_3x5_keymap {
        KC_V,    KC_W,    KC_F,    KC_P,    KC_B,        KC_J,    KC_L,    KC_U,    KC_Y, KC_QUOT, \
        KC_R,    KC_S,    KC_T,    KC_H,    KC_K,        KC_X,    KC_N,    KC_A,    KC_I,    KC_O, \
     ___x___,    KC_C,    KC_G,    KC_D,    KC_Q,        KC_Z,    KC_M, KC_COMM,  KC_DOT, ___x___, \
-                               TL_LOWR, SPC_SFT,        KC_E, TL_UPPR
+                               TL_LOWR,  KC_SPC,        KC_E, TL_UPPR
 // clang-format on
 
 /** Mostly navigation focused layer. */

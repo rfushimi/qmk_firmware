@@ -39,3 +39,5 @@
 #endif // KEYBOARD_bastardkb_skeletyl_v2_splinky_2
 #    define SERIAL_USART_PIN_SWAP
 #endif
+
+#define SELECT_SOFT_SERIAL_SPEED 0

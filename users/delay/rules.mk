@@ -15,7 +15,7 @@ endif
 
 # Include common sources.
 SRC += $(USER_PATH)/delay.c
-# SRC += $(USER_PATH)/features/achordion.c
+SRC += $(USER_PATH)/features/achordion.c
 SRC += $(USER_PATH)/features/custom_shift_keys.c
 # SRC += $(USER_PATH)/features/oneshot_mod.c
 # SRC += $(USER_PATH)/features/osm_bitmask.c
@@ -28,15 +28,6 @@ COMBO_ENABLE = yes
 DEFERRED_EXEC_ENABLE = yes
 MOUSEKEY_ENABLE = yes
 ONESHOT_ENABLE = yes
-#TAP_DANCE_ENABLE = yes
 TRI_LAYER_ENABLE = yes
 
-# Drashna's OLED driver for SH1107.
-ifeq ($(strip $(OLED_DRIVER)), custom)
-ifeq ($(strip $(OLED_ENABLE)), yes)
-	OPT_DEFS += -DOLED_ENABLE -DOLED_DRIVER_SH1107
-	SRC += $(USER_PATH)/oled/sh110x.c
-	QUANTUM_LIB_SRC += i2c_master.c
-	DEFERRED_EXEC_ENABLE = yes
-endif
-endif
+DEBOUNCE_TYPE = asym_eager_defer_pk
