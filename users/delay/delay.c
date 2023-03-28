@@ -171,6 +171,13 @@ bool is_oneshot_ignored_key(uint16_t keycode) {
     }
 }
 
+// Gotta go fast.
+void matrix_output_unselect_delay(uint8_t line, bool key_pressed) {
+    for (int32_t i = 0; i < 40; i++) {
+        __asm__ volatile("nop" ::: "memory");
+    }
+}
+
 #ifdef RGB_MATRIX_ENABLE
 // Forward-declare this helper function since it is defined in rgb_matrix.c.
 void rgb_matrix_update_pwm_buffers(void);
