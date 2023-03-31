@@ -180,12 +180,13 @@ bool is_oneshot_ignored_key(uint16_t keycode) {
     }
 }
 
+bool get_taping_force_hold(uint16_t keycode, keyrecord_t* record) {
+    return keycode != HMR_H;
+}
+
 bool achordion_chord(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
                      uint16_t other_keycode, keyrecord_t* other_record) {
-    if (tap_hold_keycode == SPC_SFT) {
-        return true;
-    }
-    // Otherwise, follow the opposite hands rule.
+    // Follow the opposite hands rule.
     return achordion_opposite_hands(tap_hold_record, other_record);
 }
 

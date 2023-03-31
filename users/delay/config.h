@@ -104,7 +104,7 @@
  *   https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold#tapping-force-hold
  *   https://precondition.github.io/home-row-mods#tapping-force-hold
  */
-// #define TAPPING_FORCE_HOLD_PER_KEY
+#define TAPPING_FORCE_HOLD_PER_KEY
 
 /*
  * Tap-or-Hold decision modes, per keymap.

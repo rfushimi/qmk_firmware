@@ -47,20 +47,19 @@ enum layers_3x5_keymap {
 #define SYSTEM OSL(_SYSTEM)
 
 // Homerow mods.
-#define HMR_A LALT_T(KC_A)
+#define HMR_A LGUI_T(KC_A)
 #define HMR_O LCTL_T(KC_O)
-#define HMR_E LGUI_T(KC_E)
-#define HMR_U LSFT_T(KC_U)
+#define HMR_E LSFT_T(KC_E)
+#define HMR_U LALT_T(KC_U)
 
-#define HMR_H LSFT_T(KC_H)
-#define HMR_T LGUI_T(KC_T)
+#define HMR_H LALT_T(KC_H)
+#define HMR_T LSFT_T(KC_T)
 #define HMR_N LCTL_T(KC_N)
-#define HMR_S LALT_T(KC_S)
+#define HMR_S LGUI_T(KC_S)
 
 // Shorthands for readability.
 #define ___x___ KC_NO
 #define _v_v_v_ KC_TRANSPARENT
-#define SPC_SFT LSFT_T(KC_SPACE)
 
 // Ctrl-Tab.
 #define CTL_TAB C(KC_TAB)
@@ -89,7 +88,7 @@ enum layers_3x5_keymap {
 // clang-format off
 #define LOWER_split_3x5_2                                                                         \
     LAUNCHR, RCS_TAB,  KC_TAB, CTL_TAB, ___x___,     ___x___, ___x___,   KC_UP, KC_BSPC, ___x___, \
-    OSM_ALT, OSM_CTL, OSM_GUI, OSM_SFT, ___x___,     ___x___, KC_LEFT, KC_DOWN, KC_RGHT,  KC_ENT, \
+    OSM_GUI, OSM_CTL, OSM_SFT, OSM_ALT, ___x___,     ___x___, KC_LEFT, KC_DOWN, KC_RGHT,  KC_ENT, \
     A(KC_1), A(KC_2), A(KC_3), A(KC_4), A(KC_5),     ___x___, ___x___, ___x___, ___x___, ___x___, \
                                _v_v_v_,  SYSTEM,     _______, _______
 // clang-format on
@@ -107,7 +106,7 @@ enum layers_3x5_keymap {
 // clang-format off
 #define ADJUST_split_3x5_2                                                                        \
     ___x___,    KC_7,    KC_8,    KC_9, ___x___,     ___x___, KC_LBRC, ___x___, KC_RBRC, ___x___, \
-    ___x___,    KC_4,    KC_5,    KC_6, ___x___,     ___x___, KC_LSFT, KC_LGUI, KC_LCTL, KC_LALT, \
+    ___x___,    KC_4,    KC_5,    KC_6, ___x___,     ___x___, KC_LALT, KC_LSFT, KC_LCTL, KC_LGUI, \
     ___x___,    KC_1,    KC_2,    KC_3, ___x___,     ___x___, KC_LCBR,    KC_0, KC_RCBR, ___x___, \
                                _v_v_v_, ___x___,     ___x___, _v_v_v_
 // clang-format on
