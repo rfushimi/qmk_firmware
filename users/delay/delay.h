@@ -96,10 +96,10 @@ enum layers_3x5_keymap {
 /** Numpad and symbols. */
 // clang-format off
 #define UPPER_split_3x5_2                                                                         \
-     KC_GRV, KC_PERC, KC_QUES, KC_COLN,   KC_AT,     KC_TILD, ___x___, ___x___, ___x___, ___x___, \
-    KC_EXLM, KC_PLUS, KC_MINS,  KC_EQL, KC_HASH,     KC_CIRC, KC_LPRN, KC_UNDS, KC_RPRN, KC_SCLN, \
+    KC_QUES, KC_PERC,  KC_ESC, KC_COLN,   KC_AT,     _______, ___x___, KC_CIRC, KC_TILD,  KC_GRV, \
+    KC_EXLM, KC_PLUS, KC_MINS,  KC_EQL, KC_HASH,     _______, KC_LPRN, KC_UNDS, KC_RPRN, KC_SCLN, \
     ___x___,  KC_DLR, KC_ASTR, KC_SLSH, ___x___,     ___x___, KC_PIPE, KC_AMPR, KC_BSLS, ___x___, \
-                               _______,  KC_ESC,      SYSTEM, _v_v_v_
+                               _______, _______,      SYSTEM, _v_v_v_
 // clang-format on
 
 /** Another numpad and symbols. */
