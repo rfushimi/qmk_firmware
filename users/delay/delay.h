@@ -27,6 +27,7 @@ enum keycodes_user {
     OSM_CTL,
     OSM_GUI,
     OSM_SFT,
+    OSM_CLR,
     KC_RIGHT_ARROW,
     KC_FAT_RIGHT_ARROW,
 };
@@ -46,17 +47,6 @@ enum layers_3x5_keymap {
 #define DVORAK DF(_DVORAK)
 #define SYSTEM OSL(_SYSTEM)
 
-// Homerow mods.
-#define HMR_A LGUI_T(KC_A)
-#define HMR_O LCTL_T(KC_O)
-#define HMR_E LSFT_T(KC_E)
-#define HMR_U LALT_T(KC_U)
-
-#define HMR_H LALT_T(KC_H)
-#define HMR_T LSFT_T(KC_T)
-#define HMR_N LCTL_T(KC_N)
-#define HMR_S LGUI_T(KC_S)
-
 // Shorthands for readability.
 #define ___x___ KC_NO
 #define _v_v_v_ KC_TRANSPARENT
@@ -70,25 +60,16 @@ enum layers_3x5_keymap {
 // clang-format off
 #define DVORAK_split_3x5_2                                                                        \
     KC_QUOT, KC_COMM,  KC_DOT,    KC_P,    KC_Y,        KC_F,    KC_G,    KC_C,    KC_R,    KC_L, \
-      HMR_A,   HMR_O,   HMR_E,   HMR_U,    KC_I,        KC_D,   HMR_H,   HMR_T,   HMR_N,   HMR_S, \
+       KC_A,    KC_O,    KC_E,    KC_U,    KC_I,        KC_D,    KC_H,    KC_T,    KC_N,    KC_S, \
      REPEAT,    KC_Q,    KC_J,    KC_K,    KC_X,        KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
-                               TL_LOWR,  KC_SPC,     ___x___, TL_UPPR
-// clang-format on
-
-/** Adaptation of the APTmak layout. */
-// clang-format off
-#define APTMAK_split_3x5_2                                                                        \
-       KC_V,    KC_W,    KC_F,    KC_P,    KC_B,        KC_J,    KC_L,    KC_U,    KC_Y, KC_QUOT, \
-       KC_R,    KC_S,    KC_T,    KC_H,    KC_K,        KC_X,    KC_N,    KC_A,    KC_I,    KC_O, \
-    ___x___,    KC_C,    KC_G,    KC_D,    KC_Q,        KC_Z,    KC_M, KC_COMM,  KC_DOT, ___x___, \
-                               TL_LOWR,  KC_SPC,        KC_E, TL_UPPR
+                               TL_LOWR,  KC_SPC,     KC_LSFT, TL_UPPR
 // clang-format on
 
 /** Mostly navigation focused layer. */
 // clang-format off
 #define LOWER_split_3x5_2                                                                         \
     LAUNCHR, RCS_TAB,  KC_TAB, CTL_TAB, ___x___,     ___x___, ___x___,   KC_UP, KC_BSPC, ___x___, \
-    OSM_GUI, OSM_CTL, OSM_SFT, OSM_ALT, ___x___,     ___x___, KC_LEFT, KC_DOWN, KC_RGHT,  KC_ENT, \
+    OSM_ALT, OSM_GUI, OSM_CTL, OSM_SFT, OSM_CLR,     ___x___, KC_LEFT, KC_DOWN, KC_RGHT,  KC_ENT, \
     A(KC_1), A(KC_2), A(KC_3), A(KC_4), A(KC_5),     ___x___, ___x___, ___x___, ___x___, ___x___, \
                                _v_v_v_,  SYSTEM,     _______, _______
 // clang-format on
@@ -106,7 +87,7 @@ enum layers_3x5_keymap {
 // clang-format off
 #define ADJUST_split_3x5_2                                                                        \
     ___x___,    KC_7,    KC_8,    KC_9, ___x___,     ___x___, KC_LBRC, ___x___, KC_RBRC, ___x___, \
-    ___x___,    KC_4,    KC_5,    KC_6, ___x___,     ___x___, KC_LALT, KC_LSFT, KC_LCTL, KC_LGUI, \
+    ___x___,    KC_4,    KC_5,    KC_6, ___x___,     ___x___, KC_LSFT, KC_LCTL, KC_LGUI, KC_LALT, \
     ___x___,    KC_1,    KC_2,    KC_3, ___x___,     ___x___, KC_LCBR,    KC_0, KC_RCBR, ___x___, \
                                _v_v_v_, ___x___,     ___x___, _v_v_v_
 // clang-format on

@@ -25,7 +25,6 @@
 #include "quantum/rgb_matrix/rgb_matrix.h"
 #endif // RGB_MATRIX_ENABLE
 
-#include "features/achordion.h"
 #include "features/custom_shift_keys.h"
 #include "features/osm_callum.h"
 #include "features/repeat.h"
@@ -109,10 +108,6 @@ static oneshot_state osm_alt_state = os_up_unqueued;
 static oneshot_state osm_gui_state = os_up_unqueued;
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
-    if (!process_achordion(keycode, record)) {
-        return false;
-    }
-
     // One-shot mods.
     update_oneshot(&osm_sft_state, KC_LSFT, OSM_SFT, keycode, record);
     update_oneshot(&osm_ctl_state, KC_LCTL, OSM_CTL, keycode, record);
@@ -140,8 +135,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
         }
     }
 
-    // Escape resets internal state.
+    // Resets internal state.
     switch (keycode) {
+        case OSM_CLR:
         case KC_ESCAPE:
             clear_oneshot_mods();
             clear_oneshot_locked_mods();
@@ -150,10 +146,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     }
 
     return true;
-}
-
-void matrix_scan_user(void) {
-    achordion_task();
 }
 
 bool is_oneshot_cancel_key(uint16_t keycode) {
@@ -178,20 +170,6 @@ bool is_oneshot_ignored_key(uint16_t keycode) {
         default:
             return false;
     }
-}
-
-bool get_taping_force_hold(uint16_t keycode, keyrecord_t* record) {
-    return keycode != HMR_H;
-}
-
-bool achordion_chord(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
-                     uint16_t other_keycode, keyrecord_t* other_record) {
-    // Follow the opposite hands rule.
-    return achordion_opposite_hands(tap_hold_record, other_record);
-}
-
-uint16_t achordion_timeout(uint16_t tap_hold_keycode) {
-    return 800; // Use a timeout of 800 ms.
 }
 
 // Gotta go fast.
