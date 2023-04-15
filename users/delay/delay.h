@@ -35,7 +35,7 @@ enum keycodes_user {
 /** Layer list. */
 enum layers_3x5_keymap {
     _DVORAK = 0,
-    _APTMAK,
+    _ENGRAM,
     _LOWER,
     _UPPER,
     _ADJUST,
@@ -43,8 +43,8 @@ enum layers_3x5_keymap {
 };
 
 // Layers.
-#define APTMAK DF(_APTMAK)
 #define DVORAK DF(_DVORAK)
+#define ENGRAM DF(_ENGRAM)
 #define SYSTEM OSL(_SYSTEM)
 
 // Shorthands for readability.
@@ -65,6 +65,15 @@ enum layers_3x5_keymap {
                                TL_LOWR,  KC_SPC,     KC_LSFT, TL_UPPR
 // clang-format on
 
+/** Adaptation of the Engram layout. */
+// clang-format off
+#define ENGRAM_split_3x5_2                                                                        \
+       KC_B,    KC_Y,    KC_O,    KC_U, KC_QUOT,      REPEAT,    KC_L,    KC_D,    KC_W,    KC_V, \
+       KC_C,    KC_I,    KC_E,    KC_A, KC_COMM,      KC_DOT,    KC_H,    KC_T,    KC_S,    KC_N, \
+       KC_G,    KC_X,    KC_J,    KC_K,    KC_Z,        KC_Q,    KC_R,    KC_M,    KC_F,    KC_P, \
+                               TL_LOWR,  KC_SPC,     KC_LSFT, TL_UPPR
+// clang-format on
+
 /** Mostly navigation focused layer. */
 // clang-format off
 #define LOWER_split_3x5_2                                                                         \
@@ -77,7 +86,7 @@ enum layers_3x5_keymap {
 /** Numpad and symbols. */
 // clang-format off
 #define UPPER_split_3x5_2                                                                         \
-    KC_QUES, KC_PERC,  KC_ESC, KC_COLN,   KC_AT,     _______, ___x___, KC_CIRC, KC_TILD,  KC_GRV, \
+    KC_PERC,  KC_ESC, KC_QUES, KC_COLN,   KC_AT,     _______, ___x___, KC_CIRC, KC_TILD,  KC_GRV, \
     KC_EXLM, KC_PLUS, KC_MINS,  KC_EQL, KC_HASH,     _______, KC_LPRN, KC_UNDS, KC_RPRN, KC_SCLN, \
     ___x___,  KC_DLR, KC_ASTR, KC_SLSH, ___x___,     ___x___, KC_PIPE, KC_AMPR, KC_BSLS, ___x___, \
                                _______, _______,      SYSTEM, _v_v_v_
@@ -96,7 +105,7 @@ enum layers_3x5_keymap {
 // clang-format off
 #define SYSTEM_split_3x5_2                                                                        \
     ___x___, ___x___, ___x___, ___x___, RGB_TOG,     RGB_TOG, ___x___, ___x___, ___x___, ___x___, \
-    ___x___,  APTMAK,  DVORAK, ___x___,  EE_CLR,      EE_CLR, ___x___,  DVORAK,  APTMAK, ___x___, \
+    ___x___,  ENGRAM,  DVORAK, ___x___,  EE_CLR,      EE_CLR, ___x___,  DVORAK,  ENGRAM, ___x___, \
     ___x___, ___x___, ___x___, ___x___, QK_BOOT,     QK_BOOT, ___x___, ___x___, ___x___, ___x___, \
                                ___x___, ___x___,     ___x___, ___x___
 // clang-format on
