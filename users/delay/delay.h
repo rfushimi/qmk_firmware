@@ -68,9 +68,9 @@ enum layers_3x5_keymap {
 /** Adaptation of the Engram layout. */
 // clang-format off
 #define ENGRAM_split_3x5_2                                                                        \
-       KC_B,    KC_Y,    KC_O,    KC_U, KC_QUOT,      REPEAT,    KC_L,    KC_D,    KC_W,    KC_V, \
-       KC_C,    KC_I,    KC_E,    KC_A, KC_COMM,      KC_DOT,    KC_H,    KC_T,    KC_S,    KC_N, \
-       KC_G,    KC_X,    KC_J,    KC_K,    KC_Z,        KC_Q,    KC_R,    KC_M,    KC_F,    KC_P, \
+       KC_B,    KC_Y,    KC_O,    KC_U,    KC_Z,        KC_Q,    KC_L,    KC_D,    KC_W,    KC_V, \
+       KC_C,    KC_I,    KC_E,    KC_A, KC_QUOT,     KC_COMM,    KC_H,    KC_T,    KC_S,    KC_N, \
+       KC_G,    KC_X,    KC_J,    KC_K,  REPEAT,      KC_DOT,    KC_R,    KC_M,    KC_F,    KC_P, \
                                TL_LOWR,  KC_SPC,     KC_LSFT, TL_UPPR
 // clang-format on
 

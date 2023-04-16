@@ -35,7 +35,7 @@
 #ifdef KEYBOARD_bastardkb_skeletyl_v2_splinky_2
 #    define SERIAL_USART_RX_PIN GP12 // USART RX pin
 #else
-#    define SERIAL_USART_RX_PIN GP16 // USART RX pin
+#    define SERIAL_USART_RX_PIN GP14 // USART RX pin
 #endif // KEYBOARD_bastardkb_skeletyl_v2_splinky_2
 #    define SERIAL_USART_PIN_SWAP
 #endif
