@@ -35,7 +35,6 @@ enum keycodes_user {
 /** Layer list. */
 enum layers_3x5_keymap {
     _DVORAK = 0,
-    _ENGRAM,
     _LOWER,
     _UPPER,
     _ADJUST,
@@ -44,7 +43,6 @@ enum layers_3x5_keymap {
 
 // Layers.
 #define DVORAK DF(_DVORAK)
-#define ENGRAM DF(_ENGRAM)
 #define SYSTEM OSL(_SYSTEM)
 
 // Shorthands for readability.
@@ -62,15 +60,6 @@ enum layers_3x5_keymap {
     KC_QUOT, KC_COMM,  KC_DOT,    KC_P,    KC_Y,        KC_F,    KC_G,    KC_C,    KC_R,    KC_L, \
        KC_A,    KC_O,    KC_E,    KC_U,    KC_I,        KC_D,    KC_H,    KC_T,    KC_N,    KC_S, \
      REPEAT,    KC_Q,    KC_J,    KC_K,    KC_X,        KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
-                               TL_LOWR,  KC_SPC,     KC_LSFT, TL_UPPR
-// clang-format on
-
-/** Adaptation of the Engram layout. */
-// clang-format off
-#define ENGRAM_split_3x5_2                                                                        \
-       KC_B,    KC_Y,    KC_O,    KC_U,    KC_Z,        KC_Q,    KC_L,    KC_D,    KC_W,    KC_V, \
-       KC_C,    KC_I,    KC_E,    KC_A, KC_QUOT,     KC_COMM,    KC_H,    KC_T,    KC_S,    KC_N, \
-       KC_G,    KC_X,    KC_J,    KC_K,  REPEAT,      KC_DOT,    KC_R,    KC_M,    KC_F,    KC_P, \
                                TL_LOWR,  KC_SPC,     KC_LSFT, TL_UPPR
 // clang-format on
 
@@ -105,7 +94,7 @@ enum layers_3x5_keymap {
 // clang-format off
 #define SYSTEM_split_3x5_2                                                                        \
     ___x___, ___x___, ___x___, ___x___, RGB_TOG,     RGB_TOG, ___x___, ___x___, ___x___, ___x___, \
-    ___x___,  ENGRAM,  DVORAK, ___x___,  EE_CLR,      EE_CLR, ___x___,  DVORAK,  ENGRAM, ___x___, \
+    ___x___, ___x___, ___x___, ___x___,  EE_CLR,      EE_CLR, ___x___, ___x___, ___x___, ___x___, \
     ___x___, ___x___, ___x___, ___x___, QK_BOOT,     QK_BOOT, ___x___, ___x___, ___x___, ___x___, \
                                ___x___, ___x___,     ___x___, ___x___
 // clang-format on
