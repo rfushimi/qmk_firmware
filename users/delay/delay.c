@@ -40,43 +40,35 @@ const custom_shift_key_t custom_shift_keys[] = {
 uint8_t NUM_CUSTOM_SHIFT_KEYS = sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
 
 enum combo_events {
-    CAPS_LOCK_COMBO,       // , and R => activate Caps Lock.
-    CAPS_WORD_COMBO,       // . and C => activate Caps Word.
-    TAB_COMBO,             // , and . => send Tab.
-    RIGHT_ARROW_COMBO,     // G and C => send ->.
-    FAT_RIGHT_ARROW_COMBO, // . and P => send =>.
+    NUM_WORD_COMBO,        // activate Num Word.
+    CAPS_WORD_COMBO,       // activate Caps Word.
+    RIGHT_ARROW_COMBO,     // send ->.
+    FAT_RIGHT_ARROW_COMBO, // send =>.
     COMBO_LENGTH
 };
 uint16_t COMBO_LEN = COMBO_LENGTH;
 
-const uint16_t caps_lock_combo[] PROGMEM = {KC_COMMA, KC_R, COMBO_END};
-const uint16_t caps_word_combo[] PROGMEM = {KC_DOT, KC_C, COMBO_END};
-const uint16_t tab_combo[] PROGMEM = {KC_COMMA, KC_DOT, COMBO_END};
-const uint16_t right_arrow_combo[] PROGMEM = {KC_G, KC_C, COMBO_END};
-const uint16_t fat_right_arrow_combo[] PROGMEM = {KC_DOT, KC_P, COMBO_END};
+const uint16_t num_word_combo[] PROGMEM = {KC_COMMA, KC_DOT, KC_P, COMBO_END};
+const uint16_t caps_word_combo[] PROGMEM = {KC_G, KC_C, KC_R, COMBO_END};
+const uint16_t right_arrow_combo[] PROGMEM = {KC_ESCAPE, KC_QUESTION, COMBO_END};
+const uint16_t fat_right_arrow_combo[] PROGMEM = {KC_QUESTION, KC_COLON, COMBO_END};
 
 combo_t key_combos[] = {
-    [CAPS_LOCK_COMBO] = COMBO_ACTION(caps_lock_combo),                          // Caps lock.
-    [CAPS_WORD_COMBO] = COMBO_ACTION(caps_word_combo),                          // Caps word.
-    [TAB_COMBO] = COMBO(tab_combo, KC_TAB),                                     // Tab.
+    [NUM_WORD_COMBO] = COMBO(num_word_combo, KC_NUM_WORD),                      // Num word.
+    [CAPS_WORD_COMBO] = COMBO(caps_word_combo, KC_CAPS_WORD),                   // Caps word.
     [RIGHT_ARROW_COMBO] = COMBO(right_arrow_combo, KC_RIGHT_ARROW),             // Right arrow.
     [FAT_RIGHT_ARROW_COMBO] = COMBO(fat_right_arrow_combo, KC_FAT_RIGHT_ARROW), // Fat right arrow.
 };
 
-void process_combo_event(uint16_t combo_index, bool pressed) {
-    if (pressed) {
-        switch (combo_index) {
-            case CAPS_LOCK_COMBO:
-                clear_oneshot_mods();
-                set_oneshot_locked_mods(MOD_LSFT);
-                add_mods(MOD_LSFT);
-                break;
-            case CAPS_WORD_COMBO:
-                clear_oneshot_mods();
-                caps_word_on();
-                break;
-        }
+uint16_t get_combo_term(uint16_t combo_index, combo_t* combo) {
+    switch (combo_index) {
+        case NUM_WORD_COMBO:
+        case CAPS_WORD_COMBO:
+        case RIGHT_ARROW_COMBO:
+        case FAT_RIGHT_ARROW_COMBO:
+            return 50;
     }
+    return COMBO_TERM;
 }
 
 bool caps_word_press_user(uint16_t keycode) {
@@ -124,6 +116,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 
     if (record->event.pressed) {
         switch (keycode) {
+            case KC_CAPS_WORD:
+                clear_oneshot_mods();
+                caps_word_on();
+                return false;
             case KC_RIGHT_ARROW:
                 tap_code16(KC_MINUS);
                 tap_code16(KC_RIGHT_ANGLE_BRACKET);
@@ -135,7 +131,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
         }
     }
 
-    // Resets internal state.
+    // Reset internal state.
     switch (keycode) {
         case OSM_CLR:
         case KC_ESCAPE:
@@ -149,12 +145,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 }
 
 bool is_oneshot_cancel_key(uint16_t keycode) {
-    switch (keycode) {
-        case KC_ESCAPE:
-            return true;
-        default:
-            return false;
-    }
+    return keycode == KC_ESCAPE;
 }
 
 bool is_oneshot_ignored_key(uint16_t keycode) {

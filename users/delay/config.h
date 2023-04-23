@@ -72,6 +72,8 @@
 #define COMBO_TERM 25
 #endif // COMBO_TERM
 
+#define COMBO_TERM_PER_COMBO
+
 /**
  * \brief Configure the global tapping term (default: 200ms).
  *
