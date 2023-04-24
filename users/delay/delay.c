@@ -150,7 +150,9 @@ bool is_oneshot_cancel_key(uint16_t keycode) {
 
 bool is_oneshot_ignored_key(uint16_t keycode) {
     switch (keycode) {
-        case QK_TRI_LAYER_LOWER:
+        case NAV_SPC:
+        case NUM:
+        case SYM:
         case QK_TRI_LAYER_UPPER:
         case KC_LSFT:
         case OSM_SFT:
@@ -161,6 +163,11 @@ bool is_oneshot_ignored_key(uint16_t keycode) {
         default:
             return false;
     }
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    return update_tri_layer_state(update_tri_layer_state(state, _NAV, _SYM, _NAV_ADJUST), _NUM,
+                                  _SYM, _NUM_ADJUST);
 }
 
 // Gotta go fast.
