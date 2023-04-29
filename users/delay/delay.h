@@ -81,7 +81,7 @@ _Static_assert(_SYM < _NUM_ADJUST, "Invalid layer order");
 // clang-format off
 #define NAV_split_3x5_2                                                                           \
     A(KC_1), A(KC_2), A(KC_3), A(KC_4), A(KC_5),     ___x___, ___x___, ___x___, KC_BSPC, ___x___, \
-    OSM_ALT, OSM_GUI, OSM_CTL, OSM_SFT, ___x___,     ___x___, ___x___,  KC_TAB, ___x___, KC_ENT, \
+    OSM_ALT, OSM_GUI, OSM_CTL, OSM_SFT, ___x___,     ___x___, ___x___,  KC_TAB, ___x___,  KC_ENT, \
     RCS_TAB, CTL_TAB, KC_DOWN,   KC_UP, ___x___,     ___x___, KC_LEFT, KC_RGHT, ___x___, ___x___, \
                                ___x___, _v_v_v_,     LAUNCHR, _______
 // clang-format on
@@ -90,7 +90,7 @@ _Static_assert(_SYM < _NUM_ADJUST, "Invalid layer order");
 // clang-format off
 #define NAV_ADJUST_split_3x5_2                                                                    \
     ___x___, ___x___, ___x___, ___x___, ___x___,     ___x___, ___x___, G(KC_C), KC_BSPC,  KC_END, \
-    ___x___, ___x___, ___x___, ___x___, ___x___,     ___x___, KC_HOME, G(KC_T), G(KC_N), ___x___, \
+    ___x___, ___x___, ___x___, ___x___, ___x___,     ___x___, KC_HOME, G(KC_T), G(KC_N),  KC_ENT, \
     ___x___, ___x___, KC_PGDN, KC_PGUP, G(KC_X),     ___x___, ___x___, G(KC_W), G(KC_V), ___x___, \
                                ___x___, _v_v_v_,     ___x___, _v_v_v_
 // clang-format on
@@ -99,7 +99,7 @@ _Static_assert(_SYM < _NUM_ADJUST, "Invalid layer order");
 // clang-format off
 #define NUM_split_3x5_2                                                                           \
     ___x___, KC_COMM,  KC_DOT, ___x___, ___x___,     ___x___,    KC_7,    KC_8,    KC_9, ___x___, \
-    KC_PERC, KC_PLUS, KC_MINS,  KC_EQL, ___x___,     ___x___,    KC_4,    KC_5,    KC_6, ___x___, \
+    KC_PERC, KC_PLUS, KC_MINS,  KC_EQL, ___x___,     ___x___,    KC_4,    KC_5,    KC_6,  KC_ENT, \
     ___x___, KC_TILD, KC_ASTR, KC_SLSH, ___x___,     ___x___,    KC_1,    KC_2,    KC_3, ___x___, \
                                _v_v_v_,  SYSTEM,        KC_0, _______
 // clang-format on
@@ -117,7 +117,7 @@ _Static_assert(_SYM < _NUM_ADJUST, "Invalid layer order");
 // clang-format off
 #define NUM_ADJUST_split_3x5_2                                                                    \
     ___x___, ___x___, ___x___, ___x___, ___x___,     ___x___, ___x___, ___x___, KC_BSPC, ___x___, \
-    ___x___,   KC_LT, KC_MINS,   KC_GT, ___x___,     ___x___, KC_LBRC,  KC_EQL, KC_RBRC, ___x___, \
+    ___x___,   KC_LT, KC_MINS,   KC_GT, ___x___,     ___x___, KC_LBRC,  KC_EQL, KC_RBRC,  KC_ENT, \
     ___x___, ___x___, ___x___, ___x___, ___x___,     ___x___, KC_PIPE, KC_BSLS, KC_AMPR, ___x___, \
                                _v_v_v_, ___x___,     ___x___, _v_v_v_
 // clang-format on
