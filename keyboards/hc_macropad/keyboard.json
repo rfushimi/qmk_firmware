@@ -1,8 +1,11 @@
 {
+    "manufacturer": "Google HC",
+    "maintainer": "Charly Delay",
     "keyboard_name": "HC Macropad",
     "usb": {
         "device_version": "1.0.0",
         "pid": "0x9009"
+        "vid": "0x0001"
     },
     "processor": "RP2040",
     "bootloader": "rp2040",
@@ -22,6 +25,7 @@
         "bootmagic": true,
         "command": false,
         "console": false,
+        "encoder": true,
         "extrakey": true,
         "mousekey": true,
         "nkro": true,
@@ -89,31 +93,31 @@
             "val": 128
         },
         "layout": [
-            {"x": 0, "y": 32, "flags": 2},
-            {"x": 0, "y": 32, "flags": 2},
-            {"x": 0, "y": 32, "flags": 2},
-            {"x": 0, "y": 32, "flags": 2},
-            {"x": 0, "y": 32, "flags": 2},
-            {"x": 0, "y": 32, "flags": 2},
+            {"x": 208, "y": 48, "flags": 2},
+            {"x": 216, "y": 64, "flags": 2},
+            {"x": 224, "y": 48, "flags": 2},
+            {"x": 224, "y": 16, "flags": 2},
+            {"x": 216, "y": 0,  "flags": 2},
+            {"x": 208, "y": 16, "flags": 2},
 
-            {"matrix": [0, 0], "x": 104, "y": 32, "flags": 1},
-            {"matrix": [0, 1], "x": 128, "y": 32, "flags": 1},
-            {"matrix": [0, 2], "x": 152, "y": 32, "flags": 1},
-            {"matrix": [1, 0], "x": 176, "y": 32, "flags": 1},
-            {"matrix": [1, 1], "x": 200, "y": 32, "flags": 1},
-            {"matrix": [1, 2], "x": 224, "y": 32, "flags": 1},
+            {"matrix": [1, 0], "x": 176, "y": 16, "flags": 1},
+            {"matrix": [1, 1], "x": 144, "y": 16, "flags": 1},
+            {"matrix": [1, 2], "x": 112, "y": 16, "flags": 1},
+            {"matrix": [0, 0], "x": 80,  "y": 16, "flags": 1},
+            {"matrix": [0, 1], "x": 48,  "y": 16, "flags": 1},
+            {"matrix": [0, 2], "x": 16,  "y": 16, "flags": 1},
         ],
         "sleep": true
     },
     "layouts": {
-        "LAYOUT_hc_macropad": {
+        "LAYOUT": {
             "layout": [
-                {"matrix": [0, 0], "x": 0, "y": 0},
+                {"matrix": [0, 2], "x": 0, "y": 0},
                 {"matrix": [0, 1], "x": 1, "y": 0},
-                {"matrix": [0, 2], "x": 2, "y": 0},
-                {"matrix": [1, 0], "x": 3, "y": 0},
+                {"matrix": [0, 0], "x": 2, "y": 0},
+                {"matrix": [1, 2], "x": 3, "y": 0},
                 {"matrix": [1, 1], "x": 4, "y": 0},
-                {"matrix": [1, 2], "x": 5, "y": 0},
+                {"matrix": [1, 0], "x": 5, "y": 0},
             ]
         }
     }
