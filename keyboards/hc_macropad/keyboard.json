@@ -29,12 +29,8 @@
         "extrakey": true,
         "mousekey": true,
         "nkro": true,
-        "dip_switch": true,
         "rgb_matrix": true,
         "tri_layer": true
-    },
-    "dip_switch": {
-        "pins": ["GP8"]
     },
     "ws2812": {
         "pin": "GP1",

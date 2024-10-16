@@ -28,18 +28,6 @@ void keyboard_pre_init_kb(void) {
     keyboard_pre_init_user();
 }
 
-#ifdef DIP_SWITCH_ENABLE
-bool dip_switch_update_kb(uint8_t index, bool active) {
-    if (!dip_switch_update_user(index, active)) {
-        return false;
-    }
-    if (active) {
-        tap_code(KC_1);
-    }
-    return true;
-}
-#endif // DIP_SWITCH_ENABLE
-
 #ifdef ENCODER_ENABLE
 bool encoder_update_kb(uint8_t index, bool clockwise) {
     if (!encoder_update_user(index, clockwise)) {
