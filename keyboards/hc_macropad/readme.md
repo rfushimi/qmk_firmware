@@ -26,7 +26,7 @@ file into the mount point that appears on your host.
 >
 > A shorthand for compiling and flashing in one command exists:
 >
-> ```
+> ```sh
 > qmk flash [--clean] [-j 0] -kb hc_macropad -km default
 > ```
 
