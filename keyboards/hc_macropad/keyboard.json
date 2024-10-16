@@ -11,8 +11,8 @@
     "bootloader": "rp2040",
     "board": "GENERIC_RP_RP2040",
     "matrix_pins": {
-        "cols": ["GP26", "GP27", "GP28"],
-        "rows": ["GP24", "GP25"]
+        "cols": ["GP26", "GP27", "GP28", "GP8"],
+        "rows": ["GP24", "GP25", "GP9"]
     },
     "diode_direction": "ROW2COL",
     "encoder": {
@@ -118,6 +118,7 @@
                 {"matrix": [1, 2], "x": 3, "y": 0},
                 {"matrix": [1, 1], "x": 4, "y": 0},
                 {"matrix": [1, 0], "x": 5, "y": 0},
+                {"matrix": [2, 3], "x": 6, "y": 0},
             ]
         }
     }
